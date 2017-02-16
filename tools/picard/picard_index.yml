@@ -1,0 +1,4 @@
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+dict: hg19.dict

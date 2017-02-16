@@ -1,0 +1,7 @@
+sortbam:
+  class: File
+#  path: /mnt/crest/result/rnaseq/DRR015333.sort.bam
+#  path: /mnt/crest/result/mutation/adrenal.sort.bam
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.bam
+#indexbam: adrenal.sort.bam.bai
+indexbam: adrenal.sort.redup.kary.bam.bai

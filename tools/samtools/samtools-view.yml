@@ -1,0 +1,8 @@
+bs: true
+sam:
+  class: File
+#  path: /mnt/crest/result/rnaseq/DRR015333.sam
+#  path: /mnt/crest/result/rnaseq/adrenal.sam
+  path: /mnt/crest/result/mutation/adrenal.sam
+#bam: DRR015333.bam
+bam: adrenal.bam

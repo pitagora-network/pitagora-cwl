@@ -1,0 +1,5 @@
+bam:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.bam
+output: adrenal.sort.redup.bam
+metout: metrics.txt

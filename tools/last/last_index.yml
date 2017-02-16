@@ -1,0 +1,5 @@
+seeding_scheme: true
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+genome_index: hg19.fa

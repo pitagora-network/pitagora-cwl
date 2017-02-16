@@ -1,0 +1,16 @@
+program: RealignerTargetCreator
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.fai
+    - class: File
+      path: /mnt/crest/refGenome/hg19.dict
+bam:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.bam
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.bam.bai
+output: adrenal.intervals

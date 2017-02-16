@@ -1,0 +1,5 @@
+override_offrate: 1
+reference:
+  class: File
+  path: /mnt/crest/refGenome/refMrna.fa
+ebwt_base: refMrna.fa

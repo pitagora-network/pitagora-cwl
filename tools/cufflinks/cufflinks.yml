@@ -1,0 +1,7 @@
+annotation:
+  class: File
+  path: /mnt/crest/refGenome/annotation/hg19.gtf
+process: 8
+bam:
+  class: File
+  path: /mnt/crest/result/rnaseq/DRR015333.sort.bam

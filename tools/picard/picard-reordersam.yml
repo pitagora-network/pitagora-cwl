@@ -1,0 +1,10 @@
+dupread:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.bam
+output: adrenal.sort.redup.kary.bam
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/hg19.dict

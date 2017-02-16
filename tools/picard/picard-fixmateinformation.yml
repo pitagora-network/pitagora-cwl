@@ -1,0 +1,6 @@
+bam:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.reali.bam
+output: adrenal.sort.redup.kary.reali.fix.bam
+sort: coordinate
+validation: SILENT

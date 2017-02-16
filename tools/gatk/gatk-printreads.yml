@@ -1,0 +1,19 @@
+program: PrintReads
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.fai
+    - class: File
+      path: /mnt/crest/refGenome/hg19.dict
+bam:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.reali.bam
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.reali.bai
+output: adrenal.sort.redup.kary.reali.fix.recal.bam
+base_quality_score_recalib:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.fix.table

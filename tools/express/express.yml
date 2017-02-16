@@ -1,0 +1,20 @@
+reference:
+  class: File
+  path: /mnt/crest/refGenome/refMrna.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.1.ebwt
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.2.ebwt
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.3.ebwt
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.4.ebwt
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.rev.1.ebwt
+    - class: File
+      path: /mnt/crest/refGenome/refMrna.fa.rev.2.ebwt
+bam:
+  class: File
+  path: /mnt/crest/result/rnaseq/adrenal.bam
+

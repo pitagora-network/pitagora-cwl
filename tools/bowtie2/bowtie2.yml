@@ -1,0 +1,31 @@
+genome_index:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.1.bt2
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.2.bt2
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.3.bt2
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.4.bt2
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.rev.1.bt2
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.rev.2.bt2
+exclusive_parameters:
+  fq1:
+    class: File
+    path: /mnt/crest/sampleData/adrenal_1.fastq
+  fq2:
+    class: File
+    path: /mnt/crest/sampleData/adrenal_2.fastq
+#  fq:
+#    class: File
+#    path: /mnt/crest/sampleData/human/rnaseq/single/SRR298695.fastq
+#output: SRR298695.sam
+output: adrenal.sam
+set_read_group_id: ID
+add_text_sam_header1: SM:A
+add_text_sam_header2: PL:Illumina

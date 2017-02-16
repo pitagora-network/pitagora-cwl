@@ -1,0 +1,23 @@
+program: BaseRecalibrator
+reference:
+  class: File
+  path: /mnt/crest/refGenome/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/hg19.fa.fai
+    - class: File
+      path: /mnt/crest/refGenome/hg19.dict
+bam:
+  class: File
+  path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.reali.bam
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/result/mutation/adrenal.sort.redup.kary.reali.bai
+output: adrenal.fix.table
+knownsite:
+  class: File
+  path: /mnt/crest/refGenome/dbSNP147_hg19.vcf
+  secondaryFiles:
+    - class: File
+      path: /mnt/crest/refGenome/dbSNP147_hg19.vcf.idx
+
