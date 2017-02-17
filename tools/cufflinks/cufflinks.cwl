@@ -23,9 +23,9 @@ inputs:
       position: 3
 arguments: ["-o", "/var/spool/cwl"]
 outputs:
-  result:
+  cufflinks_result:
     type:
       type: array
       items: File
     outputBinding:
-      glob: "*"
+      glob: '*'

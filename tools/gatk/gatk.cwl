@@ -5,6 +5,11 @@ hints:
     dockerPull: biodckrdev/gatk
 requirements:
   - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
+    listing:
+      - $(inputs.bam)
+      - $(inputs.bai)
+
 baseCommand: [java, -jar, /home/biodocker/bin/gatk/target/GenomeAnalysisTK.jar]
 inputs:
   program:
@@ -20,8 +25,14 @@ inputs:
   bam:
     type: File
     inputBinding:
-      position: 3
       prefix: -I
+      position: 3
+      valueFrom: $(self.basename)
+  bai:
+    type: File?
+    inputBinding:
+      position: 8
+      valueFrom: 
   output: 
     type: string
     inputBinding:
@@ -42,7 +53,49 @@ inputs:
     inputBinding:
       position: 7
       prefix: -BQSR
+  dummy:
+    type: File?
+    inputBinding:
+      position: 9
+      valueFrom:
+  skipaic:
+    type: boolean?
+    inputBinding:
+      position: 10
+      prefix: --disable_auto_index_creation_and_locking_when_reading_rods
 outputs:
+  vcf:
+    type: File?
+    outputBinding:
+      glob: "*.vcf"
+  vcfidx:
+    type: File?
+    outputBinding:
+      glob: "*.vcf.idx"
+  print:
+    type: File?
+    outputBinding:
+      glob: "*.recal.bam"
+  printbai:
+    type: File?
+    outputBinding:
+      glob: "*.recal.bai"
+  table:
+    type: File?
+    outputBinding:
+      glob: "*.fix.table"
+  interval:
+    type: File?
+    outputBinding:
+      glob: "*.intervals"
+  realign:
+    type: File?
+    outputBinding:
+      glob: "*.reali.bam"
+  realignbai:
+    type: File?
+    outputBinding:
+      glob: "*.reali.bai"
   result:
     type:
       type: array

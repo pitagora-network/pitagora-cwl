@@ -31,29 +31,16 @@ inputs:
     type: File
     inputBinding:
       position: 5
-  exclusive_parameters:
-    type:
-      - type: record
-        name: singleend
-        fields:
-          fq:
-            type: File
-            inputBinding:
-              prefix: -q
-              position: 6
-      - type: record
-        name: pairend
-        fields:
-          fq1:
-            type: File
-            inputBinding:
-              prefix: "-1"
-              position: 6
-          fq2:
-            type: File
-            inputBinding:
-              prefix: "-2"
-              position: 7
+  fq1:
+    type: File
+    inputBinding:
+      prefix: "-1"
+      position: 6
+  fq2:
+    type: File
+    inputBinding:
+      prefix: "-2"
+      position: 7
   process:
     type: int?
     inputBinding:
@@ -65,7 +52,7 @@ inputs:
       prefix: -S 
       position: 9
 outputs:
-  output:
+  bowtie_sam:
     type: File
     outputBinding:
-      glob: "*.sam"
+      glob: $(inputs.sam)

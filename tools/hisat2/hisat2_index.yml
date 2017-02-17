@@ -1,4 +1,4 @@
 reference:
   class: File
-  path: /mnt/crest/refGenome/hg19.fa
+  path: /path/to/reference/hg19.fa
 index_base: hg19.fa

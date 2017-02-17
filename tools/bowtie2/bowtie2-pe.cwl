@@ -6,33 +6,20 @@ hints:
 baseCommand: bowtie2
 inputs:
   genome_index:
-    type: File
+    type: File 
     inputBinding:
       position: 1
       prefix: -x
-  exclusive_parameters:
-    type:
-      - type: record
-        name: singleend
-        fields:
-          fq:
-            type: File
-            inputBinding:
-              prefix: -q
-              position: 2
-      - type: record
-        name: pairend
-        fields:
-          fq1:
-            type: File
-            inputBinding:
-              prefix: "-1"
-              position: 2
-          fq2:
-            type: File
-            inputBinding:
-              prefix: "-2"
-              position: 3
+  fq1:
+    type: File
+    inputBinding:
+      prefix: "-1"
+      position: 2
+  fq2:
+    type: File
+    inputBinding:
+      prefix: "-2"
+      position: 3
   set_read_group_id:
     type: string
     inputBinding:
@@ -59,7 +46,7 @@ inputs:
       prefix: -p
       position: 8
 outputs:
-  - id: sam
+  bowtie2_sam:
     type: File
     outputBinding:
       glob: $(inputs.output)

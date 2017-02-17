@@ -11,7 +11,7 @@ inputs:
     type: File
     inputBinding:
       position: 1
-  ebwt2_base:
+  bt2_base:
     type: string
     inputBinding:
       position: 2

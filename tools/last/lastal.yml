@@ -1,0 +1,24 @@
+input_format: 1
+gap_alignment_min_score: 120
+genome_index:
+  class: File
+  path: /path/to/reference/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg19.fa.ssp
+    - class: File
+      path: /path/to/reference/hg19.fa.tis
+    - class: File
+      path: /path/to/reference/hg19.fa.sds
+    - class: File
+      path: /path/to/reference/hg19.fa.des
+    - class: File
+      path: /path/to/reference/hg19.fa.prj
+    - class: File
+      path: /path/to/reference/hg19.fa.suf
+    - class: File
+      path: /path/to/reference/hg19.fa.bck
+input:
+  class: File
+  path: /path/to/variantdata/"ID".fastq
+process: 8

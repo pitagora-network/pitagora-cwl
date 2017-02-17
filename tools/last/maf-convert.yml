@@ -1,0 +1,10 @@
+format_type: sam
+maf1:
+  class: File
+  path: /path/to/result/"ID".maf
+maf2:
+  class: File
+  path: /path/to/result/"ID".maf
+dictionary:
+  class: File
+  path: /path/to/reference/hg19.fa.fai

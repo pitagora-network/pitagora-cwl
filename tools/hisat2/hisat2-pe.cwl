@@ -5,7 +5,7 @@ hints:
     dockerPull: limesbonn/hisat2
 baseCommand: hisat2
 inputs:
-  genome_index:
+  gi:
     type: File 
     inputBinding:
       position: 1
@@ -30,30 +30,18 @@ inputs:
     inputBinding:
       prefix: -p
       position: 7
-  exclusive_parameters:
-    type:
-      - type: record
-        name: singleend
-        fields:
-          fq:
-            type: File
-            inputBinding:
-              position: 4
-      - type: record
-        name: pairend
-        fields:
-          fq1:
-            type: File
-            inputBinding:
-              prefix: "-1"
-              position: 4
-          fq2:
-            type: File
-            inputBinding:
-              prefix: "-2"
-              position: 5
+  fq1:
+    type: File
+    inputBinding:
+      prefix: "-1"
+      position: 4
+  fq2:
+    type: File
+    inputBinding:
+      prefix: "-2"
+      position: 5
 outputs:
-  - id: sam
+  - id: hisat2_sam
     type: File
     outputBinding:
       glob: $(inputs.output)

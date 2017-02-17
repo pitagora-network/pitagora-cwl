@@ -17,7 +17,7 @@ inputs:
       position: 2
 arguments: ["-o", "/var/spool/cwl"]
 outputs:
-  output:
+  express_result:
     type:
       type: array
       items: File

@@ -5,12 +5,23 @@ hints:
     dockerPull: yyabuki/annovar
 requirements:
   - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
+    listing:
+      - $(inputs.vcf)
+      - $(inputs.vcfidx)
+
 baseCommand: table_annovar.pl
+
 inputs:
-  input:
+  vcf:
     type: File
     inputBinding:
       position: 1
+  vcfidx:
+    type: File?
+    inputBinding:
+      position: 10
+      valueFrom:
   reference:
     type: Directory
     inputBinding:
@@ -51,9 +62,9 @@ inputs:
       position: 9
       prefix: -vcfinput
 outputs:
-  result:
+  annovar_results:
     type:
       type: array
       items: File
     outputBinding:
-      glob: "*"
+      glob: "*.annovar.*"

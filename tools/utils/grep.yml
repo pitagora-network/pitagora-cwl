@@ -1,0 +1,3 @@
+tmpoutput:
+  class: File
+  path: /path/to/sam/"ID".fastq.tmp.sam

@@ -14,7 +14,7 @@ inputs:
     inputBinding:
       position: 2
 outputs:
-  output:
+  samtools-sort_sortbam:
     type: File
     outputBinding:
       glob: $(inputs.sortbam).*

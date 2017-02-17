@@ -27,7 +27,7 @@ inputs:
       position: 3
       prefix: -o
 outputs:
-  result:
+  stringtie_result:
     type: File
     outputBinding:
       glob: $(inputs.output)

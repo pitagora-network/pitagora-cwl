@@ -1,0 +1,35 @@
+# tophat2 parameters.
+fastq:
+  class: File
+  path: /path/to/rnaseqsingle/"ID".fastq
+gtf:
+  class: File
+  path: /path/to/reference/annotation/hg19.gtf
+genome_index:
+  class: File
+  path: /path/to/reference/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg19.fa.1.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.2.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.3.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.4.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.rev.1.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.rev.2.bt2
+    - class: File
+      path: /path/to/reference/hg19.fa.fa
+
+# cufflinks parameters:
+annotation_file:
+  class: File
+  path: /path/to/reference/annotation/hg19.gtf
+
+# stringtie parameters:
+stringtie_result_file: stringtieout.gtf
+
+thread: 8

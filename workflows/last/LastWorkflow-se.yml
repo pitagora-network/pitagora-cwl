@@ -1,0 +1,121 @@
+# LASTal parameters.
+fastq:
+  class: File
+  path: /path/to/variantsingle/"ID".fastq
+genome_index:
+  class: File
+  path: /path/to/reference/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg19.fa.ssp
+    - class: File
+      path: /path/to/reference/hg19.fa.tis
+    - class: File
+      path: /path/to/reference/hg19.fa.sds
+    - class: File
+      path: /path/to/reference/hg19.fa.des
+    - class: File
+      path: /path/to/reference/hg19.fa.prj
+    - class: File
+      path: /path/to/reference/hg19.fa.suf
+    - class: File
+      path: /path/to/reference/hg19.fa.bck
+input_format: 1
+gap_alignment_min_score: 120
+thread: 8
+
+# maf-convert parameters
+dictionary:
+  class: File
+  path: /path/to/reference/hg19.fa.fai
+format_type: sam
+
+# samtools view parameters
+bs_option: true
+samtools-view_result_file: "ID".bam
+
+# picard-addorreplacereadgroups parameters
+modbam: "ID".mod.bam
+rgid: sample
+rglb: sample
+rgpl: Illumina
+rgpu: run_barcode
+rgsm: sample
+
+# samtools sort parameters
+samtools-sort_result_file: "ID".sort
+
+# samtools index parameters:
+samtools-index_result_file: "ID".sort.bam.bai
+
+# picard-markduplicates parameters:
+dupout: "ID".sort.redup.bam
+metout: metrics.txt
+
+# picard-reordersam parameters:
+reorder: "ID".sort.redup.kary.bam
+reference:
+  class: File
+  path: /path/to/reference/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg19.dict
+
+# samtools-index parameters:
+samtools-index_reorder_indexbam: "ID".sort.redup.kary.bam.bai
+
+# gatk realigner target creater parameters:
+realign_program: RealignerTargetCreator
+gatk_reference:
+  class: File
+  path: /path/to/reference/hg19.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg19.fa.fai
+    - class: File
+      path: /path/to/reference/hg19.dict
+realigner_output: "ID".intervals
+
+# gatk indel realigner parameters:
+indel_program: IndelRealigner
+indel_output: "ID".sort.redup.kary.reali.bam
+
+# picard fix mate information parameters:
+fixmateinfo_output: "ID".sort.redup.kary.reali.fix.bam
+sort: coordinate
+validation: SILENT
+
+# samtools-index parameters:
+samtools-index_fixmate_indexbam: "ID".sort.redup.kary.reali.fix.bai
+
+# gatk base recalibrator parameters:
+base_program: BaseRecalibrator
+table_output: "ID".fix.table
+knownsite:
+  class: File
+  path: /path/to/reference/dbSNP149_hg19.vcf
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/dbSNP149_hg19.vcf.idx
+#skipaic: true
+skipaic: false
+
+# gatk printreads parameters:
+print_program: PrintReads
+print_output: "ID".sort.redup.kary.reali.fix.recal.bam
+
+# gatk haplotypecaller parameters:
+haplo_program: HaplotypeCaller
+vcf_output: "ID".vcf
+
+# annovar parameters:
+annovar_reference:
+  class: Directory
+  path: /path/to/reference/annovar/humandb
+reference_version: hg19
+annovar_output: "ID".annovar
+annovar_remove: true
+annovar_protocol: refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2015aug_all,1000g2015aug_eur,exac03,avsnp147,dbnsfp30a
+annovar_operation: g,r,r,f,f,f,f,f,f
+annovar_nastring: .
+annovar_vcfinput: true

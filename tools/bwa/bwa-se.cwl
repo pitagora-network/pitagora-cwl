@@ -4,7 +4,8 @@ hints:
   DockerRequirement:
     dockerPull: genomicpariscentre/bwa
 baseCommand: bwa
-stdout: tmp.sam
+requirements:
+  - class: InlineJavascriptRequirement
 inputs:
   mem:
     type: boolean
@@ -25,26 +26,10 @@ inputs:
     type: File 
     inputBinding:
       position: 4
-  exclusive_parameters:
-    type:
-      - type: record
-        name: singleend
-        fields:
-          fq:
-            type: File
-            inputBinding:
-              position: 5
-      - type: record
-        name: pairend
-        fields:
-          fq1:
-            type: File
-            inputBinding:
-              position: 5
-          fq2:
-            type: File
-            inputBinding:
-              position: 6
+  fq:
+    type: File
+    inputBinding:
+      position: 5
   process:
     type: int?
     inputBinding:
@@ -52,4 +37,11 @@ inputs:
       position: 7
 outputs:
   tmpsam:
-    type: stdout
+    type: File
+    outputBinding:
+      glob: "*"
+stdout:
+  ${
+    var outfile = inputs.fq.basename.replace('.sam', '') + '.tmp.sam';
+    return outfile;
+  }

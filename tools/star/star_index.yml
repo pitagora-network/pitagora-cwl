@@ -1,0 +1,6 @@
+run_mode: genomeGenerate
+genome_directory: .
+out_name_prefix: .
+genome_fasta_files:
+  class: File
+  path: /path/to/reference/hg19.fa

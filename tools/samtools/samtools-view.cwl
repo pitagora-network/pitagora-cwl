@@ -20,7 +20,7 @@ inputs:
     inputBinding:
       position: 3
 outputs:
-  output:
+  samtools-view_bam:
     type: File
     outputBinding:
       glob: $(inputs.bam)

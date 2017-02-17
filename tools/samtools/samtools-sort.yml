@@ -1,6 +1,4 @@
 bam:
   class: File
-#  path: /mnt/crest/result/rnaseq/DRR015333.bam
-  path: /mnt/crest/result/mutation/adrenal.bam
-#sortbam: DRR015333.sort.bam
-sortbam: adrenal.sort
+  path: /path/to/result/"ID".bam
+sortbam: "ID".sort

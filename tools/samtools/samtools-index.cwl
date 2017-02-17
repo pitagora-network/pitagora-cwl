@@ -4,17 +4,22 @@ hints:
   DockerRequirement:
     dockerPull: genomicpariscentre/samtools
 baseCommand: ["samtools", "index"]
+requirements:
+  - class: InitialWorkDirRequirement
+    listing:
+      - $(inputs.sortbam)
 inputs:
   sortbam:
     type: File
     inputBinding:
       position: 1
+      valueFrom: $(self.basename)
   indexbam:
-    type: string?
+    type: string
     inputBinding:
       position: 2
 outputs:
-  output:
+  samtools-index_indexbam:
     type: File
     outputBinding:
       glob: $(inputs.indexbam)

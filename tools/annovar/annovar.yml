@@ -1,16 +1,16 @@
-input:
+vcf:
   class: File
-  path: /mnt/crest/result/mutation/adrenal.vcf
-  secondaryFiles:
-    - class: File
-      path: /mnt/crest/result/mutation/adrenal.vcf.idx
+  path: /path/to/vcf/"ID".vcf
+vcfidx:
+  class: File
+  path: /path/to/vcf/"ID".vcf.idx
 reference:
   class: Directory
-  path: /mnt/crest/refGenome/annovar/humandb
+  path: /path/to/reference/annovar/humandb
 version: hg19
-output: adrenal.annovar
+output: "ID".annovar
 remove: true
-protocol: refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2014oct_all,1000g2014oct_afr,1000g2014oct_eas,1000g2014oct_eur,snp138,ljb26_all
-operation: g,r,r,f,f,f,f,f,f,f
+protocol: refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2015aug_all,1000g2015aug_eur,exac03,avsnp147,dbnsfp30a
+operation: g,r,r,f,f,f,f,f,f
 nastring: .
 vcfinput: true
