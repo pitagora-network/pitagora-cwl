@@ -1,0 +1,16 @@
+### available docker containers:
+# yyabuki/docker-abyss
+# yyabuki/docker-minia
+# yyabuki/docker-megahit
+# nucleotides/idba
+# nucleotides/sga
+# nucleotides/spades
+# nucleotides/sparse-assembler
+# nucleotides/velvet
+# nucleotides/velvet-optimiser
+docker_name: DOCKERNAME (e.g. nucleotides/idba)
+process_tag: TAG (e.g. default)
+fq1:
+  class: File
+  path: /path/to/fastq/XXXXX.fastq (paired-end only)
+result_directory: /path/to/result

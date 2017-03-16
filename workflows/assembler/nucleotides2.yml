@@ -1,0 +1,12 @@
+### available docker containers:
+# yyabuki/docker-a5-miseq
+# yyabuki/docker-soap-denovo2
+docker_name: DOCKERNAME (e.g. yyabuki/docker-a5-miseq)
+process_tag: TAG (e.g. default)
+fq1:
+  class: File
+  path: /path/to/fastq/XXXXX_1.fastq
+fq2:
+  class: File
+  path: /path/to/fastq/XXXXX_2.fastq
+result_directory: /path/to/result
