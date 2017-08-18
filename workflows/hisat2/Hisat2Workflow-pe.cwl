@@ -13,7 +13,6 @@ inputs:
   down_trans_assem: boolean
 
   enable_cufflinks_output: boolean
-
   hisat2_result_file: string
 
   bs_option: boolean
