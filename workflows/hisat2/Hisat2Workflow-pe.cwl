@@ -61,6 +61,7 @@ steps:
       dta: down_trans_assem
       dta_cufflinks: enable_cufflinks_output
       output: hisat2_result_file
+      process: thread
     out: [hisat2_sam]
   samtools-view:
     run: samtools-view.cwl

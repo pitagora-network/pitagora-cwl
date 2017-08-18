@@ -10,7 +10,8 @@ inputs:
   fastq: File
   genome_index: File
   down_trans_assem: boolean
-  cufflinks: boolean 
+  enable_cufflinks_output: boolean 
+
   hisat2_result_file: string
 
   bs_option: boolean
@@ -55,8 +56,9 @@ steps:
       fq: fastq
       gi: genome_index
       dta: down_trans_assem
-      dta_cufflinks: cufflinks
+      dta_cufflinks: enable_cufflinks_output
       output: hisat2_result_file
+      process: thread
     out: [hisat2_sam]
   samtools-view:
     run: samtools-view.cwl
