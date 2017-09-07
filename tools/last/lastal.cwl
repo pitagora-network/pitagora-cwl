@@ -28,7 +28,7 @@ inputs:
     inputBinding:
       position: 4
   process:
-    type: int
+    type: int?
     inputBinding:
       prefix: -P
       position: 5

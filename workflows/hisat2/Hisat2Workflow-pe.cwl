@@ -13,6 +13,7 @@ inputs:
   down_trans_assem: boolean
 
   enable_cufflinks_output: boolean
+
   hisat2_result_file: string
 
   bs_option: boolean
@@ -26,12 +27,24 @@ inputs:
 
   stringtie_result_file: string
 
-  thread: int
+  thread: int?
 
 outputs:
+  hisat2_version_stdout_result:
+    type: File
+    outputSource: hisat2_stdout/hisat2_version_stdout
+  hisat2_version_result:
+    type: File
+    outputSource: hisat2_version/version_output
   hisat2_result:
     type: File
     outputSource: hisat2/hisat2_sam
+  samtools_version_stderr_result:
+    type: File
+    outputSource: samtools_stderr/samtools_version_stderr
+  samtools_version_result:
+    type: File
+    outputSource: samtools_version/version_output
   samtools-view_result:
     type: File
     outputSource: samtools-view/samtools-view_bam
@@ -41,16 +54,37 @@ outputs:
   samtools-index_result:
     type: File
     outputSource: samtools-index/samtools-index_indexbam
+  cufflinks_version_stderr_result:
+    type: File
+    outputSource: cufflinks_stderr/cufflinks_version_stderr
+  cufflinks_version_result:
+    type: File
+    outputSource: cufflinks_version/version_output
   cufflinks_result:
     type:
       type: array
       items: File
     outputSource: cufflinks/cufflinks_result
+  stringtie_version_stdout_result:
+    type: File
+    outputSource: stringtie_stdout/stringtie_version_stdout
+  stringtie_version_result:
+    type: File
+    outputSource: stringtie_version/version_output
   stringtie_result:
     type: File
     outputSource: stringtie/stringtie_result
 
 steps:
+  hisat2_stdout:
+    run: hisat2-version.cwl
+    in: []
+    out: [hisat2_version_stdout]
+  hisat2_version:
+    run: ngs-version.cwl
+    in:
+      infile: hisat2_stdout/hisat2_version_stdout
+    out: [version_output]
   hisat2:
     run: hisat2-pe.cwl
     in:
@@ -62,6 +96,15 @@ steps:
       output: hisat2_result_file
       process: thread
     out: [hisat2_sam]
+  samtools_stderr:
+    run: samtools-version.cwl
+    in: []
+    out: [samtools_version_stderr]
+  samtools_version:
+    run: ngs-version.cwl
+    in:
+      infile: samtools_stderr/samtools_version_stderr
+    out: [version_output]
   samtools-view:
     run: samtools-view.cwl
     in:
@@ -81,6 +124,15 @@ steps:
       sortbam: samtools-sort/samtools-sort_sortbam
       indexbam: samtools-index_result_file
     out: [samtools-index_indexbam]
+  cufflinks_stderr:
+    run: cufflinks-version.cwl
+    in: []
+    out: [cufflinks_version_stderr]
+  cufflinks_version:
+    run: ngs-version.cwl
+    in:
+      infile: cufflinks_stderr/cufflinks_version_stderr
+    out: [version_output]
   cufflinks:
     run: cufflinks.cwl
     in:
@@ -88,6 +140,15 @@ steps:
       bam: samtools-sort/samtools-sort_sortbam
       process: thread
     out: [cufflinks_result]
+  stringtie_stdout:
+    run: stringtie-version.cwl
+    in: []
+    out: [stringtie_version_stdout]
+  stringtie_version:
+    run: ngs-version.cwl
+    in:
+      infile: stringtie_stdout/stringtie_version_stdout
+    out: [version_output]
   stringtie:
     run: stringtie.cwl
     in:

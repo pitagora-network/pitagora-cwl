@@ -1,0 +1,6 @@
+index_file: k_index
+kmer_size: 31
+make_unique: true
+fasta_file:
+  class: File
+  path: /path/to/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz

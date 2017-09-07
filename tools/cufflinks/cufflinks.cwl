@@ -13,7 +13,7 @@ inputs:
       position: 1
       prefix: -p
   annotation:
-    type: File 
+    type: File
     inputBinding:
       position: 2
       prefix: -G

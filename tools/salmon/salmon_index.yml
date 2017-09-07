@@ -1,0 +1,10 @@
+transcript:
+  class: File
+  path: /path/to/file/fasta.fa.gz
+kmer_size: 31
+index:
+  class: Directory
+  path: /path/to/index_dir/salmon_index
+force: true
+process: 4
+perfect_hash: true

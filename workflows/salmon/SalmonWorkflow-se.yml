@@ -1,0 +1,28 @@
+index_dir:
+  class: Directory
+  path: /path/to/index
+lib_type: SF
+unmated:
+  class: File
+  path: /path/to/fastq/"ID".fastq
+quant_out_dir: salmon_quant
+### allocating 8 to 12 threads results in the maximum speed, threads allocated above this limit will likely spend most of their time idle / sleeping.
+process: 12
+use_vbopt: true
+### The num_bootstrap and gibbs_samples options are mutually exclusive.
+num_bootstrap: 100
+#gibbs_samples: 100
+allow_orphans: true
+seq_bias: true
+gc_bias: true
+incompat_prior: 9.99999e-21
+#write_mappings:
+#  class: File
+#  path: /path/to/map/write_mappings.result
+meta: true
+dump_eq: true
+dump_eq_weights: true
+fld_mean: 400
+fld_sd: 30
+bias_speed_samp: 2
+write_unmapped_names: true

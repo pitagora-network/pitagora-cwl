@@ -84,7 +84,7 @@ outputs:
     type: File?
     outputBinding:
       glob: "*.fix.table"
-  interval:
+  interval_res:
     type: File?
     outputBinding:
       glob: "*.intervals"

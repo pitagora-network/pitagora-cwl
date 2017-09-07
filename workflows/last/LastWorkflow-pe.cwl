@@ -15,7 +15,7 @@ inputs:
   gap_alignment_min_score: int
   genome_index: File
   input_format: int
-  thread: int
+  thread: int?
 
   # maf-convert parameters
   format_type: string
@@ -91,6 +91,12 @@ inputs:
   annovar_vcfinput: boolean
 
 outputs:
+  last_version_stdout_result:
+    type: File
+    outputSource: last_stdout/last_version_stdout
+  last_version_result:
+    type: File
+    outputSource: last_version/version_output
   lastal1_result:
     type: File
     outputSource: lastal1/maf
@@ -109,9 +115,21 @@ outputs:
   trim_result:
     type: File
     outputSource: trim/sam
+  samtools_version_stderr_result:
+    type: File
+    outputSource: samtools_stderr/samtools_version_stderr
+  samtools_version_result:
+    type: File
+    outputSource: samtools_version/version_output
   samtools-view_result:
     type: File
     outputSource: samtools-view/samtools-view_bam
+  picard_version_stderr_result:
+    type: File
+    outputSource: picard_stderr/picard_version_stderr
+  picard_version_result:
+    type: File
+    outputSource: picard_version/version_output
   picard-addorreplacereadgroups_result:
     type: File
     outputSource: picard-addorreplacereadgroups/fix
@@ -133,9 +151,15 @@ outputs:
   reorder_index_result:
     type: File
     outputSource: samtools-index-for-reorder/samtools-index_indexbam
+  gatk_version_stdout_result:
+    type: File
+    outputSource: gatk_stdout/gatk_version_stdout
+  gatk_version_result:
+    type: File
+    outputSource: gatk_version/version_output
   gatk_aligner_result:
     type: File
-    outputSource: gatk-realigner/interval
+    outputSource: gatk-realigner/interval_res
   gatk_indel_bam_result:
     type: File
     outputSource: gatk-indel/realign
@@ -163,6 +187,12 @@ outputs:
   gatk_haplo_index_result:
     type: File
     outputSource: gatk-haplo/vcfidx
+  annovar_version_stdout_result:
+    type: File
+    outputSource: annovar_stdout/annovar_version_stdout
+  annovar_version_result:
+    type: File
+    outputSource: annovar_version/version_output
   annovar_result:
     type:
       type: array
@@ -170,6 +200,15 @@ outputs:
     outputSource: annovar/annovar_results
 
 steps:
+  last_stdout:
+    run: last-version.cwl
+    in: []
+    out: [last_version_stdout]
+  last_version:
+    run: ngs-version.cwl
+    in:
+      infile: last_stdout/last_version_stdout
+    out: [version_output]
   lastal1:
     run: lastal.cwl
     in:
@@ -211,6 +250,15 @@ steps:
     in:
       tmpoutput: mafconvert/sam
     out: [sam]
+  samtools_stderr:
+    run: samtools-version.cwl
+    in: []
+    out: [samtools_version_stderr]
+  samtools_version:
+    run: ngs-version.cwl
+    in:
+      infile: samtools_stderr/samtools_version_stderr
+    out: [version_output]
   samtools-view:
     run: samtools-view.cwl
     in:
@@ -218,6 +266,15 @@ steps:
       bam: samtools-view_result_file
       sam: trim/sam
     out: [samtools-view_bam]
+  picard_stderr:
+    run: picard-version.cwl
+    in: []
+    out: [picard_version_stderr]
+  picard_version:
+    run: ngs-version.cwl
+    in:
+      infile: picard_stderr/picard_version_stderr
+    out: [version_output]
   picard-addorreplacereadgroups:
     run: picard-addorreplacereadgroups.cwl
     in:
@@ -261,6 +318,15 @@ steps:
       sortbam: picard-reordersam/reorderres
       indexbam: samtools-index_reorder_indexbam
     out: [samtools-index_indexbam]
+  gatk_stdout:
+    run: gatk-version.cwl
+    in: []
+    out: [gatk_version_stdout]
+  gatk_version:
+    run: ngs-version.cwl
+    in:
+      infile: gatk_stdout/gatk_version_stdout
+    out: [version_output]
   gatk-realigner:
     run: gatk.cwl
     in:
@@ -269,7 +335,7 @@ steps:
       bam: picard-reordersam/reorderres
       bai: samtools-index-for-reorder/samtools-index_indexbam
       output: realigner_output
-    out: [interval]
+    out: [interval_res]
   gatk-indel:
     run: gatk.cwl
     in:
@@ -277,7 +343,7 @@ steps:
       reference: gatk_reference
       bam: picard-reordersam/reorderres
       bai: samtools-index-for-reorder/samtools-index_indexbam
-      interval: gatk-realigner/interval
+      interval: gatk-realigner/interval_res
       output: indel_output
     out: [realign, realignbai]
   picard-fixmate:
@@ -324,6 +390,15 @@ steps:
       bai: gatk-printreads/printbai
       output: vcf_output
     out: [vcf, vcfidx]
+  annovar_stdout:
+    run: annovar-version.cwl
+    in: []
+    out: [annovar_version_stdout]
+  annovar_version:
+    run: ngs-version.cwl
+    in:
+      infile: annovar_stdout/annovar_version_stdout
+    out: [version_output]
   annovar:
     run: annovar.cwl
     in:

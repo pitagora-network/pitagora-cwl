@@ -23,7 +23,7 @@ inputs:
       position: 3
       prefix: -R
   genome_index:
-    type: File 
+    type: File
     inputBinding:
       position: 4
   fq1:

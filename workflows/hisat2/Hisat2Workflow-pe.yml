@@ -26,7 +26,7 @@ genome_index:
     - class: File
       path: /path/to/reference/hg19.fa.8.ht2
 down_trans_assem: true
-cufflinks: true
+enable_cufflinks_output: true
 hisat2_result_file: "ID".sam
 
 # samtools view parameters

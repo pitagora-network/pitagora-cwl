@@ -1,0 +1,23 @@
+index_file:
+  class: File
+  path: /path/to/index
+mates1:
+  class: File
+  path: /path/to/fastq/"ID1".fastq
+mates2:
+  class: File
+  path: /path/to/fastq/"ID2".fastq
+quant_out_dir: kallisto_quant
+thread: 16
+fragment_length: 275
+standard_deviation: 20
+bias: true
+# bootstrap_samples: default 0
+boostrap_samples: 100
+# seed: default 42
+seed: 42
+plain_text: false
+fusion: false
+fr_stranded: false
+rf_stranded: false
+pseudo_bam: false
