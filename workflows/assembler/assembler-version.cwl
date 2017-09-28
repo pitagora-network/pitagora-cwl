@@ -3,10 +3,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-#    dockerPull: DOCKER_NAME # specify docker
-#    dockerPull: yyabuki/docker-megahit
-    dockerPull: yyabuki/docker-a5-miseq
-#    dockerPull: yyabuki/docker-sga
+    dockerPull: DOCKER_NAME # (e.g. yyabuki/docker-idba)
 
 inputs: []
 arguments: ["version", "/var/spool/cwl"]
