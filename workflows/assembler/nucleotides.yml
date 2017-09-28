@@ -2,12 +2,12 @@
 # yyabuki/docker-abyss
 # yyabuki/docker-minia
 # yyabuki/docker-megahit
-# nucleotides/idba
-# nucleotides/sga
-# nucleotides/spades
-# nucleotides/sparse-assembler
-# nucleotides/velvet
-# nucleotides/velvet-optimiser
+# yyabuki/docker-idba
+# yyabuki/docker-sga
+# yyabuki/docker-spades
+# yyabuki/docker-sparse-assembler
+# yyabuki/docker-velvet
+# yyabuki/docker-velvet-optimiser
 docker_name: DOCKERNAME (e.g. nucleotides/idba)
 process_tag: TAG (e.g. default)
 fq1:
