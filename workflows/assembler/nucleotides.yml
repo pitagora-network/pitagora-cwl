@@ -8,7 +8,7 @@
 # yyabuki/docker-sparse-assembler
 # yyabuki/docker-velvet
 # yyabuki/docker-velvet-optimiser
-docker_name: DOCKERNAME (e.g. nucleotides/idba)
+docker_name: DOCKERNAME (e.g. yyabuki/docker-idba)
 process_tag: TAG (e.g. default)
 fq1:
   class: File

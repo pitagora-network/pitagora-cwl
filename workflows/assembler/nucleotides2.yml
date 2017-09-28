@@ -1,7 +1,7 @@
 ### available docker containers:
 # yyabuki/docker-a5-miseq
 # yyabuki/docker-soap-denovo2
-docker_name: DOCKERNAME (e.g. yyabuki/docker-a5-miseq)
+docker_name: DOCKERNAME (e.g. yyabuki/docker-soap-denovo2)
 process_tag: TAG (e.g. default)
 fq1:
   class: File
