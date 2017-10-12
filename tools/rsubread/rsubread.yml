@@ -1,0 +1,9 @@
+bam:
+  class: File
+  path: /path/to/input.bam
+gtf:
+  class: File
+  path: /path/to/igenome/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
+readcount_script:
+  class: File
+  path: /path/to/rsubread.R
