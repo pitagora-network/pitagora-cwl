@@ -5,10 +5,6 @@ hints:
     dockerPull: yyabuki/sailfish
 requirements:
   - class: InlineJavascriptRequirement
-  - class: InitialWorkDirRequirement
-    listing:
-      - $(inputs.transcript)
-      - $(inputs.index_out_dir)
 baseCommand: ["sailfish", "index"]
 
 inputs:
@@ -17,7 +13,6 @@ inputs:
     inputBinding:
       position: 1
       prefix: -t
-      valueFrom: $(self.basename)
   kmer_size:
     type: int?
     inputBinding:
@@ -28,7 +23,6 @@ inputs:
     inputBinding:
       position: 3
       prefix: -o
-      valueFrom: $(self.basename)
   process:
     type: int?
     inputBinding:
@@ -48,4 +42,4 @@ outputs:
   index_results:
     type: Directory
     outputBinding:
-      glob: $(inputs.index_out_dir.basename)
+      glob: $(inputs.index_out_dir)

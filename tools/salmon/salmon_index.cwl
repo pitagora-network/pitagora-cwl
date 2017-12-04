@@ -5,10 +5,6 @@ hints:
     dockerPull: combinelab/salmon
 requirements:
   - class: InlineJavascriptRequirement
-  - class: InitialWorkDirRequirement
-    listing:
-      - $(inputs.transcript)
-      - $(inputs.index)
 baseCommand: ["salmon", "index"]
 
 inputs:
@@ -17,18 +13,16 @@ inputs:
     inputBinding:
       position: 1
       prefix: -t
-      valueFrom: $(self.basename)
   kmer_length:
     type: int?
     inputBinding:
       position: 2
       prefix: -k
   index:
-    type: Directory
+    type: string
     inputBinding:
       position: 3
       prefix: -i
-      valueFrom: $(self.basename)
   process:
     type: int?
     inputBinding:
@@ -53,4 +47,4 @@ outputs:
   index_results:
     type: Directory
     outputBinding:
-      glob: $(inputs.index.basename)
+      glob: $(inputs.index)

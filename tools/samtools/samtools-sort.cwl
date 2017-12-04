@@ -12,9 +12,10 @@ inputs:
   sortbam:
     type: string
     inputBinding:
+      prefix: -o
       position: 2
 outputs:
   samtools-sort_sortbam:
     type: File
     outputBinding:
-      glob: $(inputs.sortbam).*
+      glob: $(inputs.sortbam)
