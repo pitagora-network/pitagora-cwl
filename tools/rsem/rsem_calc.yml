@@ -1,0 +1,9 @@
+threads: 16
+bam:
+  class: File
+  path: /path/to/data.bam
+rsem_index_dir:
+  class: Directory
+  path: /path/to/rsem_index_dir
+rsem_index_prefix: RSEM_INDEX_PREFIX
+rsem_output_prefix: FILENAME

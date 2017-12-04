@@ -1,0 +1,4 @@
+sraFiles:
+  - class: File
+    path: /path/to/data.sra
+out_fastq_prefix: OUT_FASTQ_PREFIX

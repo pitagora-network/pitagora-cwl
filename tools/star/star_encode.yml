@@ -1,0 +1,29 @@
+runThreadN: 16
+outSJfilterReads: Unique
+outFilterType: BySJout
+outSAMunmapped: Within
+outSAMattributes: [NH, HI, AS, NM, MD]
+outFilterMultimapNmax: 20
+outFilterMismatchNmax: 999
+alignIntronMin: 20
+outFilterMismatchNoverReadLmax: 0.04
+alignIntronMax: 1000000
+alignMatesGapMax: 1000000
+alignSJoverhangMin: 8
+alignSJDBoverhangMin: 1
+sjdbScore: 1
+outSAMtype: [BAM, SortedByCoordinate]
+outBAMcompression: 10
+limitBAMsortRAM: 32000000000
+quantMode: [TranscriptomeSAM, GeneCounts]
+quantTranscriptomeBAMcompression: 10
+outSAMstrandField: intronMotif
+genomeDir:
+  class: Directory
+  path: /path/to/igenome/Homo_sapiens/UCSC/hg38/Sequence/STARIndex
+readFilesIn:
+  - class: File
+    path: /path/to/data_1.fastq.bz2
+  - class: File
+    path: /path/to/data_2.fastq.bz2
+readFilesCommand: "bunzip2 -c"
