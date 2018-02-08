@@ -10,8 +10,8 @@ requirements:
 inputs:
 
   # BWA parameters
-  fastq1: File
-  fastq2: File
+  fq1: File
+  fq2: File
   genome_index: File
   mem: boolean
   mark_shorter_split_hits: boolean
@@ -186,8 +186,8 @@ steps:
   bwa:
     run: bwa-pe.cwl
     in:
-      fq1: fastq1
-      fq2: fastq2
+      fq1: fq1
+      fq2: fq2
       genome_index: genome_index
       mem: mem
       mark_shorter_split_hits: mark_shorter_split_hits

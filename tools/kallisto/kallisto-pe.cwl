@@ -2,14 +2,14 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/kallisto
+    dockerPull: yyabuki/kallisto:0.43.1
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.index_file)
-      - $(inputs.mates1)
-      - $(inputs.mates2)
+      - $(inputs.fq1)
+      - $(inputs.fq2)
 baseCommand: ["kallisto", "quant"]
 
 inputs:
@@ -80,12 +80,12 @@ inputs:
     inputBinding:
       position: 13
       prefix: --pseudobam
-  mates1:
+  fq1:
     type: File
     inputBinding:
       position: 14
       valueFrom: $(self.basename)
-  mates2:
+  fq2:
     type: File
     inputBinding:
       position: 15

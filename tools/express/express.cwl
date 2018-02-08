@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/express
+    dockerPull: yyabuki/express:1.5.1
 requirements:
   - class: InlineJavascriptRequirement
 baseCommand: express

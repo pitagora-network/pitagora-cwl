@@ -19,8 +19,8 @@ inputs:
   rf_stranded: boolean?
   thread: int
   pseudo_bam: boolean?
-  mates1: File
-  mates2: File
+  fq1: File
+  fq2: File
 
 outputs:
   kallisto_version_stdout_result:
@@ -59,6 +59,6 @@ steps:
       rf_stranded: rf_stranded
       thread: thread
       pseudo_bam: pseudo_bam
-      mates1: mates1
-      mates2: mates2
+      fq1: fq1
+      fq2: fq2
     out: [quant_results]

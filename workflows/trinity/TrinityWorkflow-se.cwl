@@ -8,8 +8,8 @@ inputs:
 
   seq_type: string
   max_memory: string
-  single_end: File
-  cpu: int?
+  fq: File
+  thread: int?
   ss_lib_type: string?
   min_contig_length: int
   no_bowtie: boolean?
@@ -41,8 +41,8 @@ steps:
     in:
       seq_type: seq_type
       max_memory: max_memory
-      single_end: single_end
-      cpu: cpu
+      fq: fq
+      cpu: thread
       ss_lib_type: ss_lib_type
       min_contig_length: min_contig_length
       no_bowtie: no_bowtie

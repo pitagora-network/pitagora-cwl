@@ -2,13 +2,13 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/sailfish
+    dockerPull: yyabuki/sailfish:0.10.0
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.index_dir)
-      - $(inputs.unmated)
+      - $(inputs.fq)
 #      - $(inputs.gene_map)
 baseCommand: ["sailfish", "quant"]
 
@@ -29,7 +29,7 @@ inputs:
     inputBinding:
       position: 3
       prefix: -o
-  unmated:
+  fq:
     type: File
     inputBinding:
       position: 4

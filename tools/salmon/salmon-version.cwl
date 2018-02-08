@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: combinelab/salmon
+    dockerPull: combinelab/salmon:0.8.2
 baseCommand: ["salmon", "--version"]
 stderr: salmon_stderr
 

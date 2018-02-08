@@ -1,0 +1,10 @@
+# seq_type: 'fa' or 'fq'
+seq_type: fq
+max_memory: 40G
+run_id: RUN_ID
+read_type: pair
+thread: 4
+ss_lib_type: FR
+min_contig_length: 50
+no_bowtie: true
+output_dir: trinity-pair

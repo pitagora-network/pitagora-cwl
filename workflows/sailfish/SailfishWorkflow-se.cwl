@@ -8,7 +8,7 @@ inputs:
 
   index_dir: Directory
   lib_type: string
-  unmated: File
+  fq: File
   gene_map: File?
   use_vbopt: boolean?
   ### The num_bootstrap and gibbs_samples options are mutually exclusive.
@@ -43,7 +43,7 @@ steps:
     in:
       index_dir: index_dir
       lib_type: lib_type
-      unmated: unmated
+      fq: fq
       quant_out_dir: quant_out_dir
 #      gene_map: gene_map
       use_vbopt: use_vbopt

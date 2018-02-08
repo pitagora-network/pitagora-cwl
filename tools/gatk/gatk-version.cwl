@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: biodckrdev/gatk
+    dockerPull: biodckrdev/gatk:3.4
 baseCommand: ["java", "-jar", "/home/biodocker/bin/gatk/target/GenomeAnalysisTK.jar", "--version"]
 stdout: gatk_stdout
 

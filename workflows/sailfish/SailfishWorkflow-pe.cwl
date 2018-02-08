@@ -9,8 +9,8 @@ inputs:
   index_dir: Directory
   lib_type: string
   quant_out_dir: string
-  mates1: File
-  mates2: File
+  fq1: File
+  fq2: File
 #  gene_map: File?
   use_vbopt: boolean?
   num_bootstrap: int?
@@ -44,8 +44,8 @@ steps:
     in:
       index_dir: index_dir
       lib_type: lib_type
-      mates1: mates1
-      mates2: mates2
+      fq1: fq1
+      fq2: fq2
       quant_out_dir: quant_out_dir
 #      gene_map: gene_map
       use_vbopt: use_vbopt

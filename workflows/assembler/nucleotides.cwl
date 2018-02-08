@@ -14,7 +14,7 @@ inputs:
     type: string
     inputBinding:
       position: 2
-  fq1:
+  fq:
     type: File
     inputBinding:
       position: 3

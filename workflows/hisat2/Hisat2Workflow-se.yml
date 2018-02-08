@@ -1,5 +1,5 @@
 # hisat2 parameters.
-fastq:
+fq:
   class: File
   path: /path/to/rnaseqsingle/"ID".fastq
 genome_index:
@@ -22,6 +22,7 @@ genome_index:
       path: /path/to/reference/hg19.fa.7.ht2
     - class: File
       path: /path/to/reference/hg19.fa.8.ht2
+  genome_version: GRCh37
 down_trans_assem: true
 enable_cufflinks_output: true
 hisat2_result_file: "ID".sam

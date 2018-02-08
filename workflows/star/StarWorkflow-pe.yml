@@ -5,13 +5,14 @@ genome_directory:
 gtf:
   class: File
   path: /path/to/reference/annotation/hg19.gtf
+  genome_version: GRCh37
 output_sam_type: SortedByCoordinate
 output_name_prefix: "ID".bam
 output_sam_strand_field: intronMotif
-fastq1:
+fq1:
   class: File
   path: /path/to/rnaseqpair/"ID"_1.fastq
-fastq2:
+fq2:
   class: File
   path: /path/to/rnaseqpair/"ID"_2.fastq
 

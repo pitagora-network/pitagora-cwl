@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: broadinstitute/picard
+    dockerPull: broadinstitute/picard:latest
 baseCommand: CreateSequenceDictionary
 inputs:
   reference:

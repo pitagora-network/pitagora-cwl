@@ -1,5 +1,5 @@
 # tophat2 parameters.
-fastq:
+fq:
   class: File
   path: /path/to/rnaseqsingle/"ID".fastq
 gtf:
@@ -23,6 +23,7 @@ genome_index:
       path: /path/to/reference/hg19.fa.rev.2.bt2
     - class: File
       path: /path/to/reference/hg19.fa.fa
+  genome_version: GRCh37
 
 # cufflinks parameters:
 annotation_file:

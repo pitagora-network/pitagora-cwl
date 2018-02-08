@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/kallisto
+    dockerPull: yyabuki/kallisto:0.43.1
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement

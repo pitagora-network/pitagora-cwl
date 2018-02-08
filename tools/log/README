@@ -1,0 +1,14 @@
+1) Usage:
+  python make_json_format_log.py \
+      --data_dir "result_directory_path" \
+      --data_type "set 'assembler', 'rnaseq' or 'mutation'"
+
+2) Required for:
+  get_exe_env.py (get execution environment information:
+                  - region
+                  - instance_type
+                  - host_name
+                  - memory_total
+                  - memory_gb
+                  - disk_size)
+  (should be located in the same directory as the above script)

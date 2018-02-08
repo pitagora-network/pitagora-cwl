@@ -20,7 +20,7 @@ inputs:
   rf_stranded: boolean?
   thread: int
   pseudo_bam: boolean?
-  single_end: File
+  fq: File
 
 outputs:
   kallisto_version_stdout_result:
@@ -60,5 +60,5 @@ steps:
       rf_stranded: rf_stranded
       thread: thread
       pseudo_bam: pseudo_bam
-      single_end: single_end
+      fq: fq
     out: [quant_results]

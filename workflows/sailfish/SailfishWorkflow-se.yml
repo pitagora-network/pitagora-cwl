@@ -1,8 +1,9 @@
 index_dir:
   class: Directory
   path: /path/to/index
+  genome_version: GRCh37
 lib_type: SF
-unmated:
+fq:
   class: File
   path: /path/to/fastq/"ID".fastq
 quant_out_dir: sailfish_quant

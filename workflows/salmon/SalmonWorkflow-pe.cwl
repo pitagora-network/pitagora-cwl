@@ -9,8 +9,8 @@ inputs:
   index_dir: Directory
   lib_type: string
   quant_out_dir: string
-  mates1: File
-  mates2: File
+  fq1: File
+  fq2: File
   allow_orphans: boolean?
   seq_bias: boolean?
   gc_bias: boolean?
@@ -54,8 +54,8 @@ steps:
       index_dir: index_dir
       lib_type: lib_type
       quant_out_dir: quant_out_dir
-      mates1: mates1
-      mates2: mates2
+      fq1: fq1
+      fq2: fq2
       allow_orphans: allow_orphans
       seq_bias: seq_bias
       gc_bias: gc_bias

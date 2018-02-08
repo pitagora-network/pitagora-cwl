@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: biodckrdev/gatk
+    dockerPull: biodckrdev/gatk:3.4
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement

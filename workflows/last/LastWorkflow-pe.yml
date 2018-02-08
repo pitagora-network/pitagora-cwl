@@ -1,8 +1,8 @@
 # LASTal parameters.
-fastq1:
+fq1:
   class: File
   path: /path/to/variantpair/"ID"_1.fastq
-fastq2:
+fq2:
   class: File
   path: /path/to/variantpair/"ID"_2.fastq
 genome_index:
@@ -23,6 +23,7 @@ genome_index:
       path: /path/to/reference/hg19.fa.suf
     - class: File
       path: /path/to/reference/hg19.fa.bck
+  genome_version: GRCh37
 input_format: 1
 gap_alignment_min_score: 120
 thread: 8
@@ -96,12 +97,10 @@ base_program: BaseRecalibrator
 table_output: "ID".fix.table
 knownsite:
   class: File
-  path: /path/to/reference/dbSNP149_hg19.vcf
+  path: /path/to/reference/dbSNP147_hg19.vcf
   secondaryFiles:
     - class: File
-      path: /path/to/reference/dbSNP149_hg19.vcf.idx
-#skipaic: true
-skipaic: false
+      path: /path/to/reference/dbSNP147_hg19.vcf.idx
 
 # gatk printreads parameters:
 print_program: PrintReads

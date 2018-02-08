@@ -7,7 +7,7 @@ requirements:
 
 inputs:
 
-  fastq: File
+  fq: File
   genome_index: File
   gtf: File
   annotation_file: File
@@ -60,7 +60,7 @@ steps:
   tophat2:
     run: tophat2-se.cwl
     in:
-      fq: fastq
+      fq: fq
       gi: genome_index
       gtf: gtf
       process: thread

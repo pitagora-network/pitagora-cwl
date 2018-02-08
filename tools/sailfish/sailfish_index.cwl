@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/sailfish
+    dockerPull: yyabuki/sailfish:0.10.0
 requirements:
   - class: InlineJavascriptRequirement
 baseCommand: ["sailfish", "index"]
@@ -19,7 +19,7 @@ inputs:
       position: 2
       prefix: -k
   index_out_dir:
-    type: Directory
+    type: string
     inputBinding:
       position: 3
       prefix: -o

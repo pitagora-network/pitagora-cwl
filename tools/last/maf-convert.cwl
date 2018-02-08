@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/last
+    dockerPull: yyabuki/last:894
 baseCommand: maf-convert
 requirements:
   - class: InlineJavascriptRequirement

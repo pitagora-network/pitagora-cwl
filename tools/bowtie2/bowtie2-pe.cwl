@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: genomicpariscentre/bowtie2
+    dockerPull: genomicpariscentre/bowtie2:2.2.4
 baseCommand: bowtie2
 inputs:
   genome_index:

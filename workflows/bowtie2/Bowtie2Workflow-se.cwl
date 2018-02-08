@@ -10,7 +10,7 @@ requirements:
 inputs:
 
   # Bowtie2 parameters
-  fastq: File
+  fq: File
   genome_index: File
   set_read_group_id: string
   add_text_sam_header1: string
@@ -183,7 +183,7 @@ steps:
   bowtie2:
     run: bowtie2-se.cwl
     in:
-      fq: fastq
+      fq: fq
       genome_index: genome_index
       set_read_group_id: set_read_group_id
       add_text_sam_header1: add_text_sam_header1

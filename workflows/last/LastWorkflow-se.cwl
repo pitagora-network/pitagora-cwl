@@ -10,7 +10,7 @@ requirements:
 inputs:
 
   # LASTal parameters
-  fastq: File
+  fq: File
   gap_alignment_min_score: int
   genome_index: File
   input_format: int
@@ -205,7 +205,7 @@ steps:
   lastal:
     run: lastal.cwl
     in:
-      input: fastq
+      fq: fq
       genome_index: genome_index
       gap_alignment_min_score: gap_alignment_min_score
       input_format: input_format

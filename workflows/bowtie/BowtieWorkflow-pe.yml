@@ -19,10 +19,11 @@ reference:
       path: /path/to/reference/refMrna.fa.rev.1.ebwt
     - class: File
       path: /path/to/reference/refMrna.fa.rev.2.ebwt
-fastq1:
+  genome_version: GRCh37
+fq1:
   class: File
   path: /path/to/rnaseqpair/"ID"_1.fastq
-fastq2:
+fq2:
   class: File
   path: /path/to/rnaseqpair/"ID"_2.fastq
 sam: "ID".sam

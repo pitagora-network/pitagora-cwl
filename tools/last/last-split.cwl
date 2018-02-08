@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/last
+    dockerPull: yyabuki/last:894
 baseCommand: last-split
 requirements:
   - class: InlineJavascriptRequirement

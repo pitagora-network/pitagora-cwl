@@ -1,10 +1,10 @@
 # seq_type: 'fa' or 'fq'
 seq_type: fq
 max_memory: 40G
-single_end:
+fq:
   class: File
   path: /path/to/fastq/"ID".fq.gz
-cpu: 4
+thread: 4
 ss_lib_type: F
 min_contig_length: 50
 #no_bowtie: true

@@ -2,13 +2,13 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: comics/trinityrnaseq
+    dockerPull: comics/trinityrnaseq:2.2.0
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
-      - $(inputs.mates1)
-      - $(inputs.mates2)
+      - $(inputs.fq1)
+      - $(inputs.fq2)
 baseCommand: ["Trinity"]
 
 inputs:
@@ -22,13 +22,13 @@ inputs:
     inputBinding:
       position: 2
       prefix: --max_memory
-  mates1:
+  fq1:
     type: File
     inputBinding:
       position: 3
       prefix: --left
       valueFrom: $(self.basename)
-  mates2:
+  fq2:
     type: File
     inputBinding:
       position: 4

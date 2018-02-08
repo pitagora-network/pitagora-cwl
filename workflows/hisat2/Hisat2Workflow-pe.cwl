@@ -7,8 +7,8 @@ requirements:
 
 inputs:
 
-  fastq1: File
-  fastq2: File
+  fq1: File
+  fq2: File
   genome_index: File
   down_trans_assem: boolean
 
@@ -88,8 +88,8 @@ steps:
   hisat2:
     run: hisat2-pe.cwl
     in:
-      fq1: fastq1
-      fq2: fastq2
+      fq1: fq1
+      fq2: fq2
       gi: genome_index
       dta: down_trans_assem
       dta_cufflinks: enable_cufflinks_output

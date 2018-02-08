@@ -1,0 +1,106 @@
+# bowtie2 parameters.
+run_id: RUN_ID
+read_type: single
+genome_index:
+  class: File
+  path: /path/to/reference/hg38.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg38.fa.1.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.2.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.3.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.4.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.rev.1.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.rev.2.bt2
+  genome_version: GRCh38
+bowtie2_result_file: "ID".sam
+set_read_group_id: ID
+add_text_sam_header1: SM:A
+add_text_sam_header2: PL:Illumina
+thread: 8
+
+# samtools view parameters
+bs_option: true
+samtools-view_result_file: "ID".bam
+
+# samtools sort parameters
+samtools-sort_result_file: "ID".sort
+
+# samtools index parameters:
+samtools-index_result_file: "ID".sort.bam.bai
+
+# picard-markduplicates parameters:
+dupout: "ID".sort.redup.bam
+metout: metrics.txt
+
+# picard-reordersam parameters:
+reorder: "ID".sort.redup.kary.bam
+reference:
+  class: File
+  path: /path/to/reference/hg38.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg38.dict
+
+# samtools-index parameters:
+samtools-index_reorder_indexbam: "ID".sort.redup.kary.bam.bai
+
+# gatk realigner target creater parameters:
+realign_program: RealignerTargetCreator
+gatk_reference:
+  class: File
+  path: /path/to/reference/hg38.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg38.fa.fai
+    - class: File
+      path: /path/to/reference/hg38.dict
+realigner_output: "ID".intervals
+
+# gatk indel realigner parameters:
+indel_program: IndelRealigner
+indel_output: "ID".sort.redup.kary.reali.bam
+
+# picard fix mate information parameters:
+fixmateinfo_output: "ID".sort.redup.kary.reali.fix.bam
+sort: coordinate
+validation: SILENT
+
+# samtools-index parameters:
+samtools-index_fixmate_indexbam: "ID".sort.redup.kary.reali.fix.bai
+
+# gatk base recalibrator parameters:
+base_program: BaseRecalibrator
+table_output: "ID".fix.table
+knownsite:
+  class: File
+  path: /path/to/reference/dbSNP150_hg38.vcf
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/dbSNP150_hg38.vcf.idx
+skipaic: false
+
+# gatk printreads parameters:
+print_program: PrintReads
+print_output: "ID".sort.redup.kary.reali.fix.recal.bam
+
+# gatk haplotypecaller parameters:
+haplo_program: HaplotypeCaller
+vcf_output: "ID".vcf
+
+# annovar parameters:
+annovar_reference:
+  class: Directory
+  path: /path/to/reference/annovar/humandb
+reference_version: hg38
+annovar_output: "ID".annovar
+annovar_remove: true
+annovar_protocol: refGene,cytoBand,exac03,avsnp150,dbnsfp30a
+annovar_operation: g,r,f,f,f
+annovar_nastring: .
+annovar_vcfinput: true

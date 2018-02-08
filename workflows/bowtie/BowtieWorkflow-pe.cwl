@@ -7,8 +7,8 @@ requirements:
 
 inputs:
 
-  fastq1: File
-  fastq2: File
+  fq1: File
+  fq2: File
   all_alignment: boolean
   reference: File
   max_insert_size: int
@@ -65,8 +65,8 @@ steps:
   bowtie:
     run: bowtie-pe.cwl
     in:
-      fq1: fastq1
-      fq2: fastq2
+      fq1: fq1
+      fq2: fq2
       reference: reference
       all_alignment: all_alignment
       max_insert_size: max_insert_size

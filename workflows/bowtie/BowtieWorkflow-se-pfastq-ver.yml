@@ -1,0 +1,31 @@
+# Bowtie parameters
+run_id: RUN_ID
+read_type: single
+all_alignment: true
+max_insert_size: 800
+override_offrate: 1
+max_ram_mb: 2000
+reference:
+  class: File
+  path: /path/to/reference/refMrna.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/refMrna.fa.1.ebwt
+    - class: File
+      path: /path/to/reference/refMrna.fa.2.ebwt
+    - class: File
+      path: /path/to/reference/refMrna.fa.3.ebwt
+    - class: File
+      path: /path/to/reference/refMrna.fa.4.ebwt
+    - class: File
+      path: /path/to/reference/refMrna.fa.rev.1.ebwt
+    - class: File
+      path: /path/to/reference/refMrna.fa.rev.2.ebwt
+  genome_version: GRCh38
+sam: "ID".sam
+
+# samtools view parameters
+bs_option: true
+samtools-view_result_file: "ID".bam
+
+thread: 8

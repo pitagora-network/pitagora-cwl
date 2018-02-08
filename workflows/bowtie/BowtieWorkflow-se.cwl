@@ -7,7 +7,7 @@ requirements:
 
 inputs:
 
-  fastq: File
+  fq: File
   all_alignment: boolean
   reference: File
   max_insert_size: int
@@ -64,7 +64,7 @@ steps:
   bowtie:
     run: bowtie-se.cwl
     in:
-      fq: fastq
+      fq: fq
       reference: reference
       all_alignment: all_alignment
       max_insert_size: max_insert_size

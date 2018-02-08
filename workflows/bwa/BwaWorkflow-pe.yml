@@ -1,8 +1,8 @@
 # BWA parameters.
-fastq1:
+fq1:
   class: File
   path: /path/to/variantpair/"ID"_1.fastq
-fastq2:
+fq2:
   class: File
   path: /path/to/variantpair/"ID"_2.fastq
 genome_index:
@@ -19,6 +19,7 @@ genome_index:
       path: /path/to/reference/hg19.fa.sa
     - class: File
       path: /path/to/reference/hg19.fa.amb
+  genome_version: GRCh37
 mem: true
 mark_shorter_split_hits: true
 read_group_header_line: "@RG\\tID:A\\tSM:A\\tPL:Illumina"
@@ -79,12 +80,10 @@ base_program: BaseRecalibrator
 table_output: "ID".fix.table
 knownsite:
   class: File
-  path: /path/to/reference/dbSNP149_hg19.vcf
+  path: /path/to/reference/dbSNP147_hg19.vcf
   secondaryFiles:
     - class: File
-      path: /path/to/reference/dbSNP149_hg19.vcf.idx
-#skipaic: true
-skipaic: false
+      path: /path/to/reference/dbSNP147_hg19.vcf.idx
 
 # gatk printreads parameters:
 print_program: PrintReads

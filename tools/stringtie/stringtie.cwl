@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/stringtie
+    dockerPull: yyabuki/stringtie:1.2.3
 baseCommand: stringtie
 requirements:
   - class: InlineJavascriptRequirement

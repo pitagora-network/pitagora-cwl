@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: genomicpariscentre/bwa
+    dockerPull: genomicpariscentre/bwa:v0.7.15
 baseCommand: [bwa, index]
 requirements:
   - class: InlineJavascriptRequirement

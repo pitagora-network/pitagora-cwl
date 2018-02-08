@@ -4,7 +4,7 @@ requirements:
   - class: InlineJavascriptRequirement
 hints:
   DockerRequirement:
-    dockerPull: genomicpariscentre/star
+    dockerPull: genomicpariscentre/star:2.5.2b
 baseCommand: STAR
 inputs:
   genome_directory:

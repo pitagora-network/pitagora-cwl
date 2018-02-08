@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/annovar
+    dockerPull: yyabuki/annovar:20160201
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement

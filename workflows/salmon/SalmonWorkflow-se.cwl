@@ -9,7 +9,7 @@ inputs:
   index_dir: Directory
   lib_type: string
   quant_out_dir: string
-  unmated: File
+  fq: File
   allow_orphans: boolean?
   seq_bias: boolean?
   gc_bias: boolean?
@@ -55,7 +55,7 @@ steps:
       index_dir: index_dir
       lib_type: lib_type
       quant_out_dir: quant_out_dir
-      unmated: unmated
+      fq: fq
       allow_orphans: allow_orphans
       seq_bias: seq_bias
       gc_bias: gc_bias

@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/docker-ngs-version
+    dockerPull: yyabuki/docker-ngs-version:0.1.0
 baseCommand: ["get_version.py"]
 requirements:
   - class: InitialWorkDirRequirement

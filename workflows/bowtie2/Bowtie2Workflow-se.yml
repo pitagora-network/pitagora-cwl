@@ -1,5 +1,5 @@
 # bowtie2 parameters.
-fastq:
+fq:
   class: File
   path: /path/to/variantsingle/"ID".fastq
 genome_index:
@@ -18,6 +18,7 @@ genome_index:
       path: /path/to/reference/hg19.fa.rev.1.bt2
     - class: File
       path: /path/to/reference/hg19.fa.rev.2.bt2
+  genome_version: GRCh37
 bowtie2_result_file: "ID".sam
 set_read_group_id: ID
 add_text_sam_header1: SM:A
@@ -79,10 +80,10 @@ base_program: BaseRecalibrator
 table_output: "ID".fix.table
 knownsite:
   class: File
-  path: /path/to/reference/dbSNP149_hg19.vcf
+  path: /path/to/reference/dbSNP147_hg19.vcf
   secondaryFiles:
     - class: File
-      path: /path/to/reference/dbSNP149_hg19.vcf.idx
+      path: /path/to/reference/dbSNP147_hg19.vcf.idx
 skipaic: false
 
 # gatk printreads parameters:
@@ -100,8 +101,6 @@ annovar_reference:
 reference_version: hg19
 annovar_output: "ID".annovar
 annovar_remove: true
-#annovar_protocol: refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2014oct_all,1000g2014oct_afr,1000g2014oct_eas,1000g2014oct_eur,snp138,ljb26_all
-#annovar_operation: g,r,r,f,f,f,f,f,f,f
 annovar_protocol: refGene,cytoBand,genomicSuperDups,esp6500siv2_all,1000g2015aug_all,1000g2015aug_eur,exac03,avsnp147,dbnsfp30a
 annovar_operation: g,r,r,f,f,f,f,f,f
 annovar_nastring: .

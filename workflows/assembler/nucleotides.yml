@@ -10,7 +10,7 @@
 # yyabuki/docker-velvet-optimiser
 docker_name: DOCKERNAME (e.g. yyabuki/docker-idba)
 process_tag: TAG (e.g. default)
-fq1:
+fq:
   class: File
   path: /path/to/fastq/XXXXX.fastq (paired-end only)
 result_directory: /path/to/result

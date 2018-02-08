@@ -1,11 +1,12 @@
 index_dir:
   class: Directory
   path: /path/to/index
+  genome_version: GRCh37
 lib_type: IU
-mates1:
+fq1:
   class: File
   path: /path/to/fastq/"ID1".fastq
-mates2:
+fq2:
   class: File
   path: /path/to/fastq/"ID2".fastq
 quant_out_dir: salmon_quant

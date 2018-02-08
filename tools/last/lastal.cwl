@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/last
+    dockerPull: yyabuki/last:894
 baseCommand: lastal
 requirements:
   - class: InlineJavascriptRequirement
@@ -23,7 +23,7 @@ inputs:
     type: File 
     inputBinding:
       position: 3
-  input:
+  fq:
     type: File
     inputBinding:
       position: 4

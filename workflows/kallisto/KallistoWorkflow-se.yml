@@ -1,7 +1,8 @@
 index_file:
   class: File
   path: /path/to/index
-single_end:
+  genome_version: GRCh37
+fq:
   class: File
   path: /path/to/fastq/"ID".fastq
 quant_out_dir: kallisto_quant

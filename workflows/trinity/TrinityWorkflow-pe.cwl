@@ -8,9 +8,9 @@ inputs:
 
   seq_type: string
   max_memory: string
-  mates1: File
-  mates2: File
-  cpu: int?
+  fq1: File
+  fq2: File
+  thread: int?
   ss_lib_type: string?
   min_contig_length: int
   no_bowtie: boolean?
@@ -42,9 +42,9 @@ steps:
     in:
       seq_type: seq_type
       max_memory: max_memory
-      mates1: mates1
-      mates2: mates2
-      cpu: cpu
+      fq1: fq1
+      fq2: fq2
+      cpu: thread
       ss_lib_type: ss_lib_type
       min_contig_length: min_contig_length
       no_bowtie: no_bowtie

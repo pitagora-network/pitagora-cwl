@@ -7,7 +7,7 @@ requirements:
 
 inputs:
 
-  fastq: File
+  fq: File
   genome_directory: Directory
   gtf: File
   output_sam_type: string
@@ -64,7 +64,7 @@ steps:
   star:
     run: star-se.cwl
     in:
-      fq: fastq
+      fq: fq
       genome_directory: genome_directory
       gtf: gtf
       out_sam_type: output_sam_type

@@ -2,14 +2,14 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: combinelab/salmon
+    dockerPull: combinelab/salmon:0.8.2
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
       - $(inputs.index_dir)
-      - $(inputs.mates1)
-      - $(inputs.mates2)
+      - $(inputs.fq1)
+      - $(inputs.fq2)
 #      - $(inputs.gene_map)
 #      - $(inputs.write_mappings)
 baseCommand: ["salmon", "quant"]
@@ -31,13 +31,13 @@ inputs:
     inputBinding:
       position: 3
       prefix: -o
-  mates1:
+  fq1:
     type: File
     inputBinding:
       position: 4
       prefix: "-1"
       valueFrom: $(self.basename)
-  mates2:
+  fq2:
     type: File
     inputBinding:
       position: 5

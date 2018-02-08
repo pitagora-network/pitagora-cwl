@@ -1,13 +1,13 @@
 # seq_type: 'fa' or 'fq'
 seq_type: fq
 max_memory: 40G
-mates1:
+fq1:
   class: File
   path: /path/to/fastq/Sp_ds.10k.left.fq.gz
-mates2:
+fq2:
   class: File
   path: /path/to/fastq/Sp_ds.10k.right.fq.gz
-cpu: 4
+thread: 4
 ss_lib_type: FR
 min_contig_length: 50
 no_bowtie: true

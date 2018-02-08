@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: biodckrdev/bowtie
+    dockerPull: biodckrdev/bowtie:1.1.2
 baseCommand: bowtie
 requirements:
   - class: InlineJavascriptRequirement

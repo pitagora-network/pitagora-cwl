@@ -35,7 +35,6 @@ readonly CONTAINER_FILE="$(mktemp -d)/container_id"
 
 # Assemble the reads using docker and the image
 docker run \
-    --rm \
     --volume ${DST}:${CONTAINER_DST_DIR}:rw \
     --volume ${SRC}:${CONTAINER_SRC_DIR}:ro \
     --detach=false \

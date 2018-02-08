@@ -1,0 +1,35 @@
+# tophat2 parameters.
+run_id: RUN_ID
+read_type: pair
+gtf:
+  class: File
+  path: /path/to/reference/annotation/hg38.gtf
+genome_index:
+  class: File
+  path: /path/to/reference/hg38.fa
+  secondaryFiles:
+    - class: File
+      path: /path/to/reference/hg38.fa.1.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.2.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.3.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.4.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.rev.1.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.rev.2.bt2
+    - class: File
+      path: /path/to/reference/hg38.fa.fa
+  genome_version: GRCh38
+
+# cufflinks parameters:
+annotation_file:
+  class: File
+  path: /path/to/reference/annotation/hg38.gtf
+
+# stringtie parameters:
+stringtie_result_file: stringtieout.gtf
+
+thread: 8

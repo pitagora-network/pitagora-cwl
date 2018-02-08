@@ -7,7 +7,7 @@ requirements:
 
 inputs:
 
-  fastq: File
+  fq: File
   genome_index: File
   down_trans_assem: boolean
   enable_cufflinks_output: boolean 
@@ -86,7 +86,7 @@ steps:
   hisat2:
     run: hisat2-se.cwl
     in:
-      fq: fastq
+      fq: fq
       gi: genome_index
       dta: down_trans_assem
       dta_cufflinks: enable_cufflinks_output
