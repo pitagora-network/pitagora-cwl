@@ -10,8 +10,7 @@ import yaml
 def get_execution_environment(env_output_file, env_info):
 
     try:
-#        cmd = 'python ' + os.environ.get('CWL_HOME') + '/src/get_exe_env.py --output_file ' + env_output_file
-        cmd = 'python get_exe_env.py --output_file ' + env_output_file
+        cmd = 'python ' + os.environ.get('CWL_HOME') + '/src/get_exe_env.py --output_file ' + env_output_file
         subprocess.check_call(cmd, shell=True)
     except Exception as e:
         print(e)
@@ -234,6 +233,9 @@ def parse_stderr_contents(stderr_log_contents, step_contents, versions, size_lis
         # get docker commands. for container information.
         if line.startswith('    --env=HOME='):
             docker_line_hit = True
+            # added. 16.Feb.2018
+            docker_name = ''
+            docker_command = ''
             continue
         if docker_line_hit == True:
             if line.endswith(' \\'):
