@@ -143,135 +143,159 @@ def parse_stderr_contents(stderr_log_contents, step_contents, versions, size_lis
     listing_start_hit_count = 0
     listing_end_hit = False
 
-    for line in stderr_log_contents:
-        line = line.strip('\n')
-        if line.endswith(' '): # delete a space at the end of each line.
-            line = line[:-1]
-        # get a workflow program name. for RNA-seq and Variant Call
-        if line.startswith('[workflow') and workflow_cwl_name == '':
-            workflow_cwl_name = line.replace(']', '').split(' ')[1]
-            step_contents.append([workflow_cwl_name])
-            continue
-        # get each step name.
-        if line.startswith('[step') and line.endswith('start'):
-            step_name = line.replace(']', '').split(' ')[1]
-            job_tag = '[job ' + step_name + ']'
-            continue
-        # get a cwl program name.
-        if 'initializing from file' in line:
-            each_cwl_name = re.search('\/.+\.cwl', line).group(0).split('/')[-1]
-            continue
-        # get job input information
-        if 'evaluated job input to' in line and job_input == False:
-            job_step_tag = re.search('\[job step .+\]\s{1}', line).group(0).split(' ')[2].replace(']', '')
-            if '{}' in line:
-                job_input_lines = '{}'
-            else:
-                job_input_lines = '{'
-                job_input = True
-            continue
-        # get job files.
-        if job_input == True:
-            if not line.startswith('}'): # not end line
-                if '\"listing\":' in line: # class Directory
-                    listing_start_hit = True
-                    listing_start_hit_count += 1
-                if line.startswith('    "file:///'):
-                    field_tag = re.search('#.+', line).group(0).replace('#', '').split('":')[0].split('/')[1]
-                    if line.endswith('{'): # file or directory
-                        job_input_lines += '\n    "' + field_tag + '": {'
-                    else:
-                        field_tag_value = ''.join(re.search('#.+', line).group(0).split('/')[1:])
-                        job_input_lines += '\n    "' + field_tag_value
+    try:
+        for line in stderr_log_contents:
+            line = line.strip('\n')
+            if line.endswith(' '): # delete a space at the end of each line.
+                line = line[:-1]
+            # get a workflow program name. for RNA-seq and Variant Call
+            if line.startswith('[workflow') and workflow_cwl_name == '':
+                workflow_cwl_name = line.replace(']', '').split(' ')[1]
+                step_contents.append([workflow_cwl_name])
+                continue
+            # get each step name.
+            if line.startswith('[step') and line.endswith('start'):
+                step_name = line.replace(']', '').split(' ')[1]
+                job_tag = '[job ' + step_name + ']'
+                continue
+            # get a cwl program name.
+            if 'initializing from file' in line:
+                each_cwl_name = re.search('\/.+\.cwl', line).group(0).split('/')[-1]
+                continue
+            # get job input information
+            if 'evaluated job input to' in line and job_input == False:
+                job_step_tag = re.search('\[job step .+\]\s{1}', line).group(0).split(' ')[2].replace(']', '')
+                if '{}' in line:
+                    job_input_lines = '{}'
                 else:
-                    # skip nameroot, nameext and commonwl.org lines.
-                    if 'nameroot\":' in line or 'nameext\":' in line or 'commonwl.org' in line:
-                        continue
-                    if 'location\":' in line:
-                        location = line.split('\"file://')[1].replace('\"', '').replace(',', '')
-                    if 'basename\":' in line:
-                        base_name = line.split()[1].replace(',', '').replace('"', '')
-                        spaces = re.search('^\s+', line).group(0)
-                    if re.match('^\s+\"size\":', line):
-                        size_hit = True
-                    if re.match('^\s+\},*', line):
-                        size = ''
-                        if size_hit == False:
-                            if listing_end_hit == False:
-                                size = spaces + '"size": ' + str(size_list[base_name])
-                        if job_input_lines.endswith(','):
-                            # line => '}' or '},'
-                            if size_hit == False and listing_end_hit == False: # add the size line.
-                                job_input_lines += '\n' + size + '\n' + line
-                            else: # delte commma. (i.e. ', }' => ' }')
-                                job_input_lines = job_input_lines[:-1] + '\n' + line
+                    job_input_lines = '{'
+                    job_input = True
+                continue
+            # get job files.
+            if job_input == True:
+                if not line.startswith('}'): # not end line
+                    if '\"listing\":' in line: # class Directory
+                        listing_start_hit = True
+                        listing_start_hit_count += 1
+                    if line.startswith('    "file:///'):
+                        field_tag = re.search('#.+', line).group(0).replace('#', '').split('":')[0].split('/')[1]
+                        if line.endswith('{'): # file or directory
+                            job_input_lines += '\n    "' + field_tag + '": {'
                         else:
-                            if size_hit == False and listing_end_hit == False:
-                                job_input_lines += ',\n' + size + '\n' + line
+                            field_tag_value = ''.join(re.search('#.+', line).group(0).split('/')[1:])
+                            job_input_lines += '\n    "' + field_tag_value
+                    else:
+                        # skip nameroot, nameext and commonwl.org lines.
+                        if 'nameroot\":' in line or 'nameext\":' in line or 'commonwl.org' in line:
+                            continue
+                        if 'location\":' in line:
+                            location = line.split('\"file://')[1].replace('\"', '').replace(',', '')
+                        if 'basename\":' in line:
+                            base_name = line.split()[1].replace(',', '').replace('"', '')
+                            spaces = re.search('^\s+', line).group(0)
+                        if re.match('^\s+\"size\":', line):
+                            size_hit = True
+                        if re.match('^\s+\},*', line):
+                            size = ''
+                            if size_hit == False:
+                                if listing_end_hit == False:
+                                    size = spaces + '"size": ' + str(size_list[base_name])
+                            if job_input_lines.endswith(','):
+                                # line => '}' or '},'
+                                if size_hit == False and listing_end_hit == False: # add the size line.
+                                    job_input_lines += '\n' + size + '\n' + line
+                                else: # delte commma. (i.e. ', }' => ' }')
+                                    job_input_lines = job_input_lines[:-1] + '\n' + line
+                            else:
+                                if size_hit == False and listing_end_hit == False:
+                                    job_input_lines += ',\n' + size + '\n' + line
+                                else:
+                                    job_input_lines += '\n' + line
+                            location = ''
+                            base_name = ''
+                            size = ''
+                            size_hit = False
+                            listing_end_hit = False
+                        elif re.match('^\s+\],*', line) and listing_start_hit == True: # listing.
+                            if job_input_lines.endswith(','):
+                                job_input_lines = job_input_lines[:-1] + '\n' + line
                             else:
                                 job_input_lines += '\n' + line
-                        location = ''
-                        base_name = ''
-                        size = ''
-                        size_hit = False
-                        listing_end_hit = False
-                    elif re.match('^\s+\],*', line) and listing_start_hit == True: # listing.
-                        if job_input_lines.endswith(','):
-                            job_input_lines = job_input_lines[:-1] + '\n' + line
+                            listing_start_hit_count -= 1
+                            if listing_start_hit_count == 0:
+                                listing_start_hit = False
+                            listing_end_hit = True
                         else:
                             job_input_lines += '\n' + line
-                        listing_start_hit_count -= 1
-                        if listing_start_hit_count == 0:
-                            listing_start_hit = False
-                        listing_end_hit = True
-                    else:
-                        job_input_lines += '\n' + line
-            else:
-                job_input = False
-                job_input_lines = job_input_lines + "\n}"
-            continue
-        # get docker commands. for container information.
-        if line.startswith('    --env=HOME='):
-            docker_line_hit = True
-            # added. 16.Feb.2018
-            docker_name = ''
-            docker_command = ''
-            continue
-        if docker_line_hit == True:
-            if line.endswith(' \\'):
-                line = line[4:-2]
-                if docker_name == '':
-                    docker_name = line
-                    # for picard.
-                    if 'picard' in docker_name:
-                        docker_command += '/usr/picard/docker_helper.sh '
                 else:
+                    job_input = False
+                    job_input_lines = job_input_lines + "\n}"
+                continue
+            # get docker commands. for container information.
+            if line.startswith('    --env=HOME='):
+                docker_line_hit = True
+                # added. 16.Feb.2018
+                docker_name = ''
+                docker_command = ''
+                continue
+            if docker_line_hit == True:
+                if line.endswith(' \\'):
+                    line = line[4:-2]
+                    if docker_name == '':
+                        docker_name = line
+                        # for picard.
+                        if 'picard' in docker_name:
+                            docker_command += '/usr/picard/docker_helper.sh '
+                    else:
+                        # docker ps output ommits redirect commands.
+                        if '>' in line:
+                            docker_command += re.split('\s+.*>', line)[0] + ' '
+                        else:
+                            docker_command += line + ' '
+                else:
+                    line = line[4:]
                     # docker ps output ommits redirect commands.
                     if '>' in line:
-                        docker_command += re.split('\s+.*>', line)[0] + ' '
+                        docker_command += re.split('\s+.*>', line)[0]
                     else:
-                        docker_command += line + ' '
-            else:
-                line = line[4:]
-                # docker ps output ommits redirect commands.
-                if '>' in line:
-                    docker_command += re.split('\s+.*>', line)[0]
-                else:
-                    docker_command += line
-                docker_line_hit = False
-        # get status information
-        if line.startswith(job_tag + ' completed'):
-            status = line.replace(job_tag + ' completed ', '')
-            if line.endswith('success'):
-                if step_name == 'trim':
-                    version = '1.0.0'
-                else:
-                    if 'pfastq-dump' in step_name:
-                        version = versions[step_name.split('_')[0]]
+                        docker_command += line
+                    docker_line_hit = False
+            # get status information
+            if line.startswith(job_tag + ' completed'):
+                status = line.replace(job_tag + ' completed ', '')
+                if line.endswith('success'):
+                    if step_name == 'trim':
+                        version = '1.0.0'
                     else:
-                        version = versions[step_name.split('_')[0].split('-')[0]]
-                step_contents.append([step_name, each_cwl_name, version, status, job_input_lines, docker_name, docker_command])
+                        if 'pfastq-dump' in step_name:
+                            version = versions[step_name.split('_')[0]]
+                        else:
+                            version = versions[step_name.split('_')[0].split('-')[0]]
+                    step_contents.append([step_name, each_cwl_name, version, status, job_input_lines, docker_name, docker_command])
+                    step_name = ''
+                    version = ''
+                    job_tag = ''
+                    job_step_tag = ''
+                    job_input = False
+                    job_input_lines = ''
+                    docker_name = ''
+                    docker_command = ''
+                    location = ''
+                    base_name = ''
+                    size_hit = False
+                    fail = False
+                    status = ''
+                    docker_line_hit = False
+                    docker_command = ''
+                    docker_name = ''
+                    continue
+                else:
+                    fail = True
+            if fail == True or line.startswith('Unexpected exception'):
+                version = versions[step_name.split("_")[0].split("-")[0]]
+                step_contents.append([step_name, each_cwl_name, version, 'permanentFail', job_input_lines, docker_name, docker_command])
                 step_name = ''
+                each_cwl_name = ''
                 version = ''
                 job_tag = ''
                 job_step_tag = ''
@@ -288,29 +312,9 @@ def parse_stderr_contents(stderr_log_contents, step_contents, versions, size_lis
                 docker_command = ''
                 docker_name = ''
                 continue
-            else:
-                fail = True
-        if fail == True or line.startswith('Unexpected exception'):
-            version = versions[step_name.split("_")[0].split("-")[0]]
-            step_contents.append([step_name, each_cwl_name, version, 'permanentFail', job_input_lines, docker_name, docker_command])
-            step_name = ''
-            each_cwl_name = ''
-            version = ''
-            job_tag = ''
-            job_step_tag = ''
-            job_input = False
-            job_input_lines = ''
-            docker_name = ''
-            docker_command = ''
-            location = ''
-            base_name = ''
-            size_hit = False
-            fail = False
-            status = ''
-            docker_line_hit = False
-            docker_command = ''
-            docker_name = ''
-            continue
+        return 'success'
+    except Exception:
+        return 'error'
 
 def parse_assembler_stderr_contents(stderr_log_contents, step_contents, versions, size_list):
 
@@ -327,82 +331,98 @@ def parse_assembler_stderr_contents(stderr_log_contents, step_contents, versions
     fail = False
     status = ''
 
-    for line in stderr_log_contents:
-        line = line.strip('\n')
-        if line.endswith(' '): # delete a space at the end of each line.
-            line = line[:-1]
-        # get a cwl program name.
-        if 'initializing from file' in line:
-            each_cwl_name = re.search('\/.+\.cwl', line).group(0).split('/')[-1]
-            if '-version' in line:
-                step_name = line.split('.cwl')[0].replace('[job ', '')
-            else:
-                step_name = step_name.split('-')[0] # e.g. sga-version => sga
-                if workflow_cwl_name == '':
-                    workflow_cwl_name = line.replace(']', '').split(' ')[1]
-                    step_contents.insert(0, [workflow_cwl_name])
-            initial_hit = True
-            continue
-        # get job input information
-        if initial_hit == True:
-            if line.startswith('[job ' + each_cwl_name + '] {}'):
-                job_input_lines = '{}'
-            else:
-                job_input_lines = '{'
-                job_input = True
-            initial_hit = False
-            continue
-        if job_input == True:
-            if not line.startswith('}'): # not end line
-                if 'nameroot\":' in line or 'nameext\":' in line or 'commonwl.org' in line:
-                    continue
-                if re.match('^\s+\},*', line):
-                    if job_input_lines.endswith(','):
-                        # delete commma. (i.e. ', }' => ' }')
-                        job_input_lines = job_input_lines[:-1] + '\n' + line
+    try:
+        for line in stderr_log_contents:
+            line = line.strip('\n')
+            if line.endswith(' '): # delete a space at the end of each line.
+                line = line[:-1]
+            # get a cwl program name.
+            if 'initializing from file' in line:
+                each_cwl_name = re.search('\/.+\.cwl', line).group(0).split('/')[-1]
+                if '-version' in line:
+                    step_name = line.split('.cwl')[0].replace('[job ', '')
+                else:
+                    step_name = step_name.split('-')[0] # e.g. sga-version => sga
+                    if workflow_cwl_name == '':
+                        workflow_cwl_name = line.replace(']', '').split(' ')[1]
+                        step_contents.insert(0, [workflow_cwl_name])
+                initial_hit = True
+                continue
+            # get job input information
+            if initial_hit == True:
+                if line.startswith('[job ' + each_cwl_name + '] {}'):
+                    job_input_lines = '{}'
+                else:
+                    job_input_lines = '{'
+                    job_input = True
+                initial_hit = False
+                continue
+            if job_input == True:
+                if not line.startswith('}'): # not end line
+                    if 'nameroot\":' in line or 'nameext\":' in line or 'commonwl.org' in line:
+                        continue
+                    if re.match('^\s+\},*', line):
+                        if job_input_lines.endswith(','):
+                            # delete commma. (i.e. ', }' => ' }')
+                            job_input_lines = job_input_lines[:-1] + '\n' + line
+                        else:
+                            job_input_lines += '\n' + line
                     else:
                         job_input_lines += '\n' + line
                 else:
-                    job_input_lines += '\n' + line
-            else:
-                job_input = False
-                job_input_lines = job_input_lines + "\n}"
-            continue
-        # get docker commands. for container information.
-        # docker assembler executes a shell program (nucleotids(2).sh)
-        if line.startswith('    --env=HOME=') or line.endswith('.sh \\'):
-            docker_line_hit = True
-            continue
-        if docker_line_hit == True:
-            if line.endswith(' \\'):
-                line = line[4:-2]
-                if docker_name == '':
-                    docker_name = line
-                    docker_command += 'run '
-                else:
-                    if '-version' in step_name:
-                        docker_command += line + ' '
+                    job_input = False
+                    job_input_lines = job_input_lines + "\n}"
+                continue
+            # get docker commands. for container information.
+            # docker assembler executes a shell program (nucleotids(2).sh)
+            if line.startswith('    --env=HOME=') or line.endswith('.sh \\'):
+                docker_line_hit = True
+                continue
+            if docker_line_hit == True:
+                if line.endswith(' \\'):
+                    line = line[4:-2]
+                    if docker_name == '':
+                        docker_name = line
+                        docker_command += 'run '
                     else:
-                        if '/' in line:
-                            fastq_name = line.split('/')[-1]
-                            docker_command += '/inputs/' + fastq_name + ' '
-                        else:
+                        if '-version' in step_name:
                             docker_command += line + ' '
-            else:
-                line = line[4:]
-                if '-version' in step_name:
-                    docker_command += line
+                        else:
+                            if '/' in line:
+                                fastq_name = line.split('/')[-1]
+                                docker_command += '/inputs/' + fastq_name + ' '
+                            else:
+                                docker_command += line + ' '
                 else:
-                    docker_command += '/outputs'
-                docker_line_hit = False
-            continue
+                    line = line[4:]
+                    if '-version' in step_name:
+                        docker_command += line
+                    else:
+                        docker_command += '/outputs'
+                    docker_line_hit = False
+                continue
 
-        # get status information
-        if line.startswith('[job ' + each_cwl_name + '] completed'):
-            status = line.replace('[job ' + each_cwl_name + '] completed ', '')
-            if line.endswith('success'):
+            # get status information
+            if line.startswith('[job ' + each_cwl_name + '] completed'):
+                status = line.replace('[job ' + each_cwl_name + '] completed ', '')
+                if line.endswith('success'):
+                    version = versions['version']
+                    step_contents.append([step_name, each_cwl_name, version, status, job_input_lines, docker_name, docker_command])
+                    each_cwl_name = ''
+                    version = ''
+                    job_input = False
+                    job_input_lines = ''
+                    fail = False
+                    status = ''
+                    docker_line_hit = False
+                    docker_command = ''
+                    docker_name = ''
+                    continue
+                else:
+                    fail = True
+            if fail == True or line.startswith('Unexpected exception'):
                 version = versions['version']
-                step_contents.append([step_name, each_cwl_name, version, status, job_input_lines, docker_name, docker_command])
+                step_contents.append([step_name, each_cwl_name, version, 'permanentFail', job_input_lines, docker_name, docker_command])
                 each_cwl_name = ''
                 version = ''
                 job_input = False
@@ -413,21 +433,9 @@ def parse_assembler_stderr_contents(stderr_log_contents, step_contents, versions
                 docker_command = ''
                 docker_name = ''
                 continue
-            else:
-                fail = True
-        if fail == True or line.startswith('Unexpected exception'):
-            version = versions['version']
-            step_contents.append([step_name, each_cwl_name, version, 'permanentFail', job_input_lines, docker_name, docker_command])
-            each_cwl_name = ''
-            version = ''
-            job_input = False
-            job_input_lines = ''
-            fail = False
-            status = ''
-            docker_line_hit = False
-            docker_command = ''
-            docker_name = ''
-            continue
+        return 'success'
+    except Exception:
+        return 'error'
 
 def read_one_line_file(date):
 
@@ -436,7 +444,7 @@ def read_one_line_file(date):
 
 
 
-def write_json(start_date, end_date, container_info_list, stderr_log_contents, step_contents, inputs_jobs, env_info, output_file, genome_version):
+def write_json(start_date, end_date, container_info_list, stderr_log_contents, step_contents, inputs_jobs, env_info, output_file, genome_version, parse_result):
 
     template = OrderedDict()
 
@@ -454,40 +462,41 @@ def write_json(start_date, end_date, container_info_list, stderr_log_contents, s
     workflow['debug_output'] = ''.join(stderr_log_contents)
     ### steps section.
     step = OrderedDict()
-    for i in range(len(step_contents)):
-        # contents.
-        step_name = step_contents[i][0]
-        each_cwl_name = step_contents[i][1]
-        version = step_contents[i][2]
-        status = step_contents[i][3]
-        job_input_lines = json.loads(step_contents[i][4])
-        docker_name = step_contents[i][5]
-        docker_command = step_contents[i][6]
-        if docker_name != '' and docker_command != '':
-            con_info_list = container_info_list[docker_name, docker_command]
-            container_id = con_info_list[0]
-            container_name = con_info_list[1]
-            container_cmd = con_info_list[2]
-            container_status = con_info_list[3]
-        else:
-            container_id = None
-            container_name = None
-            container_cmd = None
-            container_status = None
-        # set contents.
-        each_field = OrderedDict()
-        each_field['platform'] = env_info['instance_type']
-        each_field['stepname'] = step_name
-        each_field['cwlfile'] = each_cwl_name
-        each_field['container_id'] = container_id
-        each_field['container_name'] = container_name
-        each_field['container_cmd'] = container_cmd
-        each_field['container_status'] = container_status
-        each_field['tool_version'] = version
-        each_field['tool_status'] = status
-        each_field['input_files'] = job_input_lines
-        # set contents to each step.
-        step[step_name] = each_field
+    if parse_result == 'success':
+        for i in range(len(step_contents)):
+            # contents.
+            step_name = step_contents[i][0]
+            each_cwl_name = step_contents[i][1]
+            version = step_contents[i][2]
+            status = step_contents[i][3]
+            job_input_lines = json.loads(step_contents[i][4])
+            docker_name = step_contents[i][5]
+            docker_command = step_contents[i][6]
+            if docker_name != '' and docker_command != '':
+                con_info_list = container_info_list[docker_name, docker_command]
+                container_id = con_info_list[0]
+                container_name = con_info_list[1]
+                container_cmd = con_info_list[2]
+                container_status = con_info_list[3]
+            else:
+                container_id = None
+                container_name = None
+                container_cmd = None
+                container_status = None
+            # set contents.
+            each_field = OrderedDict()
+            each_field['platform'] = env_info['instance_type']
+            each_field['stepname'] = step_name
+            each_field['cwlfile'] = each_cwl_name
+            each_field['container_id'] = container_id
+            each_field['container_name'] = container_name
+            each_field['container_cmd'] = container_cmd
+            each_field['container_status'] = container_status
+            each_field['tool_version'] = version
+            each_field['tool_status'] = status
+            each_field['input_files'] = job_input_lines
+            # set contents to each step.
+            step[step_name] = each_field
  
     template['workflow'] = workflow
     template['steps'] = step
@@ -585,14 +594,17 @@ def main():
 
     ### parse stderr contents to create arrays for json objects.
     step_contents = []
+    parse_result = '' # success or error
     if data_type != 'assembler':
-        parse_stderr_contents(stderr_log_contents, step_contents, versions, size_list)
+        parse_result = parse_stderr_contents(stderr_log_contents, step_contents, versions, size_list)
     else:
-        parse_assembler_stderr_contents(stderr_log_contents, step_contents, versions, size_list)
+        parse_result = parse_assembler_stderr_contents(stderr_log_contents, step_contents, versions, size_list)
 
     ### write log
     # modified. 13.Dec.2017
-    write_json(start_date, end_date, container_info_list, stderr_log_contents, step_contents, inputs_jobs, env_info, output_file, genome_version)
+    # modified. 27.Feb.2018
+    write_json(start_date, end_date, container_info_list, stderr_log_contents, step_contents, inputs_jobs, env_info, output_file, genome_version, parse_result)
+
 
 
 if __name__ == '__main__':
