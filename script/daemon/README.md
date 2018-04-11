@@ -2,6 +2,7 @@
 init.pl is a daemon program for collecting container and workflow execution metrics using inutano/docker-metrics-collector and yyabuki/docker-cwllog-metrics containers, respectively. Please check below sites for further information.
 
 inutano/docker-metrics-collector: https://github.com/inutano/docker-metrics-collector
+
 yyabuki/docker-cwllog-generator: https://hub.docker.com/r/yyabuki/docker-cwllog-generator/
 
 # Prerequisite:
@@ -18,7 +19,7 @@ yyabuki/docker-cwllog-generator: https://hub.docker.com/r/yyabuki/docker-cwllog-
 # Command:
     % (perl) ./init.pl start|stop|restart
 
-# In order to collect the metrics using this daemon, workflow programs must be executed with seven arguments, and its standard error output needs to be redirected to a file.
+In order to collect the metrics using this daemon, workflow programs must be executed with seven arguments, and its standard error output needs to be redirected to a file.
     --debug
     --leave-container
     --timestamps
