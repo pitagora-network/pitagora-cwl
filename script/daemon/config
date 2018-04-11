@@ -1,0 +1,3 @@
+ES_HOST=
+ES_PORT=
+DMC_DIR_PATH=/path/to/docker-metrics-collector
