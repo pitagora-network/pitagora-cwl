@@ -19,15 +19,14 @@ yyabuki/docker-cwllog-generator: https://hub.docker.com/r/yyabuki/docker-cwllog-
 # Command:
     % (perl) ./init.pl start|stop|restart
 
-In order to collect the metrics using this daemon, workflow programs must be executed with seven arguments, and its standard error output needs to be redirected to a file.
-    --debug
-    --leave-container
-    --timestamps
-    --compute-checksum
-    --record-container-id
-    --cidfile-dir /path/to/container_id_dir
-    --outdir /path/to/cwl_result_dir
-    2> /path/to/file
-
-    e.g.
-    cwltool --debug --leave-container --timestamps --compute-checksum --record-container-id --cidfile-dir /path/to/result --outdir /path/to/result Hisat2Workflow-se.cwl Hisat2Workflow-se-test.yml 2> /path/to/stderr.log
+In order to collect the metrics using this daemon, workflow programs must be executed with seven arguments, and its standard error output needs to be redirected to a file.   
+    --debug  
+    --leave-container  
+    --timestamps  
+    --compute-checksum  
+    --record-container-id  
+    --cidfile-dir /path/to/container_id_dir  
+    --outdir /path/to/cwl_result_dir  
+    2> /path/to/file  
+    e.g.  
+    % cwltool --debug --leave-container --timestamps --compute-checksum --record-container-id --cidfile-dir /path/to/result --outdir /path/to/result Hisat2Workflow-se.cwl Hisat2Workflow-se-test.yml 2> /path/to/stderr.log
