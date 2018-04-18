@@ -20,6 +20,12 @@ inputs:
     type: File
     inputBinding:
       position: 3
+  read_layout:
+    type:
+      type: enum
+      symbols:
+        - single end
+        - pair end
   fastq:
     type:
       - type: record
@@ -29,6 +35,13 @@ inputs:
             type: File
             inputBinding:
               position: 4
+              valueFrom: |
+                ${
+                  if (inputs.read_layout != "single end") {
+                    throw new Error('A parameter "fq" is valid if "read_layout" is "single end"')
+                  }
+                  return self
+                }
       - type: record
         label: pair end
         fields:
@@ -36,6 +49,13 @@ inputs:
             type: File
             inputBinding:
               position: 4
+              valueFrom: |
+                ${
+                  if (inputs.read_layout != "pair end") {
+                    throw new Error('A parameter "fq1" is valid if "read_layout" is "pair end"')
+                  }
+                  return self
+                }
           fq2:
             type: File
             inputBinding:
