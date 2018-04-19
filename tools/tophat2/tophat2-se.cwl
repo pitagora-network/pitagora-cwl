@@ -24,7 +24,9 @@ inputs:
     type: File
     inputBinding:
       position: 4
-arguments: ["-o", "/var/spool/cwl"]
+arguments:
+  - prefix: -o
+    valueFrom: $(runtime.outdir)
 outputs:
   tophat2_bam:
     type: File

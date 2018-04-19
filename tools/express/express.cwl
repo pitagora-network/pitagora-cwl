@@ -3,8 +3,6 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: yyabuki/express:1.5.1
-requirements:
-  - class: InlineJavascriptRequirement
 baseCommand: express
 inputs:
   reference:
@@ -15,7 +13,9 @@ inputs:
     type: File 
     inputBinding:
       position: 2
-arguments: ["-o", "/var/spool/cwl"]
+arguments:
+  - prefix: -o
+    valueFrom: $(runtime.outdir)
 outputs:
   express_result:
     type:

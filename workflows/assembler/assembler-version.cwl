@@ -6,7 +6,7 @@ hints:
     dockerPull: DOCKER_NAME # (e.g. yyabuki/docker-idba)
 
 inputs: []
-arguments: ["version", "/var/spool/cwl"]
+arguments: ["version", $(runtime.outdir)]
 outputs:
   version_file:
     type: File
