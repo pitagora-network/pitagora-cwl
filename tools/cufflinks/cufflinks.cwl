@@ -4,8 +4,6 @@ hints:
   DockerRequirement:
     dockerPull: nasuno/cufflinks:2.2.1
 baseCommand: cufflinks
-requirements:
-  - class: InlineJavascriptRequirement
 inputs:
   process:
     type: int?
@@ -21,7 +19,9 @@ inputs:
     type: File
     inputBinding:
       position: 3
-arguments: ["-o", "/var/spool/cwl"]
+arguments:
+  - prefix: -o
+    valueFrom: $(runtime.outdir)
 outputs:
   cufflinks_result:
     type:
