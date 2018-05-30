@@ -40,7 +40,7 @@ find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
     --outdir ${result_dir} \
     fastq-dump.cwl \
     "${yaml_path}" \
-    2 > "${result_dir}/cwltool.log"
+    2> "${result_dir}/cwltool.log"
 
   cd "${BASE_DIR}"
 done
