@@ -3,12 +3,9 @@ class: CommandLineTool
 
 hints:
   DockerRequirement:
-    dockerPull: inutano/sra-toolkit:2.8.2
+    dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
 
 baseCommand: [fastq-dump, --split-spot, --stdout, --readids]
-
-requirements:
-  - class: InlineJavascriptRequirement
 
 inputs:
   sraFiles:
