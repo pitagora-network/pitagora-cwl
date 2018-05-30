@@ -5,8 +5,8 @@ set -e
 
 BASE_DIR="$(pwd -P)"
 DATA_DIR_PATH="${1}"
-CWL_PATH="${2}"
-YAML_TMP_PATH="${3}"
+CWL_PATH="$(cd $(dirname "${2}") && pwd -P)/$(basename "${2}")"
+YAML_TMP_PATH="$(cd $(dirname "${3}") && pwd -P)/$(basename "${3}")"
 
 find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
   id="$(basename "${fpath}" | sed -e 's:.sra$::g')"
