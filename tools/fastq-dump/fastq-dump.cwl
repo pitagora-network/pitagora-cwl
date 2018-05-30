@@ -19,4 +19,4 @@ outputs:
   fastq:
     type: stdout
 
-stdout: $(inputs.out_fastq_prefix + ".fastq")
+stdout: $(self.inputs.out_fastq_prefix).fastq
