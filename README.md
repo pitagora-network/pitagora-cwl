@@ -6,7 +6,7 @@ This repository is to share the definition files of tools and workflows that mai
 
 - Get Data
   - [download_sra](tools/download_sra)
-  - [fastq_dump](tools/fastq_dump)
+  - [fastq-dump](tools/fastq-dump)
   - [pfastq-dump](tools/pfastq-dump)
 - Data Formatting
   - [samtools](tools/samtools)
