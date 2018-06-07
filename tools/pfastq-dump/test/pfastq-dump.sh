@@ -25,7 +25,7 @@ find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
   mkdir -p "${result_dir}"
 
   data_path="${result_dir}/data.sra"
-  ln -s "${fpath}" "${data_path}"
+  ln -s "${BASE_DIR}/${fpath}" "${data_path}"
 
   cwl_path="${result_dir}/pfastq-dump.cwl"
   ln -s "${CWL_PATH}" "${cwl_path}"
@@ -34,7 +34,7 @@ find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
   sed -i.buk \
-    -e "s:_PATH_TO_SRA_FILE_:${fpath}:" \
+    -e "s:_PATH_TO_SRA_FILE_:${data_path}:" \
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_OUT_FASTQ_PREFIX_:${id}:" \
     "${yaml_path}"
