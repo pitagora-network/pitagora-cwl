@@ -12,7 +12,7 @@ inputs:
       position: 1
       prefix: "-r"
   run_ids:
-    type: File[]
+    type: string[]
     inputBinding:
       position: 2
 
