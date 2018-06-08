@@ -3,6 +3,8 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: yyabuki/kallisto:0.43.1
+baseCommand: ["kallisto", "quant"]
+
 requirements:
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
@@ -10,7 +12,6 @@ requirements:
       - $(inputs.index_file)
       - $(inputs.fq1)
       - $(inputs.fq2)
-baseCommand: ["kallisto", "quant"]
 
 inputs:
   index_file:
@@ -69,7 +70,7 @@ inputs:
     type: boolean?
     inputBinding:
       position: 11
-      prefix: --rf-stranded 
+      prefix: --rf-stranded
   thread:
     type: int
     inputBinding:

@@ -3,26 +3,28 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: yyabuki/kallisto:0.43.1
-requirements:
-  - class: InlineJavascriptRequirement
-  - class: InitialWorkDirRequirement
-    listing:
-      - $(inputs.fasta_file)
 baseCommand: ["kallisto", "index"]
 
+requirements:
+  InitialWorkDirRequirement:
+    listing:
+      - $(inputs.fasta_file)
+
 inputs:
-  index_file:
+  index_name:
     type: string
     inputBinding:
       position: 1
       prefix: -i
   kmer_size:
     type: int?
+    default: 31
     inputBinding:
       position: 2
       prefix: -k
   make_unique:
     type: boolean?
+    default: true
     inputBinding:
       position: 3
       prefix: --make-unique
@@ -31,8 +33,9 @@ inputs:
     inputBinding:
       position: 4
       valueFrom: $(self.basename)
+
 outputs:
-  index_results:
+  index_file:
     type: File
     outputBinding:
-      glob: $(inputs.index_file)
+      glob: $(inputs.index_name)
