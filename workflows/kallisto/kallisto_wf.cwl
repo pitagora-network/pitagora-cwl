@@ -2,16 +2,28 @@ cwlVersion: v1.0
 class: Workflow
 
 inputs:
-  # Common inputs
+  ## Common inputs
+  # Required
   nthreads: int
-  # Inputs for download-sra
-  repo: string?
+
+  ## Inputs for download-sra
+  # Required
   run_ids: string[]
-  # Inputs for pfastq-dump
+  # Optional
+  repo: string?
+
+  ## Inputs for pfastq-dump
   #   None
-  # Inputs for kallisto quant
+
+  ## Inputs for kallisto quant
+  # Required
   index_file: File
   out_dir_name: string?
+  # Optional
+  single: boolean?
+  fragment_length: double?
+  standard_deviation: double?
+  boostrap_samples: int?
 
 outputs:
   quant_output:
