@@ -43,3 +43,11 @@ outputs:
     type: File[]
     outputBinding:
       glob: "*fastq*"
+  forward:
+    type: File?
+    outputBinding:
+      glob: "*_1.fastq*"
+  reverse:
+    type: File?
+    outputBinding:
+      glob: "*_2.fastq*"
