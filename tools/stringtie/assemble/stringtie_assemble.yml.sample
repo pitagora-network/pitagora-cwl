@@ -1,0 +1,8 @@
+input_bam:
+  class: File
+  path: _INPUT_BAM_
+# output_filename: _OUTPUT_FILENAME_
+nthreads: _NTHREADS_
+annotation:
+  class: File
+  path: _ANNOTATION_GTF_

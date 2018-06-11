@@ -1,8 +1,0 @@
-annotation:
-  class: File
-  path: /path/to/reference/annotation/hg19.gtf
-process: 8
-bam:
-  class: File
-  path: /path/to/result/"ID".sort.bam
-output: stringtieout.gtf
