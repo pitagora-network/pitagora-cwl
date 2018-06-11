@@ -1,0 +1,16 @@
+# Common inputs
+nthreads: _NTHREADS_
+# Inputs for download-sra
+run_ids: [_RUN_IDS_]
+# Inputs for pfastq-dump
+#   None
+# Inputs for kallisto quant
+index_file:
+  class: File
+  path: _INDEX_FILE_PATH_
+
+# single: true           # UNCOMMENT FOR --single
+# fragment_length: 100   # UNCOMMENT FOR --single
+# standard_deviation: 20 # UNCOMMENT FOR --single
+
+boostrap_samples: 100 # For faster calculation, default: 0
