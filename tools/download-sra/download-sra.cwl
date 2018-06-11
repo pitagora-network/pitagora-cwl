@@ -8,6 +8,7 @@ hints:
 inputs:
   repo:
     type: string
+    default: "ncbi"
     inputBinding:
       position: 1
       prefix: "-r"
