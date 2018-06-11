@@ -54,7 +54,7 @@ inputs:
     default: true
     inputBinding:
       prefix: --time
-  threads:
+  nthreads:
     label: "Launch NTHREADS parallel search threads"
     doc: "Launch NTHREADS parallel search threads (default: 1). Threads will run on separate processors/cores and synchronize when parsing reads and outputting alignments. Searching for alignments is highly parallel, and speedup is close to linear. Increasing -p increases HISAT2's memory footprint. E.g. when aligning to a human genome index, increasing -p from 1 to 8 increases the memory footprint by a few hundred megabytes. This option is only available if bowtie is linked with the pthreads library (i.e. if BOWTIE_PTHREADS=0 is not specified at build time)."
     type: int
