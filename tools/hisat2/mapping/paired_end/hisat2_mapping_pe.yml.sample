@@ -1,0 +1,19 @@
+# Job configuration sample for hisat2_mapping_pe.cwl
+
+hisat2_idx_basedir:
+  class: Directory
+  path: _INDEX_DIR_PATH_
+  # genome_version: _GENOME_VER_
+hisat2_idx_basename: _INDEX_BASENAME_
+
+fq1:
+  class: File
+  path: _FASTQ_1_PATH_
+
+fq2:
+  class: File
+  path: _FASTQ_2_PATH_
+
+nthreads: _NTHREADS_
+
+# out_sam_name: _OUT_SAM_NAME_

@@ -3,25 +3,33 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: nasuno/cufflinks:2.2.1
+
 baseCommand: cufflinks
-inputs:
-  process:
-    type: int?
-    inputBinding:
-      position: 1
-      prefix: -p
-  annotation:
-    type: File
-    inputBinding:
-      position: 2
-      prefix: -G
-  bam:
-    type: File
-    inputBinding:
-      position: 3
+
 arguments:
   - prefix: -o
     valueFrom: $(runtime.outdir)
+
+inputs:
+  nthreads:
+    label: "number of threads used during analysis"
+    doc: "number of threads used during analysis"
+    type: int?
+    inputBinding:
+      prefix: -p
+  annotation:
+    label: "quantitate against reference transcript annotations"
+    doc: "quantitate against reference transcript annotations"
+    type: File
+    inputBinding:
+      prefix: --GTF
+  input_bam:
+    label: "Input bam file for cufflinks"
+    doc: "Input bam file for cufflinks"
+    type: File
+    inputBinding:
+      position: 50
+
 outputs:
   cufflinks_result:
     type:

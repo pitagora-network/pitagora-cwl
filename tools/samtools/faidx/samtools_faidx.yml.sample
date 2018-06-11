@@ -1,0 +1,3 @@
+reference:
+  class: File
+  path: _INPUT_FASTA_

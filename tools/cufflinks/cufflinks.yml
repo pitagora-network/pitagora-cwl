@@ -1,7 +1,7 @@
 annotation:
   class: File
-  path: /path/to/reference/annotation/hg19.gtf
-process: 8
-bam:
+  path: _PATH_TO_GTF_
+nthreads: _NTHREADS_
+input_bam:
   class: File
-  path: /path/to/result/"ID".sort.bam
+  path: _INPUT_BAM_

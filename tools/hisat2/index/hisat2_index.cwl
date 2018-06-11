@@ -3,20 +3,21 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: humancellatlas/hisat2:2-2.1.0
-baseCommand: hisat2-build
-requirements:
-  - class: InlineJavascriptRequirement
+
+baseCommand: [hisat2-build]
+
 inputs:
-  reference:
+  reference_fasta:
     type: File
     inputBinding:
       position: 1
-  index_base:
+  index_basename:
     type: string
     inputBinding:
       position: 2
+
 outputs:
-  result:
+  index_files:
     type:
       type: array
       items: File

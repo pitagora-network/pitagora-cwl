@@ -3,23 +3,25 @@ class: CommandLineTool
 hints:
   DockerRequirement:
     dockerPull: genomicpariscentre/samtools:1.4.1
-baseCommand: ["samtools", "index"]
+
+baseCommand: [samtools, faidx]
+
 requirements:
   - class: InitialWorkDirRequirement
     listing:
-      - $(inputs.sortbam)
+      - $(inputs.reference)
+
 inputs:
-  sortbam:
+  reference:
     type: File
     inputBinding:
       position: 1
       valueFrom: $(self.basename)
-  indexbam:
-    type: string
-    inputBinding:
-      position: 2
+
 outputs:
-  samtools-index_indexbam:
-    type: File
+  result:
+    type:
+      type: array
+      items: File
     outputBinding:
-      glob: $(inputs.indexbam)
+      glob: "*"

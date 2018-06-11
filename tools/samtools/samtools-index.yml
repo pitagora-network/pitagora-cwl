@@ -1,4 +1,0 @@
-sortbam:
-  class: File
-  path: /path/to/result/"ID".sort.bam
-indexbam: "ID".sort.bam.bai
