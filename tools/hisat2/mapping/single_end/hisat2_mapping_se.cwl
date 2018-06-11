@@ -24,9 +24,10 @@ inputs:
   fq:
     label: "Read file"
     doc: "Comma-separated list of files containing unpaired reads to be aligned, e.g. lane1.fq,lane2.fq,lane3.fq,lane4.fq. Reads may be a mix of different lengths."
-    type: File
+    type: File[]
     inputBinding:
       prefix: -U
+      itemSeparator: ","
   out_sam_name:
     label: "Name of file to write SAM alignments to"
     doc: "Name of file to write SAM alignments to (default: out.sam)"

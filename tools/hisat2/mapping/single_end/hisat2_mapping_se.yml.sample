@@ -7,8 +7,8 @@ hisat2_idx_basedir:
 hisat2_idx_basename: _INDEX_BASENAME_
 
 fq:
-  class: File
-  path: _FASTQ_PATH_
+  - class: File
+    path: _FASTQ_PATH_
 
 nthreads: _NTHREADS_
 
