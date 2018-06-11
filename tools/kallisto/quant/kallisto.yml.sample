@@ -9,7 +9,7 @@ fq:
   - class: File
     path: _FASTQ_PATH_
 
-thread: _NUM_CPUS_
+nthreads: _NTHREADS_
 
 # out_dir_name: _OUT_DIR_NAME_
 

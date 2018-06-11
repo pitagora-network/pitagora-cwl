@@ -62,7 +62,7 @@ config_yaml_single_end(){
     -i.buk \
     -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
     -e "s:_FASTQ_PATH_:${fpath}:" \
-    -e "s:_NUM_CPUS_:${NCPUS}:" \
+    -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:^# (.*)# UNCOMMENT FOR --single:\1:g" \
     "${yaml_path}"
 }
@@ -76,7 +76,7 @@ config_yaml_paired_end(){
   cat "${yaml_path}.buk" | \
     sed -r \
       -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
-      -e "s:_NUM_CPUS_:${NCPUS}:" \
+      -e "s:_NTHREADS_:${NCPUS}:" \
       -e "s#_FASTQ_PATH_#${path_fwd}@  - class: File@    path: ${path_rev}#" \
       "${yaml_path}" | \
     tr '@' '\n' \

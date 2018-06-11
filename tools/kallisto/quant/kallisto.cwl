@@ -93,7 +93,7 @@ inputs:
     inputBinding:
       prefix: --sd=
       separate: false
-  thread:
+  nthreads:
     label: "Number of threads"
     doc: "Number of threads to use (default: 1)"
     type: int?
