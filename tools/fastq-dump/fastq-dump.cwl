@@ -5,18 +5,41 @@ hints:
   DockerRequirement:
     dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
 
-baseCommand: [fastq-dump, --split-spot, --stdout, --readids]
+baseCommand: [fastq-dump]
 
 inputs:
   sraFiles:
     type: File[]
     inputBinding:
-      position: 1
-  out_fastq_prefix:
-    type: string
+      position: 50
+  split_files:
+    type: boolean?
+    default: true
+    inputBinding:
+      prefix: --split-files
+  split_spot:
+    type: boolean?
+    default: true
+    inputBinding:
+      prefix: --split-spot
+  skip_technical:
+    type: boolean?
+    default: true
+    inputBinding:
+      prefix: --skip-technical
+  readids:
+    type: boolean?
+    default: true
+    inputBinding:
+      prefix: --readids
+  gzip:
+    type: boolean?
+    default: true
+    inputBinding:
+      prefix: --gzip
 
 outputs:
-  fastq:
-    type: stdout
-
-stdout: $(inputs.out_fastq_prefix).fastq
+  fastqFiles:
+    type: File[]
+    outputBinding:
+      glob: "*fastq*"

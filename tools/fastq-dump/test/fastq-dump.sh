@@ -3,32 +3,40 @@
 #
 set -e
 
+get_abs_path(){
+  local ipt="${1}"
+  echo "$(cd $(dirname "${ipt}") && pwd -P)/$(basename "${ipt}")"
+}
+
+set_ncpus(){
+  NCPUS=1
+  if [[ "$(uname)" == 'Darwin' ]]; then
+    NCPUS=$(sysctl -n hw.ncpu)
+  elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
+    NCPUS=$(nproc)
+  else
+    echo "Your platform ($(uname -a)) is not supported." 2>dev/null
+    exit 1
+  fi
+}
+set_ncpus
+
 BASE_DIR="$(pwd -P)"
-DATA_DIR_PATH="${1}"
-CWL_PATH="$(cd $(dirname "${2}") && pwd -P)/$(basename "${2}")"
-YAML_TMP_PATH="$(cd $(dirname "${3}") && pwd -P)/$(basename "${3}")"
+DATA_DIR_PATH="$(get_abs_path ${1})"
+CWL_PATH="$(get_abs_path ${2})"
+YAML_TMP_PATH="$(get_abs_path ${3})"
 
 find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
   id="$(basename "${fpath}" | sed -e 's:.sra$::g')"
   result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
-
-  mkdir -p "${result_dir}"
-
-  data_path="${result_dir}/data.sra"
-  ln -s "${BASE_DIR}/${fpath}" "${data_path}"
-
-  cwl_path="${result_dir}/fastq-dump.cwl"
-  ln -s "${CWL_PATH}" "${cwl_path}"
+  mkdir -p "${result_dir}" && cd "${result_dir}"
 
   yaml_path="${result_dir}/${id}.yml"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
   sed -i.buk \
-    -e "s:_PATH_TO_SRA_FILE_:${data_path}:" \
-    -e "s:_OUT_FASTQ_PREFIX_:${id}:" \
+    -e "s:_PATH_TO_SRA_FILE_:${fpath}:" \
     "${yaml_path}"
-
-  cd "${result_dir}"
 
   cwltool \
     --debug \
@@ -38,7 +46,7 @@ find "${DATA_DIR_PATH}" -name '*.sra' | while read fpath; do
     --record-container-id \
     --cidfile-dir ${result_dir} \
     --outdir ${result_dir} \
-    fastq-dump.cwl \
+    "${CWL_PATH}" \
     "${yaml_path}" \
     2> "${result_dir}/cwltool.log"
 
