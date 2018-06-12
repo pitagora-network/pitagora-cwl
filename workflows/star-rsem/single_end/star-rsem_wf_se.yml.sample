@@ -1,0 +1,10 @@
+nthreads: _NTHREADS_
+run_ids: [_RUN_IDS_]
+genomeDir:
+  class: Directory
+  path: _PATH_TO_INDEX_DIR_
+rsem_index_dir:
+  class: Directory
+  path: _RSEM_INDEX_DIR_PATH_
+rsem_index_prefix: _RSEM_INDEX_PREFIX_
+rsem_output_prefix: _RSEM_OUT_PREFIX_

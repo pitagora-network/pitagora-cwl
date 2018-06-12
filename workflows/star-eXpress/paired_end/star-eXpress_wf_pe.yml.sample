@@ -1,0 +1,6 @@
+nthreads: _NTHREADS_
+run_ids: [_RUN_IDS_]
+genomeDir:
+  class: Directory
+  path: _PATH_TO_INDEX_DIR_
+target_fasta: _TARGET_FASTA_
