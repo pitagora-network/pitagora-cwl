@@ -16,7 +16,7 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
   - [bowtie2](tools/bowtie2)
   - [last](tools/last)
   - [star](tools/star)
-  - [hisat2](tools/hisat2)
+  - [HISAT2](tools/hisat2)
 - Variant Analysis
   - [gatk](tools/gatk)
   - [annovar](tools/annovar)
@@ -39,8 +39,14 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
 ## Workflows
 
 - RNA-Seq
-  - [hisat2-cufflinks](workflows/hisat2-cufflinks)
-  - [hisat2-stringtie](workflows/hisat2-stringtie)
-  - [hisat2-eXpress](workflows/hisat2-eXpress)
-  - [hisat2-rsem](workflows/hisat2-rsem)
+  - HISAT2-*
+    - [hisat2-cufflinks](workflows/hisat2-cufflinks)
+    - [hisat2-stringtie](workflows/hisat2-stringtie)
+    - [hisat2-eXpress](workflows/hisat2-eXpress)
+    - [hisat2-rsem](workflows/hisat2-rsem)
+  - STAR-*
+    - [star-cufflinks](workflows/star-cufflinks)
+    - [star-stringtie](workflows/star-stringtie)
+    - [star-eXpress](workflows/star-eXpress)
+    - [star-rsem](workflows/star-rsem)
   - [kallisto](workflows/kallisto)
