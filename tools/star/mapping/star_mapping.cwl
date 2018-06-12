@@ -170,10 +170,10 @@ is less than or equal to this value."
       prefix: --readFilesIn
 
 outputs:
-  sortedByCoord_bam:
+  output_bam:
     type: File
     outputBinding:
-      glob: "*Aligned.sortedByCoord.out.bam"
+      glob: "*Aligned.out.bam"
   toTranscriptome_bam:
     type: File
     outputBinding:
