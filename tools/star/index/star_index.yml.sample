@@ -1,0 +1,8 @@
+nthreads: _NTHREADS_
+genomeFastaFiles:
+  - class: File
+    path: _PATH_TO_FASTA_
+sjdbGTFfile:
+  class: File
+  path: _ANNOTATION_GTF_
+# sjdbOverhang: _SJDB_OVERHANG_

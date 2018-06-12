@@ -1,0 +1,7 @@
+nthreads: _NTHREADS_
+genomeDir:
+  class: Directory
+  path: _PATH_TO_INDEX_DIR_
+readFilesIn:
+  - class: File
+    path: _PATH_TO_FASTQ_
