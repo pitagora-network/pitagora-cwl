@@ -1,0 +1,6 @@
+target_fasta:
+  class: File
+  path: _TARGET_FASTA_
+input_bam:
+  class: File
+  path: _INPUT_BAM_
