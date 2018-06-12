@@ -1,0 +1,7 @@
+gtf:
+  class: File
+  path: _PATH_TO_GTF_
+reference_fasta_dir:
+  class: Directory
+  path: _PATH_TO_FASTA_DIR_
+reference_name: _REFERENCE_NAME_

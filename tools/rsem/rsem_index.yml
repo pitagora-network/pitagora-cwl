@@ -1,8 +1,0 @@
-threads: 16
-gtf:
-  class: File
-  path: /path/to/genes.gtf
-genome:
-  class: File
-  path: /path/to/genome.fa
-rsem_index_prefix: PREFIX
