@@ -1,5 +1,9 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "HISAT2: graph-based alignment of next generation sequencing reads to a population of genomes [cwl for single end read]"
+doc: "HISAT2: graph-based alignment of next generation sequencing reads to a population of genomes. https://ccb.jhu.edu/software/hisat2/manual.shtml#command-line"
+
+
 hints:
   DockerRequirement:
     dockerPull: humancellatlas/hisat2:2-2.1.0

@@ -1,5 +1,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "kallisto quant: runs the quantification algorithm"
+doc: "kallisto is a program for quantifying abundances of transcripts from RNA-Seq data, or more generally of target sequences using high-throughput sequencing reads. https://pachterlab.github.io/kallisto/manual.html#quant"
+
 hints:
   DockerRequirement:
     dockerPull: yyabuki/kallisto:0.43.1

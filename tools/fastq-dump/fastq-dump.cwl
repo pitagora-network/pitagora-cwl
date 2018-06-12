@@ -1,5 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "fastq-dump: dump .sra format file to generate fastq file"
+doc: "sra-toolkit: https://github.com/ncbi/sra-tools/wiki/Download-On-Demand"
 
 hints:
   DockerRequirement:

@@ -1,5 +1,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "Cufflinks: Transcriptome assembly and differential expression analysis for RNA-Seq"
+doc: "Transcriptome assembly and differential expression analysis for RNA-Seq. http://cole-trapnell-lab.github.io/cufflinks/cufflinks/index.html"
+
 hints:
   DockerRequirement:
     dockerPull: nasuno/cufflinks:2.2.1

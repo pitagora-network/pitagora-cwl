@@ -1,5 +1,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "StringTie: Transcript assembly and quantification for RNA-Seq"
+doc: "StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional de novo assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only the alignments of raw reads used by other transcript assemblers, but also alignments longer sequences that have been assembled from those reads. https://ccb.jhu.edu/software/stringtie/index.shtml?t=manual"
+
 hints:
   DockerRequirement:
     dockerPull: yyabuki/stringtie:1.2.3

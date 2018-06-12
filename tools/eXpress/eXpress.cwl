@@ -1,5 +1,8 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "eXpress: Streaming quantification for high-throughput sequencing"
+doc: "Streaming quantification for high-throughput sequencing. https://pachterlab.github.io/eXpress/manual.html"
+
 hints:
   DockerRequirement:
     dockerPull: yyabuki/express:1.5.1

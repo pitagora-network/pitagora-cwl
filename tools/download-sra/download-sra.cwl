@@ -1,5 +1,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
+label: "download-sra: A simple download tool to get .sra file"
+doc: "A simple download tool to get .sra file from a repository of INSDC members. https://github.com/inutano/download-sra"
 
 hints:
  DockerRequirement:
