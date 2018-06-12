@@ -1,6 +1,6 @@
 # Pitagora Workflows in CWL
 
-This repository is to share the definition files of tools and workflows that maintained by Pitagora Network, as known as Galaxy Community Japan.
+This repository is to share the [Common Workflow Language](https://www.commonwl.org) definition files of tools and workflows, maintained by Pitagora Network, as known as Galaxy Community Japan.
 
 ## Tools
 
@@ -15,20 +15,32 @@ This repository is to share the definition files of tools and workflows that mai
   - [bowtie](tools/bowtie)
   - [bowtie2](tools/bowtie2)
   - [last](tools/last)
+  - [star](tools/star)
+  - [hisat2](tools/hisat2)
 - Variant Analysis
   - [gatk](tools/gatk)
   - [annovar](tools/annovar)
   - [picard](tools/picard)
 - Transcriptome Analysis
-  - [tophat2](tools/tophat2)
-  - [cufflinks](tools/cufflinks)
-  - [stringtie](tools/stringtie)
-  - [express](tools/express)
-  - [hisat2](tools/hisat2)
-  - [star](tools/star)
-  - [kallisto](tools/kallisto)
-  - [rsem](tools/rsem)
-  - [rsubread](tools/rsubread)
-  - [sailfish](tools/sailfish)
-  - [salmon](tools/salmon)
-  - [trinity](tools/trinity)
+  - splice junction mapper
+    - [tophat2](tools/tophat2)
+  - transcript assemble / quantification
+    - [cufflinks](tools/cufflinks)
+    - [stringtie](tools/stringtie)
+    - [eXpress](tools/eXpress)
+    - [rsem](tools/rsem)
+    - [rsubread](tools/rsubread)
+    - [kallisto](tools/kallisto)
+    - [sailfish](tools/sailfish)
+    - [salmon](tools/salmon)
+  - de novo transcriptome assemble
+    - [trinity](tools/trinity)
+
+## Workflows
+
+- RNA-Seq
+  - [hisat2-cufflinks](workflows/hisat2-cufflinks)
+  - [hisat2-stringtie](workflows/hisat2-stringtie)
+  - [hisat2-eXpress](workflows/hisat2-eXpress)
+  - [hisat2-rsem](workflows/hisat2-rsem)
+  - [kallisto](workflows/kallisto)
