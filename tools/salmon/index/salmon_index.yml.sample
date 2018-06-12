@@ -1,0 +1,6 @@
+transcript_fasta:
+  class: File
+  path: _PATH_TO_FASTA_
+index_name: _SALMON_INDEX_NAME_
+# gencode: true
+nthreads: _NTHREADS_
