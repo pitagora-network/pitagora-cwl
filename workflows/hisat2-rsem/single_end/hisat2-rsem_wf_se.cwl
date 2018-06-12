@@ -41,13 +41,13 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
     out:
       [fastqFiles]
 
   hisat2_mapping:
-    run: hisat2_mapping.cwl
+    run: hisat2_mapping_se.cwl
     in:
       hisat2_idx_basedir: hisat2_idx_basedir
       hisat2_idx_basename: hisat2_idx_basename

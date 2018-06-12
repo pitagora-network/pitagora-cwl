@@ -5,7 +5,7 @@ inputs:
   ## Common input
   nthreads: int
 
-  ## Inputs for download_sra
+  ## Inputs for download-sra
   repo: string?
   run_ids: string[]
 
@@ -35,13 +35,13 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
     out:
       [forward, reverse]
 
   hisat2_mapping:
-    run: hisat2_mapping.cwl
+    run: hisat2_mapping_pe.cwl
     in:
       hisat2_idx_basedir: hisat2_idx_basedir
       hisat2_idx_basename: hisat2_idx_basename

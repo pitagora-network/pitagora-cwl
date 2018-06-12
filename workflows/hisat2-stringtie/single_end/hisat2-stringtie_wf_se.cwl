@@ -5,7 +5,7 @@ inputs:
   ## Common input
   nthreads: int
 
-  ## Inputs for download_sra
+  ## Inputs for download-sra
   repo: string?
   run_ids: string[]
 
@@ -18,9 +18,7 @@ inputs:
 
 outputs:
   assemble_output:
-    type:
-      type: array
-      items: File
+    type: File
     outputSource: stringtie_assemble/assemble_output
 
 steps:
@@ -35,13 +33,13 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
     out:
       [fastqFiles]
 
   hisat2_mapping:
-    run: hisat2_mapping.cwl
+    run: hisat2_mapping_se.cwl
     in:
       hisat2_idx_basedir: hisat2_idx_basedir
       hisat2_idx_basename: hisat2_idx_basename
@@ -62,7 +60,7 @@ steps:
       input_bam: samtools_sam2bam/bamfile
     out: [sorted_bamfile]
 
-  stringtie_assemble
+  stringtie_assemble:
     run: stringtie_assemble.cwl
     in:
       input_bam: samtools_sort/sorted_bamfile
