@@ -4,10 +4,14 @@
 #
 set -e
 
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
 BASE_DIR="$(pwd -P)"
-ID_LIST_PATH="${1}"
-CWL_PATH="$(cd $(dirname "${2}") && pwd -P)/$(basename "${2}")"
-YAML_TMP_PATH="$(cd $(dirname "${3}") && pwd -P)/$(basename "${3}")"
+ID_LIST_PATH="$(get_abs_path ${1})"
+CWL_PATH="$(get_abs_path ${2})"
+YAML_TMP_PATH="$(get_abs_path ${3})"
 
 cat "${ID_LIST_PATH}" | while read id; do
   result_dir="${BASE_DIR}/result/${id:0:6}/${id}"

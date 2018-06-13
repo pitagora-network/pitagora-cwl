@@ -4,8 +4,7 @@
 set -e
 
 get_abs_path(){
-  local ipt="${1}"
-  echo "$(cd $(dirname "${ipt}") && pwd -P)/$(basename "${ipt}")"
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
 }
 
 BASE_DIR="$(pwd -P)"
