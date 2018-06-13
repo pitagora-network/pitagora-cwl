@@ -1,7 +1,0 @@
-transcript:
-  class: File
-  path: /path/to/file/transcripts.fasta
-kmer_size: 31
-index_out_dir: sailfish_index_out
-force: true
-perfect_hash: true
