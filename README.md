@@ -50,3 +50,5 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
     - [star-eXpress](workflows/star-eXpress)
     - [star-rsem](workflows/star-rsem)
   - [kallisto](workflows/kallisto)
+  - [sailfish](workflows/sailfish)
+  - [salmon](workflows/salmon)
