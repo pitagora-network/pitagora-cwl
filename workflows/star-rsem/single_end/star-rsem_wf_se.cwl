@@ -58,6 +58,7 @@ steps:
     run: samtools_sort.cwl
     in:
       input_bam: star_mapping/output_bam
+      nthreads: nthreads
     out: [sorted_bamfile]
 
   rsem-calculate-expression:
