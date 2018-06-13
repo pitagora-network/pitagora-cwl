@@ -1,5 +1,5 @@
 #!/bin/bash
-# kallisto_wf.sh <path to id list> <path to kallisto index file> <path to kallisto_wf.cwl> <path to kallisto_wf.yaml.sample> [single|paired]
+# sailfish_wf.sh <path to id list> <path to sailfish index dir> <path to sailfish_wf_(se|pe).cwl> <path to sailfish_wf_(se|pe).yaml.sample>
 #
 set -e
 
@@ -15,57 +15,30 @@ esac
 
 BASE_DIR="$(pwd -P)"
 ID_LIST_PATH="$(get_abs_path ${1})"
-INDEX_FILE_PATH="$(get_abs_path ${2})"
+INDEX_DIR_PATH="$(get_abs_path ${2})"
 CWL_PATH="$(get_abs_path ${3})"
 YAML_TMP_PATH="$(get_abs_path ${4})"
-READ_LAYOUT="${5}"
 
 run_workflow(){
   local id="${1}"
   local result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
   local yaml_path="${result_dir}/${id}.yaml"
   mkdir -p "${result_dir}" && cd "${result_dir}"
-
-  case "${READ_LAYOUT}" in
-    "single" | "SE" | "SINGLE" )
-      config_yaml_single_end "${yaml_path}" "${id}"
-      ;;
-    "paired" | "PE" | "PAIRED" )
-      config_yaml_paired_end "${yaml_path}" "${id}"
-      ;;
-    *)
-      echo "ERROR: Read Layout not specified"
-      echo "usage: kallisto_wf.sh <path to id list> <path to kallisto index file> <path to kallisto_wf.cwl> <path to kallisto_wf.yaml.sample> [single|paired]"
-      exit 1
-      ;;
-  esac
-
+  config_yaml "${yaml_path}" "${id}"
   run_cwl "${result_dir}" "${yaml_path}"
   cd "${BASE_DIR}"
 }
 
-config_yaml_single_end(){
+config_yaml(){
   local yaml_path="${1}"
   local id="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
-    -i.buk \
-    -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
-    -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
-    -e "s:^# (.*)# UNCOMMENT FOR --single:\1:g" \
-    "${yaml_path}"
-}
 
-config_yaml_paired_end(){
-  local yaml_path="${1}"
-  local id="${2}"
-  cp "${YAML_TMP_PATH}" "${yaml_path}"
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_RUN_IDS_:${id}:" \
-    -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
+    -e "s:_SAILFISH_INDEX_DIR_:${INDEX_DIR_PATH}:" \
     "${yaml_path}"
 }
 

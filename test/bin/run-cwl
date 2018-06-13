@@ -1,0 +1,80 @@
+#!/bin/sh
+# run-cwl [--cwl-repo <path to pitagora-galaxy/cwl>] <workflow name>
+set -e
+REPO_GITHUB_URL="https://github.com/pitagora-galaxy/cwl"
+REPO_DIR="${HOME}/.pitagora-cwl"
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+while test $# -gt 0; do
+  key=${1}
+  case ${key} in
+    --cwl-repo)
+      REPO_DIR="$(get_abs_path ${2})"
+      shift
+      ;;
+    *)
+      WF_NAME="${key}"
+      ;;
+  esac
+  shift
+done
+
+#
+# Fetch repository if not found
+#
+if test ! -e "${REPO_DIR}" ; then
+  git clone --depth=1 "${REPO_GITHUB_URL}" "${REPO_DIR}"
+fi
+TOOL_DIR="${REPO_DIR}/tools"
+WF_DIR="${REPO_DIR}/workflows"
+
+#
+# Select workflow
+#
+wf_cwl_name="${WF_NAME}.cwl"
+wf_cwl_path="$(find "${WF_DIR}" -name "${wf_cwl_name}")"
+
+if test $(echo "${wf_cwl_path}" | wc -l) -ne 1 -o ! -e "${wf_cwl_path}"; then
+  echo "ERROR: workflow ${WF_NAME} not found. Select one from below:"
+  find "${WF_DIR}" -name '*cwl' | xargs -I{} basename {} | sed 's:\.cwl$::g'
+  exit 1
+fi
+
+#
+# Set file paths
+#
+wf_cwl_dirname="$(dirname "${wf_cwl_path}")"
+
+wf_yml_name="${WF_NAME}.yml.sample"
+wf_yml_path="${wf_cwl_dirname}/${wf_yml_name}"
+
+wf_test_setup_name="${WF_NAME}_setup.sh"
+wf_test_setup_path="${wf_cwl_dirname}/test/${wf_test_setup_name}"
+
+wf_test_sh_name="${WF_NAME}.sh"
+wf_test_sh_path="${wf_cwl_dirname}/test/${wf_test_sh_name}"
+
+#
+# Create test directory and symlinks of required files
+#
+BASE_DIR="$(pwd -P)"
+TEST_DIR="${BASE_DIR}/test.${WF_NAME}"
+mkdir -p "${TEST_DIR}" && cd "${TEST_DIR}"
+
+ln -s "${wf_cwl_path}" .
+ln -s "${wf_yml_path}" .
+ln -s "${wf_test_setup_path}" .
+ln -s "${wf_test_sh_path}" .
+
+cat ${wf_cwl_name} | awk '$1 == "run:" { print $2 }' | while read tool; do
+  ln -s $(find "${TOOL_DIR}" -name "${tool}") .
+done
+
+#
+# Setup and run test
+#
+bash "${wf_test_setup_name}" "${REPO_DIR}"
+bash "${wf_test_sh_name}"

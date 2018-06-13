@@ -1,0 +1,17 @@
+#!/bin/sh
+# get_hisat2_index: Download HISAT2 index files
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+LAYOUT="${2}"
+
+# Get ID list
+id_list_name="id.list"
+id_list_path="${REPO_DIR}/test/data/${layout}.test.${id_list_name}"
+ln -s "${id_list_path}" ./"${id_list_name}"

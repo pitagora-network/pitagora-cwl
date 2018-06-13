@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_gencode_gene_transcripts_fasta: Download gene transcripts_fasta gtf file from gencode
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+GENCODE_FASTA_URL="ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.transcripts.fa.gz"
+GENCODE_FASTA_GZIP_FILE_NAME="$(basename "${GENCODE_FASTA_URL}")"
+GENCODE_FASTA_FILE_NAME="$(echo "${GENCODE_FASTA_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+
+transcripts_fasta_file_path="${REF_DIR}/annotation/gencode/transcripts.fa"
+
+transcripts_fasta_dir_path="$(dirname "${transcripts_fasta_file_path}")"
+transcripts_fasta_file_name="$(basename "${transcripts_fasta_file_path}")"
+
+if test ! -e "${transcripts_fasta_file_path}"; then
+  mkdir -p "${transcripts_fasta_dir_path}" && cd "${transcripts_fasta_dir_path}"
+  wget "${GENCODE_FASTA_URL}"
+  gunzip "${GENCODE_FASTA_GZIP_FILE_NAME}"
+  mv "${GENCODE_FASTA_FILE_NAME}" "${transcripts_fasta_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${transcripts_fasta_file_path}" .

@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_UCSC_mrna_fasta: Download fasta file from UCSC
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+UCSC_FASTA_URL="http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/refMrna.fa.gz"
+UCSC_FASTA_GZIP_FILE_NAME="$(basename "${UCSC_FASTA_URL}")"
+UCSC_FASTA_FILE_NAME="$(echo "${UCSC_FASTA_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+
+transcripts_fasta_file_path="${REF_DIR}/annotation/UCSC/refMrna.fa"
+
+transcripts_fasta_dir_path="$(dirname "${transcripts_fasta_file_path}")"
+transcripts_fasta_file_name="$(basename "${transcripts_fasta_file_path}")"
+
+if test ! -e "${transcripts_fasta_file_path}"; then
+  mkdir -p "${transcripts_fasta_dir_path}" && cd "${transcripts_fasta_dir_path}"
+  wget "${UCSC_FASTA_URL}"
+  gunzip "${UCSC_FASTA_GZIP_FILE_NAME}"
+  mv "${UCSC_FASTA_FILE_NAME}" "${transcripts_fasta_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${transcripts_fasta_file_path}" .

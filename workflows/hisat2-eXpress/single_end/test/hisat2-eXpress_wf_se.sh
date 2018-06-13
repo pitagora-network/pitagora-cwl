@@ -1,5 +1,5 @@
 #!/bin/bash
-# hisat2-cufflinks_wf.sh <path to id list> <path to one of hisat2 index files (e.g. hoge.1.ht2)> <path to annotation gtf file> <path to hisat2-cufflinks_wf_(se|pe).cwl> <path to hisat2-cufflinks_wf_(se|pe).yaml.sample>
+# hisat2-eXpress_wf.sh <path to id list> <path to one of hisat2 index files (e.g. hoge.1.ht2)> <path to annotation gtf file> <path to hisat2-eXpress_wf_(se|pe).cwl> <path to hisat2-eXpress_wf_(se|pe).yaml.sample>
 #
 set -e
 
@@ -13,12 +13,27 @@ case "$(uname -s)" in
   * ) NCPUS=1 ;;
 esac
 
+PFX=$(basename ${0} | sed 's:\.sh$::')
+
 BASE_DIR="$(pwd -P)"
-ID_LIST_PATH="$(get_abs_path ${1})"
-INDEX_FILE_PATH="$(get_abs_path ${2})"
-ANNOTATION_FILE_PATH="$(get_abs_path ${3})"
-CWL_PATH="$(get_abs_path ${4})"
-YAML_TMP_PATH="$(get_abs_path ${5})"
+DATA_DIR_PATH="${BASE_DIR}"
+CWL_PATH="${BASE_DIR}/${PFX}.cwl"
+YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
+ID_LIST_PATH="${BASE_DIR}/id.list"
+HISAT2_INDEX_FILE_PATH="${BASE_DIR}/refMrna/refMrna.1.ht2"
+EXPRESS_FASTA_FILE_PATH="${BASE_DIR}/refMrna.fa"
+
+while test $# -gt 0; do
+  key=${1}
+  case ${key} in
+    --cwl) CWL_PATH="$(get_abs_path ${2})"; shift ;;
+    --yml) YAML_TMP_PATH="$(get_abs_path ${2})"; shift ;;
+    --id) ID_LIST_PATH="$(get_abs_path ${2})"; shift ;;
+    --index) HISAT2_INDEX_FILE_PATH="$(get_abs_path ${2})"; shift ;;
+    --fasta) EXPRESS_FASTA_FILE_PATH="$(get_abs_path ${2})"; shift ;;
+  esac
+  shift
+done
 
 run_workflow(){
   local id="${1}"
@@ -35,8 +50,8 @@ config_yaml(){
   local id="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
-  local idx_basedir=$(dirname ${INDEX_FILE_PATH})
-  local idx_basename=$(basename ${INDEX_FILE_PATH} | sed 's:\..*$::g')
+  local idx_basedir=$(dirname ${HISAT2_INDEX_FILE_PATH})
+  local idx_basename=$(basename ${HISAT2_INDEX_FILE_PATH} | sed 's:\..*$::g')
 
   sed -r \
     -i.buk \
@@ -44,7 +59,7 @@ config_yaml(){
     -e "s:_RUN_IDS_:${id}:" \
     -e "s:_INDEX_DIR_PATH_:${idx_basedir}:" \
     -e "s:_INDEX_BASENAME_:${idx_basename}:" \
-    -e "s:_ANNOTATION_GTF_:${ANNOTATION_FILE_PATH}:" \
+    -e "s:_TARGET_FASTA_:${EXPRESS_FASTA_FILE_PATH}:" \
     "${yaml_path}"
 }
 

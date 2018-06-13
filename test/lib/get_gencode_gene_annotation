@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_gencode_gene_annotation: Download gene annotation gtf file from gencode
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+GENCODE_GTF_URL="ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz"
+GENCODE_GTF_GZIP_FILE_NAME="$(basename "${GENCODE_GTF_URL}")"
+GENCODE_GTF_FILE_NAME="$(echo "${GENCODE_GTF_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+
+annotation_file_path="${REF_DIR}/annotation/gencode/genes.gtf"
+
+annotation_dir_path="$(dirname "${annotation_file_path}")"
+annotation_file_name="$(basename "${annotation_file_path}")"
+
+if test ! -e "${annotation_file_path}"; then
+  mkdir -p "${annotation_dir_path}" && cd "${annotation_dir_path}"
+  wget "${GENCODE_GTF_URL}"
+  gunzip "${GENCODE_GTF_GZIP_FILE_NAME}"
+  mv "${GENCODE_GTF_FILE_NAME}" "${annotation_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${annotation_file_path}" .

@@ -1,0 +1,28 @@
+#!/bin/sh
+# get_hisat2_index: Download HISAT2 index files
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference/hisat2_index"
+
+HISAT2_INDEX_URL="http://data.dbcls.jp/~inutano/reference/hisat2_index/refMrna.tar.gz"
+HISAT2_INDEX_NAME_ORG="$(basename "${HISAT2_INDEX_URL}")"
+HISAT2_INDEX_DIR_NAME="$(echo "${HISAT2_INDEX_NAME_ORG}" | sed 's:.tar.gz$::')"
+
+hisat2_index_dir="${REF_DIR}/refMrna"
+hisat2_index_file="${hisat2_index_dir}/refMrna.1.ht2"
+
+if test ! -e "${hisat2_index_file}"; then
+  mkdir -p "${REF_DIR}" && cd "${REF_DIR}"
+  wget "${HISAT2_INDEX_URL}"
+  tar zxf "${HISAT2_INDEX_NAME_ORG}"
+  mv "${HISAT2_INDEX_DIR_NAME}" "${hisat2_index_dir}"
+  rm -f "${HISAT2_INDEX_NAME_ORG}"
+  cd "${BASE_DIR}"
+fi
+
+ln -s "${hisat2_index_dir}" .
