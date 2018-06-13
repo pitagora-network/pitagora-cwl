@@ -7,18 +7,11 @@ get_abs_path(){
   echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
 }
 
-set_ncpus(){
-  NCPUS=1
-  if [[ "$(uname)" == 'Darwin' ]]; then
-    NCPUS=$(sysctl -n hw.ncpu)
-  elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-    NCPUS=$(nproc)
-  else
-    echo "Your platform ($(uname -a)) is not supported." 2>dev/null
-    exit 1
-  fi
-}
-set_ncpus
+case "$(uname -s)" in
+  Darwin) NCPUS=$(sysctl -n hw.ncpu) ;;
+  Linux ) NCPUS=$(nproc) ;;
+  * ) NCPUS=1 ;;
+esac
 
 BASE_DIR="$(pwd -P)"
 ID_LIST_PATH="$(get_abs_path ${1})"
