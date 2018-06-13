@@ -6,36 +6,38 @@ doc: "kallisto is a program for quantifying abundances of transcripts from RNA-S
 hints:
   DockerRequirement:
     dockerPull: yyabuki/kallisto:0.43.1
-baseCommand: ["kallisto", "index"]
 
-requirements:
-  InitialWorkDirRequirement:
-    listing:
-      - $(inputs.fasta_file)
+baseCommand: [kallisto, index]
+
+arguments:
+  - prefix: -i
+    valueFrom: $(runtime.ourdir)/$(inputs.index_name)
 
 inputs:
   index_name:
+    label: "Filename for the kallisto index to be constructed"
+    doc: "Filename for the kallisto index to be constructed"
     type: string
-    inputBinding:
-      position: 1
-      prefix: -i
   kmer_size:
-    type: int?
+    label: "k-mer (odd) length (default: 31, max value: 31)"
+    doc: "k-mer (odd) length (default: 31, max value: 31)"
+    type: int
     default: 31
     inputBinding:
-      position: 2
       prefix: -k
   make_unique:
-    type: boolean?
+    label: "Replace repeated target names with unique names"
+    doc: "Replace repeated target names with unique names"
+    type: boolean
     default: true
     inputBinding:
-      position: 3
       prefix: --make-unique
-  fasta_file:
-    type: File
+  fasta_files:
+    label: "The Fasta file supplied can be either in plaintext or gzipped format"
+    doc: "The Fasta file supplied can be either in plaintext or gzipped format"
+    type: File[]
     inputBinding:
-      position: 4
-      valueFrom: $(self.basename)
+      position: 10
 
 outputs:
   index_file:

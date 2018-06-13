@@ -1,8 +1,4 @@
-# Name of the index file, e.g. GRCh38_kallisto_index
 index_name: _INDEX_NAME_
-kmer_size: 31
-make_unique: true
-fasta_file:
-  class: File
-  # Path to cDNA fasta file, e.g. /path/to/Homo_sapiens.GRCh38.cdna.all.fa.gz
-  path: _FASTA_PATH_
+fasta_files:
+  - class: File
+    path: _PATH_TO_FASTA_
