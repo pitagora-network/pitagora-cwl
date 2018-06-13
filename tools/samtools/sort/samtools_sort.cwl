@@ -14,6 +14,11 @@ inputs:
   output_filename:
     type: string
     default: sorted.bam
+  nthreads:
+    type: int
+    default: 1
+    inputBinding:
+      prefix: -@
   input_bam:
     type: File
     inputBinding:

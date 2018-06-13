@@ -7,6 +7,12 @@ get_abs_path(){
   echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
 }
 
+case "$(uname -s)" in
+  Darwin) NCPUS=$(sysctl -n hw.ncpu) ;;
+  Linux ) NCPUS=$(nproc) ;;
+  * ) NCPUS=1 ;;
+esac
+
 BASE_DIR="$(pwd -P)"
 DATA_DIR_PATH="$(get_abs_path ${1})"
 CWL_PATH="$(get_abs_path ${2})"
@@ -22,6 +28,7 @@ find "${DATA_DIR_PATH}" -name '*.bam' | while read fpath; do
 
   sed -i.buk \
     -e "s:_INPUT_BAM_:${fpath}:" \
+    -e "s:_NTHREADS_:${NCPUS}:" \
     "${yaml_path}"
 
   cwltool \
