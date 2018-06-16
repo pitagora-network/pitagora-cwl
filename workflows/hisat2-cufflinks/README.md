@@ -16,7 +16,7 @@ $ curl https://raw.githubusercontent.com/pitagora-galaxy/cwl/master/test/bin/run
 
 ### Steps
 
-1. [download-sra](/tools/download_sra)
+1. [download-sra](/tools/download-sra)
 2. [pfastq-dump](/tools/pfastq-dump)
 3. [hisat2-mapping](/tools/hisat2/mapping)
 4. [samtools_sam2bam](/tools/samtools/sam2bam)
