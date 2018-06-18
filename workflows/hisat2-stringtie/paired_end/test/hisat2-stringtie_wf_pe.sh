@@ -50,8 +50,8 @@ config_yaml(){
   local id="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
-  local idx_basedir=$(dirname ${INDEX_FILE_PATH})
-  local idx_basename=$(basename ${INDEX_FILE_PATH} | sed 's:\..*$::g')
+  local idx_basedir=$(dirname ${HISAT2_INDEX_FILE_PATH})
+  local idx_basename=$(basename ${HISAT2_INDEX_FILE_PATH} | sed 's:\..*$::g')
 
   sed -r \
     -i.buk \
