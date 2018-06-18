@@ -11,8 +11,7 @@ baseCommand: [rsem-prepare-reference]
 
 arguments:
   - valueFrom: $(runtime.outdir)/$(inputs.reference_name)
-    inputBinding:
-      position: 50
+    position: 50
 
 inputs:
   gtf:
