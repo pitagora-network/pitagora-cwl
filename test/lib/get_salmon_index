@@ -1,5 +1,5 @@
 #!/bin/sh
-# get_salmon_index_GRCh38: Download SALMON index file of GRCh38 reference genome
+# get_salmon_index: download salmon index of GRCh38 Gencode transcriptome
 BASE_DIR=$(pwd -P)
 
 get_abs_path(){
