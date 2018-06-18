@@ -15,7 +15,7 @@ if test ! -e "${id_list_name}"; then
 fi
 
 # Get HISAT2 index files
-. "${LIB_DIR}/get_hisat2_index" "${REPO_DIR}"
+. "${LIB_DIR}/get_hisat2_index_GRCh38" "${REPO_DIR}"
 
 # Get Gencode annotation GTF
 . "${LIB_DIR}/get_gencode_gene_annotation" "${REPO_DIR}"
