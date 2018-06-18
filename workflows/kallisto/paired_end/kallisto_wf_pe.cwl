@@ -20,9 +20,6 @@ inputs:
   index_file: File
   out_dir_name: string?
   # Optional
-  single: boolean?
-  fragment_length: double?
-  standard_deviation: double?
   boostrap_samples: int?
 
 outputs:
@@ -50,6 +47,7 @@ steps:
     in:
       index_file: index_file
       out_dir_name: out_dir_name
+      boostrap_samples: boostrap_samples
       fq: pfastq_dump/fastqFiles
     out:
       [quant_output]

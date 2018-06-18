@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_kallisto_index_GRCh38: Download KALLISTO index file of GRCh38 reference genome
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+KALLISTO_INDEX_URL="https://s3.amazonaws.com/nig-reference/kallisto_index/GRCh38Gencode.gz"
+KALLISTO_INDEX_GZIP_FILE_NAME="$(basename "${KALLISTO_INDEX_URL}")"
+KALLISTO_INDEX_FILE_NAME="$(echo "${KALLISTO_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+
+kallisto_index_file_path="${REF_DIR}/reference/kallisto_index/GRCh38"
+
+kallisto_index_dir_path="$(dirname "${kallisto_index_file_path}")"
+kallisto_index_file_name="$(basename "${kallisto_index_file_path}")"
+
+if test ! -e "${kallisto_index_file_path}"; then
+  mkdir -p "${kallisto_index_dir_path}" && cd "${kallisto_index_dir_path}"
+  wget "${KALLISTO_INDEX_URL}"
+  gunzip "${KALLISTO_INDEX_GZIP_FILE_NAME}"
+  mv "${KALLISTO_INDEX_FILE_NAME}" "${kallisto_index_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${kallisto_index_file_path}" "./kallisto_GRCh38"

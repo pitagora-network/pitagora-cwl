@@ -20,7 +20,7 @@ DATA_DIR_PATH="${BASE_DIR}"
 CWL_PATH="${BASE_DIR}/${PFX}.cwl"
 YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
 ID_LIST_PATH="${BASE_DIR}/id.list"
-HISAT2_INDEX_FILE_PATH="${BASE_DIR}/hisat2_index/genome.1.ht2"
+HISAT2_INDEX_FILE_PATH="${BASE_DIR}/hisat2_GRCh38/genome.1.ht2"
 STRINGTIE_ANNOTATION_FILE_PATH="${BASE_DIR}/genes.gtf"
 
 while test $# -gt 0; do
