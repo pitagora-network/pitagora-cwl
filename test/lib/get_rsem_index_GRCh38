@@ -13,7 +13,7 @@ RSEM_INDEX_URL="https://s3.amazonaws.com/nig-reference/rsem_index/GRCh38.tar.gz"
 RSEM_INDEX_GZIP_FILE_NAME="$(basename "${RSEM_INDEX_URL}")"
 RSEM_INDEX_FILE_NAME="$(echo "${RSEM_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
 
-rsem_index_file_path="${REF_DIR}/reference/rsem_index/GRCh38"
+rsem_index_file_path="${REF_DIR}/rsem_index/GRCh38"
 
 rsem_index_dir_path="$(dirname "${rsem_index_file_path}")"
 rsem_index_file_name="$(basename "${rsem_index_file_path}")"

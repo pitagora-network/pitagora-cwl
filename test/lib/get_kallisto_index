@@ -13,7 +13,7 @@ KALLISTO_INDEX_URL="https://s3.amazonaws.com/nig-reference/kallisto_index/GRCh38
 KALLISTO_INDEX_GZIP_FILE_NAME="$(basename "${KALLISTO_INDEX_URL}")"
 KALLISTO_INDEX_FILE_NAME="$(echo "${KALLISTO_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
 
-kallisto_index_file_path="${REF_DIR}/reference/kallisto_index/GRCh38"
+kallisto_index_file_path="${REF_DIR}/kallisto_index/GRCh38"
 
 kallisto_index_dir_path="$(dirname "${kallisto_index_file_path}")"
 kallisto_index_file_name="$(basename "${kallisto_index_file_path}")"

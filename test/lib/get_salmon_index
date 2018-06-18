@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_salmon_index_GRCh38: Download SALMON index file of GRCh38 reference genome
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+SALMON_INDEX_URL="https://s3.amazonaws.com/nig-reference/salmon_index/salmon_GRCh38.tar.gz"
+SALMON_INDEX_GZIP_FILE_NAME="$(basename "${SALMON_INDEX_URL}")"
+SALMON_INDEX_FILE_NAME="$(echo "${SALMON_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
+
+salmon_index_file_path="${REF_DIR}/salmon_index/GRCh38"
+
+salmon_index_dir_path="$(dirname "${salmon_index_file_path}")"
+salmon_index_file_name="$(basename "${salmon_index_file_path}")"
+
+if test ! -e "${salmon_index_file_path}"; then
+  mkdir -p "${salmon_index_dir_path}" && cd "${salmon_index_dir_path}"
+  wget "${SALMON_INDEX_URL}"
+  tar zxf "${SALMON_INDEX_GZIP_FILE_NAME}"
+  mv "${SALMON_INDEX_FILE_NAME}" "${salmon_index_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${salmon_index_file_path}" "./salmon_GRCh38"

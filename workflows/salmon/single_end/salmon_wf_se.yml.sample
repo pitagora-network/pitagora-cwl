@@ -1,6 +1,8 @@
 nthreads: _NTHREADS_
 run_ids: [_RUN_ID_]
 # repos: _REPO_
-index_dir: _SALMON_INDEX_DIR_
+index_dir:
+  class: Directory
+  path:  _SALMON_INDEX_DIR_
 # gibbs_samples: _GIBBS_SAMPLES_
 # num_bootstrap: _NUM_BOOTSTRAP_

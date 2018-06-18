@@ -42,11 +42,11 @@ steps:
     out:
       [forward, reverse]
   salmon_quant:
-    run: salmon_quant_se.cwl
+    run: salmon_quant_pe.cwl
     in:
       index_dir: index_dir
       fq1: pfastq_dump/forward
-      fq2: pfastq_dump/forward
+      fq2: pfastq_dump/reverse
       nthreads: nthreads
       gibbs_samples: gibbs_samples
       num_bootstrap: num_bootstrap

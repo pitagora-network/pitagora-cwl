@@ -1,5 +1,5 @@
 #!/bin/bash
-# salmon_wf.sh <path to id list> <path to salmon index dir> <path to salmon_wf_(se|pe).cwl> <path to salmon_wf_(se|pe).yaml.sample>
+# salmon_wf.sh [--id <path to id list>] [--salmon-index <path to salmon index dir>] [--cwl <path to salmon_wf_pe.cwl>] [--yml <path to salmon_wf_pe.yaml.sample>]
 #
 set -e
 
@@ -13,11 +13,25 @@ case "$(uname -s)" in
   * ) NCPUS=1 ;;
 esac
 
+PFX=$(basename ${0} | sed 's:\.sh$::')
+
 BASE_DIR="$(pwd -P)"
-ID_LIST_PATH="$(get_abs_path ${1})"
-INDEX_DIR_PATH="$(get_abs_path ${2})"
-CWL_PATH="$(get_abs_path ${3})"
-YAML_TMP_PATH="$(get_abs_path ${4})"
+DATA_DIR_PATH="${BASE_DIR}"
+CWL_PATH="${BASE_DIR}/${PFX}.cwl"
+YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
+ID_LIST_PATH="${BASE_DIR}/id.list"
+SALMON_INDEX_DIR_PATH="${BASE_DIR}/salmon_GRCh38"
+
+while test $# -gt 0; do
+  key=${1}
+  case ${key} in
+    --cwl) CWL_PATH="$(get_abs_path ${2})"; shift ;;
+    --yml) YAML_TMP_PATH="$(get_abs_path ${2})"; shift ;;
+    --id) ID_LIST_PATH="$(get_abs_path ${2})"; shift ;;
+    --salmon-index) SALMON_INDEX_DIR_PATH="$(get_abs_path ${2})"; shift ;;
+  esac
+  shift
+done
 
 run_workflow(){
   local id="${1}"
@@ -37,8 +51,8 @@ config_yaml(){
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
-    -e "s:_SALMON_INDEX_DIR_:${INDEX_DIR_PATH}:" \
+    -e "s:_RUN_ID_:${id}:" \
+    -e "s:_SALMON_INDEX_DIR_:${SALMON_INDEX_DIR_PATH}:" \
     "${yaml_path}"
 }
 
