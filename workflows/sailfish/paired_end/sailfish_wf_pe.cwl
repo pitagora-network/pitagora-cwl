@@ -13,7 +13,9 @@ inputs:
   repo: string?
 
   ## Inputs for pfastq-dump
-  #   None
+  gzip:
+    type: boolean
+    default: false
 
   ## Inputs for sailfish quant
   # Required
@@ -39,7 +41,7 @@ steps:
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
-      gzip: false
+      gzip: gzip
     out:
       [forward, reverse]
   sailfish_quant:
