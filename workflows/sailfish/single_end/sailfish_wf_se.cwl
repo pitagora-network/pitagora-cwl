@@ -13,13 +13,15 @@ inputs:
   repo: string?
 
   ## Inputs for pfastq-dump
-  #   None
+  gzip:
+    type: boolean
+    default: false
 
   ## Inputs for sailfish quant
   # Required
   index_dir: Directory
   gibbs_samples: int?
-  num_bootstrap: int?
+  num_bootstraps: int?
 
 outputs:
   quant_results:
@@ -39,6 +41,7 @@ steps:
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
+      gzip: gzip
     out:
       [fastqFiles]
   sailfish_quant:

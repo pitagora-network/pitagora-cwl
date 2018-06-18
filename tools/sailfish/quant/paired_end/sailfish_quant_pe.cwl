@@ -63,14 +63,14 @@ inputs:
     type: boolean?
     inputBinding:
         prefix: --gcBiasCorrect
-  gibbs_samples
+  gibbs_samples:
     label: "Number of Gibbs sampling rounds"
     doc: "*super*-experimental]: Number of Gibbs sampling rounds to perform."
     type: int
     default: 0
     inputBinding:
       prefix: --numGibbsSamples
-  num_bootstraps
+  num_bootstraps:
     label: "Number of bootstrap samples to generate"
     doc: "[*super*-experimental]: Number of bootstrap samples to generate. Note: This is mutually exclusive with Gibbs sampling."
     type: int

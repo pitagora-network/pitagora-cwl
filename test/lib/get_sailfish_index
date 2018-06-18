@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_sailfish_index: download sailfish index of GRCh38 Gencode transcriptome
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+SAILFISH_INDEX_URL="https://s3.amazonaws.com/nig-reference/sailfish_index/sailfish_GRCh38.tar.gz"
+SAILFISH_INDEX_GZIP_FILE_NAME="$(basename "${SAILFISH_INDEX_URL}")"
+SAILFISH_INDEX_FILE_NAME="$(echo "${SAILFISH_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
+
+sailfish_index_file_path="${REF_DIR}/reference/sailfish_index/GRCh38"
+
+sailfish_index_dir_path="$(dirname "${sailfish_index_file_path}")"
+sailfish_index_file_name="$(basename "${sailfish_index_file_path}")"
+
+if test ! -e "${sailfish_index_file_path}"; then
+  mkdir -p "${sailfish_index_dir_path}" && cd "${sailfish_index_dir_path}"
+  wget "${SAILFISH_INDEX_URL}"
+  tar zxf "${SAILFISH_INDEX_GZIP_FILE_NAME}"
+  mv "${SAILFISH_INDEX_FILE_NAME}" "${sailfish_index_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${sailfish_index_file_path}" "./sailfish_GRCh38"

@@ -19,7 +19,7 @@ inputs:
   # Required
   index_dir: Directory
   gibbs_samples: int?
-  num_bootstrap: int?
+  num_bootstraps: int?
 
 outputs:
   quant_results:
@@ -39,14 +39,15 @@ steps:
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
+      gzip: false
     out:
       [forward, reverse]
   sailfish_quant:
-    run: sailfish_quant_se.cwl
+    run: sailfish_quant_pe.cwl
     in:
       index_dir: index_dir
       fq1: pfastq_dump/forward
-      fq2: pfastq_dump/forward
+      fq2: pfastq_dump/reverse
       nthreads: nthreads
       gibbs_samples: gibbs_samples
       num_bootstraps: num_bootstraps
