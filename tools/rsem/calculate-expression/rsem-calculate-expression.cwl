@@ -16,7 +16,7 @@ arguments:
 inputs:
   input_bam:
     label: "BAM formatted input file"
-    doc: "BAM formatted input file. If "-" is specified for the filename, the input is instead assumed to come from standard input. RSEM requires all alignments of the same read group together. For paired-end reads, RSEM also requires the two mates of any alignment be adjacent. In addition, RSEM does not allow the SEQ and QUAL fields to be empty. See Description section for how to make input file obey RSEM's requirements."
+    doc: "BAM formatted input file. If '-' is specified for the filename, the input is instead assumed to come from standard input. RSEM requires all alignments of the same read group together. For paired-end reads, RSEM also requires the two mates of any alignment be adjacent. In addition, RSEM does not allow the SEQ and QUAL fields to be empty. See Description section for how to make input file obey RSEM's requirements."
     type: File
     inputBinding:
       position: 1

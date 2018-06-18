@@ -42,8 +42,6 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
   - HISAT2-*
     - [hisat2-cufflinks](workflows/hisat2-cufflinks)
     - [hisat2-stringtie](workflows/hisat2-stringtie)
-    - [hisat2-eXpress](workflows/hisat2-eXpress)
-    - [hisat2-rsem](workflows/hisat2-rsem)
   - STAR-*
     - [star-cufflinks](workflows/star-cufflinks)
     - [star-stringtie](workflows/star-stringtie)

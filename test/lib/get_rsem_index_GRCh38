@@ -1,0 +1,29 @@
+#!/bin/sh
+# get_rsem_index_GRCh38: Download RSEM index file of GRCh38 reference genome
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference"
+
+RSEM_INDEX_URL="https://s3.amazonaws.com/nig-reference/rsem_index/GRCh38.tar.gz"
+RSEM_INDEX_GZIP_FILE_NAME="$(basename "${RSEM_INDEX_URL}")"
+RSEM_INDEX_FILE_NAME="$(echo "${RSEM_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+
+rsem_index_file_path="${REF_DIR}/reference/rsem_index/GRCh38"
+
+rsem_index_dir_path="$(dirname "${rsem_index_file_path}")"
+rsem_index_file_name="$(basename "${rsem_index_file_path}")"
+
+if test ! -e "${rsem_index_file_path}"; then
+  mkdir -p "${rsem_index_dir_path}" && cd "${rsem_index_dir_path}"
+  wget "${RSEM_INDEX_URL}"
+  tar zxf "${RSEM_INDEX_GZIP_FILE_NAME}"
+  mv "${RSEM_INDEX_FILE_NAME}" "${rsem_index_file_name}"
+  cd ${BASE_DIR}
+fi
+
+ln -s "${rsem_index_file_path}" "./rsem_GRCh38"

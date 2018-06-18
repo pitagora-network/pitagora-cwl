@@ -25,4 +25,4 @@ if test ! -e "${hisat2_index_file}"; then
   cd "${BASE_DIR}"
 fi
 
-ln -s "${hisat2_index_dir}" .
+ln -s "${hisat2_index_dir}" "./hisat2_GRCh38"
