@@ -45,7 +45,6 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
   - STAR-*
     - [star-cufflinks](workflows/star-cufflinks)
     - [star-stringtie](workflows/star-stringtie)
-    - [star-eXpress](workflows/star-eXpress)
     - [star-rsem](workflows/star-rsem)
   - [kallisto](workflows/kallisto)
   - [sailfish](workflows/sailfish)
