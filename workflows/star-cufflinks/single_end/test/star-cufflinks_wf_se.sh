@@ -1,5 +1,5 @@
 #!/bin/bash
-# star-cufflinks_wf.sh <path to id list> <path to index directory> <path to annotation gtf file> <path to star-cufflinks_wf_(se|pe).cwl> <path to star-cufflinks_wf_(se|pe).yaml.sample>
+# star-cufflinks_wf.sh [--id <path to id list>]  [--star-index <path to index directory>] [--cufflinks-annotation <path to annotation gtf file>] [--cwl <path to star-cufflinks_wf_se.cwl>] [--yml <path to star-cufflinks_wf_se.yaml.sample>]
 #
 set -e
 
@@ -13,12 +13,27 @@ case "$(uname -s)" in
   * ) NCPUS=1 ;;
 esac
 
+PFX=$(basename ${0} | sed 's:\.sh$::')
+
 BASE_DIR="$(pwd -P)"
-ID_LIST_PATH="$(get_abs_path ${1})"
-INDEX_DIR_PATH="$(get_abs_path ${2})"
-ANNOTATION_FILE_PATH="$(get_abs_path ${3})"
-CWL_PATH="$(get_abs_path ${4})"
-YAML_TMP_PATH="$(get_abs_path ${5})"
+DATA_DIR_PATH="${BASE_DIR}"
+CWL_PATH="${BASE_DIR}/${PFX}.cwl"
+YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
+ID_LIST_PATH="${BASE_DIR}/id.list"
+STAR_INDEX_DIR_PATH="${BASE_DIR}/star_GRCh38"
+CUFFLINKS_ANNOTATION_FILE_PATH="${BASE_DIR}/genes.gtf"
+
+while test $# -gt 0; do
+  key=${1}
+  case ${key} in
+    --cwl) CWL_PATH="$(get_abs_path ${2})"; shift ;;
+    --yml) YAML_TMP_PATH="$(get_abs_path ${2})"; shift ;;
+    --id) ID_LIST_PATH="$(get_abs_path ${2})"; shift ;;
+    --star-index) STAR_INDEX_DIR_PATH="$(get_abs_path ${2})"; shift ;;
+    --cufflinks-annotation) CUFFLINKS_ANNOTATION_FILE_PATH="$(get_abs_path ${2})"; shift ;;
+  esac
+  shift
+done
 
 run_workflow(){
   local id="${1}"
@@ -38,9 +53,9 @@ config_yaml(){
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
-    -e "s:_PATH_TO_INDEX_DIR_:${INDEX_DIR_PATH}:" \
-    -e "s:_ANNOTATION_GTF_:${ANNOTATION_FILE_PATH}:" \
+    -e "s:_RUN_ID_:${id}:" \
+    -e "s:_PATH_TO_INDEX_DIR_:${STAR_INDEX_DIR_PATH}:" \
+    -e "s:_ANNOTATION_GTF_:${CUFFLINKS_ANNOTATION_FILE_PATH}:" \
     "${yaml_path}"
 }
 

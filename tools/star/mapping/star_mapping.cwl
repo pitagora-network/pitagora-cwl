@@ -11,9 +11,14 @@ baseCommand: [STAR]
 
 arguments:
   - prefix: --outFileNamePrefix
-    valueFrom: $(runtime.outdir)
+    valueFrom: $(runtime.outdir)/$(inputs.output_dir_name)
 
 inputs:
+  output_dir_name:
+    label: "Name of the directory to write output files in"
+    doc: "Name of the directory to write output files in"
+    type: string
+    default: STAR
   nthreads:
     label: "Number of threads"
     doc: "defines the number of threads to be used for genome generation, it has

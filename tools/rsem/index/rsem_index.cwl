@@ -33,6 +33,6 @@ inputs:
 
 outputs:
   rsem_index:
-    type: File[]
+    type: Directory
     outputBinding:
-      glob: $(inputs.reference_name)*
+      glob: $(inputs.reference_name)

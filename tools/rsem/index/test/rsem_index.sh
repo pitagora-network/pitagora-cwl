@@ -17,7 +17,7 @@ YAML_TMP_PATH="$(get_abs_path ${5})"
 result_dir="${BASE_DIR}/result"
 mkdir -p "${result_dir}" && cd "${result_dir}"
 
-yaml_path="${result_dir}/${id}.yml"
+yaml_path="${result_dir}/rsem_index.yml"
 cp "${YAML_TMP_PATH}" "${yaml_path}"
 
 sed -i.buk \

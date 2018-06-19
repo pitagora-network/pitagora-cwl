@@ -9,6 +9,11 @@ inputs:
   repo: string?
   run_ids: string[]
 
+  ## Inputs for fastq-dump
+  gzip:
+    type: boolean
+    default: false
+
   ## Inputs for star_mapping
   genomeDir: Directory
 
@@ -34,8 +39,9 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
+      gzip: gzip
     out:
       [fastqFiles]
 
