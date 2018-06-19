@@ -9,6 +9,11 @@ inputs:
   repo: string?
   run_ids: string[]
 
+  ## Inputs for fastq-dump
+  gzip:
+    type: boolean
+    default: false
+
   ## Inputs for star_mapping
   genomeDir: Directory
 
@@ -25,7 +30,7 @@ outputs:
     type: File
     outputSource: rsem-calculate-expression/isoforms_result
   stat:
-    type: File
+    type: Directory
     outputSource: rsem-calculate-expression/stat
 
 steps:
@@ -40,24 +45,25 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
+      gzip: gzip
     out:
-      [forward, reverse]
+      [fastqFiles]
 
   star_mapping:
     run: star_mapping.cwl
     in:
       nthreads: nthreads
       genomeDir: genomeDir
-      readFilesIn: [pfastq-dump/forward, pfastq-dump/reverse]
+      readFilesIn: pfastq-dump/fastqFiles
     out:
-      [output_bam]
+      [toTranscriptome_bam]
 
   samtools_sort:
     run: samtools_sort.cwl
     in:
-      input_bam: star_mapping/output_bam
+      input_bam: star_mapping/toTranscriptome_bam
       nthreads: nthreads
     out: [sorted_bamfile]
 
