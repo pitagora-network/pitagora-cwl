@@ -15,10 +15,10 @@ inputs:
   ## Inputs for stringtie
   annotation: File
 
-  outputs:
-    assemble_output:
-      type: File
-      outputSource: stringtie_assemble/assemble_output
+outputs:
+  assemble_output:
+    type: File
+    outputSource: stringtie_assemble/assemble_output
 
 steps:
   download-sra:
