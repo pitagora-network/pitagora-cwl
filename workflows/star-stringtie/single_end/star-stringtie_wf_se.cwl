@@ -55,7 +55,7 @@ steps:
       nthreads: nthreads
     out: [sorted_bamfile]
 
-  stringtie_assemble
+  stringtie_assemble:
     run: stringtie_assemble.cwl
     in:
       input_bam: samtools_sort/sorted_bamfile
