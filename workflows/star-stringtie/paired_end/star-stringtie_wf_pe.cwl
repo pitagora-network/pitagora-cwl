@@ -41,14 +41,14 @@ steps:
       nthreads: nthreads
       gzip: gzip
     out:
-      [forward, reverse]
+      [fastqFiles]
 
   star_mapping:
     run: star_mapping.cwl
     in:
       nthreads: nthreads
       genomeDir: genomeDir
-      readFilesIn: [pfastq-dump/forward, pfastq-dump/reverse]
+      readFilesIn: pfastq-dump/fastqFiles
     out:
       [output_bam]
 
