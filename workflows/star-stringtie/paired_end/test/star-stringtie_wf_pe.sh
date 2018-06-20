@@ -53,7 +53,7 @@ config_yaml(){
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
+    -e "s:_RUN_ID_:${id}:" \
     -e "s:_PATH_TO_INDEX_DIR_:${STAR_INDEX_DIR_PATH}:" \
     -e "s:_ANNOTATION_GTF_:${STRINGTIE_ANNOTATION_FILE_PATH}:" \
     "${yaml_path}"
