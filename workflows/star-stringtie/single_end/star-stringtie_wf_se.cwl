@@ -34,7 +34,7 @@ steps:
   pfastq-dump:
     run: pfastq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      sraFiles: download-sra/sraFiles
       nthreads: nthreads
     out:
       [fastqFiles]
