@@ -17,9 +17,7 @@ inputs:
 
 outputs:
   assemble_output:
-    type:
-      type: array
-      items: File
+    type: File
     outputSource: stringtie_assemble/assemble_output
 
 steps:
