@@ -7,19 +7,32 @@ hints:
   DockerRequirement:
     dockerPull: genomicpariscentre/rsem:1.2.28
 
-baseCommand: [rsem-calculate-expression, --alignments, --no-bam-output]
+baseCommand: [rsem-calculate-expression, --star, --keep-intermediate-files, --no-bam-output, --paired-end]
 
 arguments:
   - valueFrom: $(inputs.rsem_index_dir.path)/$(inputs.rsem_index_prefix)
-    position: 2
+    position: 3
 
 inputs:
-  input_bam:
-    label: "BAM formatted input file"
-    doc: "BAM formatted input file. If '-' is specified for the filename, the input is instead assumed to come from standard input. RSEM requires all alignments of the same read group together. For paired-end reads, RSEM also requires the two mates of any alignment be adjacent. In addition, RSEM does not allow the SEQ and QUAL fields to be empty. See Description section for how to make input file obey RSEM's requirements."
+  nthreads:
+    label: "Number of threads to use"
+    doc: "Number of threads to use. Both Bowtie/Bowtie2, expression estimation and 'samtools sort' will use this many threads. (Default: 1)"
+    type: int
+    inputBinding:
+      prefix: --num-threads
+      position: 0
+  input_fastq_fw:
+    label: "Upstream reads for paired-end data"
+    doc: "Upstream reads for paired-end data. By default, these files are assumed to be in FASTQ format."
     type: File
     inputBinding:
       position: 1
+  input_fastq_rv:
+    label: "Downstream reads for paired-end data"
+    doc: "Downstream reads for paired-end data. By default, these files are assumed to be in FASTQ format."
+    type: File
+    inputBinding:
+      position: 2
   rsem_index_dir:
     label: "A path to the directory contains RSEM index files"
     doc: "A path to the directory contains RSEM index files"
@@ -33,7 +46,7 @@ inputs:
     doc: "The name of the sample analyzed. All output files are prefixed by this name (e.g., sample_name.genes.results)"
     type: string
     inputBinding:
-      position: 3
+      position: 4
 
 outputs:
   genes_result:
@@ -48,3 +61,7 @@ outputs:
     type: Directory
     outputBinding:
       glob: "*.stat"
+  star_output:
+    type: Directory
+    outputBinding:
+      glob: "*.temp"

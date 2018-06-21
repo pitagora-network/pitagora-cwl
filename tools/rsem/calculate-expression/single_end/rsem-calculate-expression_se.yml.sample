@@ -1,0 +1,9 @@
+nthreads: _NTHREADS_
+input_fastq:
+  class: File
+  path: _PATH_TO_INPUT_FASTQ_
+rsem_index_dir:
+  class: Directory
+  path: _PATH_TO_INDEX_DIR_
+rsem_index_prefix: _RSEM_INDEX_PREFIX_
+rsem_output_prefix: _PREFIX_

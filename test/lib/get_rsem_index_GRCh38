@@ -11,7 +11,7 @@ REF_DIR="${REPO_DIR}/test/reference"
 
 RSEM_INDEX_URL="https://s3.amazonaws.com/nig-reference/rsem_index/GRCh38.tar.gz"
 RSEM_INDEX_GZIP_FILE_NAME="$(basename "${RSEM_INDEX_URL}")"
-RSEM_INDEX_FILE_NAME="$(echo "${RSEM_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
+RSEM_INDEX_FILE_NAME="$(echo "${RSEM_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
 
 rsem_index_file_path="${REF_DIR}/rsem_index/rsem_GRCh38"
 

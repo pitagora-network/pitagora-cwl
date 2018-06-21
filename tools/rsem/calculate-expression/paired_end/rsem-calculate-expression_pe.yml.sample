@@ -1,6 +1,10 @@
-input_bam:
+nthreads: _NTHREADS_
+input_fastq_fw:
   class: File
-  path: _PATH_TO_INPUT_BAM_
+  path: _PATH_TO_FORWARD_FASTQ_
+input_fastq_rv:
+  class: File
+  path: _PATH_TO_REVERSE_FASTQ_
 rsem_index_dir:
   class: Directory
   path: _PATH_TO_INDEX_DIR_

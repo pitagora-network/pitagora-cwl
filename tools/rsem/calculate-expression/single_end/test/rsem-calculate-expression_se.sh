@@ -22,7 +22,7 @@ YAML_TMP_PATH="$(get_abs_path ${4})"
 index_dir=$(dirname ${PATH_TO_INDEX_FILE})
 index_prefix=$(basename ${PATH_TO_INDEX_FILE} | sed 's:\..*$::')
 
-find "${DATA_DIR_PATH}" -name '*.bam' | while read fpath; do
+find "${DATA_DIR_PATH}" -name '*.fastq' | while read fpath; do
   id="$(basename "${fpath}" | sed -e 's:.bam$::g')"
   result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
   mkdir -p "${result_dir}" && cd "${result_dir}"
@@ -31,7 +31,7 @@ find "${DATA_DIR_PATH}" -name '*.bam' | while read fpath; do
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
   sed -i.buk \
-    -e "s:_PATH_TO_INPUT_BAM_:${fpath}:" \
+    -e "s:_PATH_TO_INPUT_FASTQ_:${fpath}:" \
     -e "s:_PATH_TO_INDEX_DIR_:${index_dir}:" \
     -e "s:_RSEM_INDEX_PREFIX_:${index_prefix}:" \
     -e "s:_PREFIX_:${id}:" \

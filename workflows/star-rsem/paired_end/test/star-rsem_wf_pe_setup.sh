@@ -15,8 +15,5 @@ layout=$(basename ${0} | sed -e 's:^.*_wf_::' -e 's:_setup.sh$::')
 # Get the list of Run IDs
 . "${LIB_DIR}/get_id_list" "${REPO_DIR}" "${layout}"
 
-# Get STAR index files
-. "${LIB_DIR}/get_star_index_GRCh38" "${REPO_DIR}"
-
 # Get RSEM index files
 . "${LIB_DIR}/get_rsem_index_GRCh38" "${REPO_DIR}"

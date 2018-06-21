@@ -1,5 +1,5 @@
 #!/bin/bash
-# star-rsem_wf_se.sh [--id <path to id list>] [--star-index <path to index directory>] [--rsem-index <path to RSEM reference index file (e.g. hoge.idx.fa)>] [--cwl <path to star-rsem_wf_se.cwl>] [--yml <path to star-rsem_wf_se.yaml.sample>]
+# star-rsem_wf_se.sh [--id <path to id list>] [--rsem-index <path to RSEM reference index file (e.g. hoge.idx.fa)>] [--cwl <path to star-rsem_wf_se.cwl>] [--yml <path to star-rsem_wf_se.yaml.sample>]
 #
 set -e
 
@@ -20,7 +20,6 @@ DATA_DIR_PATH="${BASE_DIR}"
 CWL_PATH="${BASE_DIR}/${PFX}.cwl"
 YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
 ID_LIST_PATH="${BASE_DIR}/id.list"
-STAR_INDEX_DIR_PATH="${BASE_DIR}/star_GRCh38"
 RSEM_INDEX_FILE_PATH="${BASE_DIR}/rsem_GRCh38/HS.idx.fa"
 
 while test $# -gt 0; do
@@ -29,7 +28,6 @@ while test $# -gt 0; do
     --cwl) CWL_PATH="$(get_abs_path ${2})"; shift ;;
     --yml) YAML_TMP_PATH="$(get_abs_path ${2})"; shift ;;
     --id) ID_LIST_PATH="$(get_abs_path ${2})"; shift ;;
-    --star-index) STAR_INDEX_DIR_PATH="$(get_abs_path ${2})"; shift ;;
     --rsem-index) RSEM_INDEX_FILE_PATH="$(get_abs_path ${2})"; shift ;;
   esac
   shift
@@ -50,14 +48,13 @@ config_yaml(){
   local id="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
-  local rsem_idx_basedir=$(dirname ${RSEM_INDEX_FILE_PATH})
+  local rsem_idx_basedir=$(readlink $(dirname ${RSEM_INDEX_FILE_PATH}))
   local rsem_idx_prefix=$(basename ${RSEM_INDEX_FILE_PATH} | sed 's:\..*$::')
 
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
-    -e "s:_PATH_TO_INDEX_DIR_:${STAR_INDEX_DIR_PATH}:" \
+    -e "s:_RUN_ID_:${id}:" \
     -e "s:_RSEM_INDEX_DIR_PATH_:${rsem_idx_basedir}:" \
     -e "s:_RSEM_INDEX_PREFIX_:${rsem_idx_prefix}:" \
     -e "s:_RSEM_OUT_PREFIX_:${id}:" \

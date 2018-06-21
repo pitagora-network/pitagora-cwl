@@ -14,9 +14,6 @@ inputs:
     type: boolean
     default: false
 
-  ## Inputs for star_mapping
-  genomeDir: Directory
-
   ## Inputs for rsem
   rsem_index_dir: Directory
   rsem_index_prefix: string
@@ -25,13 +22,16 @@ inputs:
 outputs:
   genes_result:
     type: File
-    outputSource: rsem-calculate-expression/genes_result
+    outputSource: star_rsem/genes_result
   isoforms_result:
     type: File
-    outputSource: rsem-calculate-expression/isoforms_result
+    outputSource: star_rsem/isoforms_result
   stat:
     type: Directory
-    outputSource: rsem-calculate-expression/stat
+    outputSource: star_rsem/stat
+  star_output:
+    type: Directory
+    outputSource: star_rsem/star_output
 
 steps:
   download-sra:
@@ -49,29 +49,15 @@ steps:
       nthreads: nthreads
       gzip: gzip
     out:
-      [fastqFiles]
+      [forward, reverse]
 
-  star_mapping:
-    run: star_mapping.cwl
+  star_rsem:
+    run: rsem-calculate-expression_se.cwl
     in:
       nthreads: nthreads
-      genomeDir: genomeDir
-      readFilesIn: pfastq-dump/fastqFiles
-    out:
-      [toTranscriptome_bam]
-
-  samtools_sort:
-    run: samtools_sort.cwl
-    in:
-      input_bam: star_mapping/toTranscriptome_bam
-      nthreads: nthreads
-    out: [sorted_bamfile]
-
-  rsem-calculate-expression:
-    run: rsem-calculate-expression.cwl
-    in:
-      input_bam: samtools_sort/sorted_bamfile
+      input_fastq_fw: pfastq-dump/forward
+      input_fastq_rv: pfastq-dump/reverse
       rsem_index_dir: rsem_index_dir
       rsem_index_prefix: rsem_index_prefix
       rsem_output_prefix: rsem_output_prefix
-    out: [genes_result, isoforms_result, stat]
+    out: [genes_result, isoforms_result, stat, star_output]
