@@ -1,20 +1,8 @@
 # STAR-rsem workflow
 
-*STAR-rsem workflow is now under heavy development*
-
 ## Test
 
-Single-end input version:
-
-```
-$ curl https://raw.githubusercontent.com/pitagora-galaxy/cwl/master/test/bin/run-cwl | bash -s "star-rsem_wf_se"
-```
-
-Paired-end input version:
-
-```
-$ curl https://raw.githubusercontent.com/pitagora-galaxy/cwl/master/test/bin/run-cwl | bash -s "star-rsem_wf_pe"
-```
+*Note: current STAR-RSEM workflow test scripts occurs STAR's permanentFailure: too many levels of symbolic links, will find a way to fix it*
 
 ### Steps
 
