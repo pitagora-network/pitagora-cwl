@@ -5,5 +5,4 @@ index_dir:
   class: Directory
   path: _PATH_TO_SAILFISH_INDEX_DIR_
   # genome_version: _GENOME_VER_
-# gibbs_samples: _GIBBS_SAMPLES_
-# num_bootstrap: _NUM_BOOTSTRAP_
+num_bootstrap: 100

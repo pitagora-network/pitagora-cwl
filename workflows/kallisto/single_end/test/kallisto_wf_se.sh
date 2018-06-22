@@ -55,7 +55,6 @@ config_yaml(){
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_RUN_IDS_:${id}:" \
     -e "s:_INDEX_FILE_PATH_:${KALLISTO_INDEX_FILE_PATH}:" \
-    -e "s:^# (.*)# UNCOMMENT FOR --single:\1:g" \
     "${yaml_path}"
 }
 

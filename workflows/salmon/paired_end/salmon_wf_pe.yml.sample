@@ -4,5 +4,4 @@ run_ids: [_RUN_ID_]
 index_dir:
   class: Directory
   path:  _SALMON_INDEX_DIR_
-# gibbs_samples: _GIBBS_SAMPLES_
-# num_bootstrap: _NUM_BOOTSTRAP_
+num_bootstrap: 100
