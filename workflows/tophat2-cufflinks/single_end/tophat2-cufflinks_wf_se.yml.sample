@@ -1,0 +1,9 @@
+nthreads: _NTHREADS_
+run_ids: [_RUN_ID_]
+genome_index_dir:
+  class: Directory
+  path: _PATH_TO_GENOME_INDEX_DIR_
+genome_index_base: _GENOME_INDEX_BASE_
+annotation:
+  class: File
+  path: _PATH_TO_ANNOTATION_

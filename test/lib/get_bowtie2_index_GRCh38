@@ -1,0 +1,28 @@
+#!/bin/sh
+# get_bowtie2_index: Download bowtie2 index files
+BASE_DIR=$(pwd -P)
+
+get_abs_path(){
+  echo "$(cd $(dirname "${1}") && pwd -P)/$(basename "${1}")"
+}
+
+REPO_DIR="$(get_abs_path "${1}")"
+REF_DIR="${REPO_DIR}/test/reference/bowtie2_index"
+
+BOWTIE2_INDEX_URL="https://s3.amazonaws.com/nig-reference/bowtie2_index/bowtie2_GRCh38.tar.gz"
+BOWTIE2_INDEX_NAME_ORG="$(basename "${BOWTIE2_INDEX_URL}")"
+BOWTIE2_INDEX_DIR_NAME="$(echo "${BOWTIE2_INDEX_NAME_ORG}" | sed 's:.tar.gz$::')"
+
+bowtie2_index_dir="${REF_DIR}/GRCh38"
+bowtie2_index_file="${bowtie2_index_dir}/genome.fa"
+
+if test ! -e "${bowtie2_index_file}"; then
+  mkdir -p "${REF_DIR}" && cd "${REF_DIR}"
+  wget "${BOWTIE2_INDEX_URL}"
+  tar zxf "${BOWTIE2_INDEX_NAME_ORG}"
+  mv "${BOWTIE2_INDEX_DIR_NAME}" "${bowtie2_index_dir}"
+  rm -f "${BOWTIE2_INDEX_NAME_ORG}"
+  cd "${BASE_DIR}"
+fi
+
+ln -s "${bowtie2_index_dir}" "./bowtie2_GRCh38"

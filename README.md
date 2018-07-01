@@ -39,6 +39,8 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
 ## Workflows
 
 - RNA-Seq
+  - TopHat2-*
+    - [tophat2-cufflinks](workflows/tophat2-cufflinks)
   - HISAT2-*
     - [hisat2-cufflinks](workflows/hisat2-cufflinks)
     - [hisat2-stringtie](workflows/hisat2-stringtie)
