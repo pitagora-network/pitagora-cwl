@@ -6,4 +6,4 @@ index_file:
 single: true
 fragment_length: 100
 standard_deviation: 20
-boostrap_samples: 100
+bootstrap_samples: 100

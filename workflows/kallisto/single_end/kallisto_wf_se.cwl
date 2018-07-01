@@ -23,7 +23,7 @@ inputs:
   single: boolean
   fragment_length: double
   standard_deviation: double
-  boostrap_samples: int?
+  bootstrap_samples: int?
 
 outputs:
   quant_output:
@@ -53,7 +53,7 @@ steps:
       single: single
       fragment_length: fragment_length
       standard_deviation: standard_deviation
-      boostrap_samples: boostrap_samples
+      bootstrap_samples: bootstrap_samples
       fq: pfastq_dump/fastqFiles
     out:
       [quant_output]

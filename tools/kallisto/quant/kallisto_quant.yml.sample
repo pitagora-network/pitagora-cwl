@@ -17,4 +17,4 @@ nthreads: _NTHREADS_
 # fragment_length: 100   # UNCOMMENT FOR --single
 # standard_deviation: 20 # UNCOMMENT FOR --single
 
-boostrap_samples: 100 # For faster calculation, default: 0
+bootstrap_samples: 100 # For faster calculation, default: 0

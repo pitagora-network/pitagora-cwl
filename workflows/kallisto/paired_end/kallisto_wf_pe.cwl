@@ -20,7 +20,7 @@ inputs:
   index_file: File
   out_dir_name: string?
   # Optional
-  boostrap_samples: int?
+  bootstrap_samples: int?
 
 outputs:
   quant_output:
@@ -47,7 +47,7 @@ steps:
     in:
       index_file: index_file
       out_dir_name: out_dir_name
-      boostrap_samples: boostrap_samples
+      bootstrap_samples: bootstrap_samples
       fq: pfastq_dump/fastqFiles
     out:
       [quant_output]
