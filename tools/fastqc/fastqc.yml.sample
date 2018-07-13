@@ -1,0 +1,4 @@
+seqfile:
+  - class: File
+    path: _PATH_TO_SEQFILE_
+nthreads: _NTHREADS_
