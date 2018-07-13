@@ -126,6 +126,6 @@ inputs:
 
 outputs:
   fastqc_result:
-    type: File
+    type: File[]
     outputBinding:
       glob: "*_fastqc.zip"

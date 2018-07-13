@@ -8,7 +8,7 @@ inputs:
 
 outputs:
   fastqc_result:
-    type: Directory
+    type: File[]
     outputSource: fastqc/fastqc_result
 
 steps:
