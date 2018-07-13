@@ -34,12 +34,16 @@ WF_DIR="${REPO_DIR}/workflows"
 #
 # Select workflow
 #
+get_available_wf(){
+  find "${WF_DIR}" -name 'README.md' | xargs cat | awk '/curl/ { print $NF }' | tr -d '"'
+}
+
 wf_cwl_name="${WF_NAME}.cwl"
 wf_cwl_path="$(find "${WF_DIR}" -name "${wf_cwl_name}")"
 
 if test $(echo "${wf_cwl_path}" | wc -l) -ne 1 -o ! -e "${wf_cwl_path}"; then
   echo "ERROR: workflow ${WF_NAME} not found. Select one from below:"
-  find "${WF_DIR}" -name '*cwl' | xargs -I{} basename {} | sed 's:\.cwl$::g'
+  get_available_wf
   exit 1
 fi
 
