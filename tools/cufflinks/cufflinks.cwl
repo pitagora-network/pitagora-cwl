@@ -5,7 +5,7 @@ doc: "Transcriptome assembly and differential expression analysis for RNA-Seq. h
 
 hints:
   DockerRequirement:
-    dockerPull: nasuno/cufflinks:2.2.1
+    dockerPull: quay.io/biocontainers/cufflinks:2.2.1--py27_2
 
 baseCommand: cufflinks
 
