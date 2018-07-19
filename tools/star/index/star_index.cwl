@@ -5,7 +5,7 @@ doc: "STAR: Spliced Transcripts Alignment to a Reference. https://github.com/ale
 
 hints:
   DockerRequirement:
-    dockerPull: genomicpariscentre/star:2.5.2b
+    dockerPull: quay.io/biocontainers/star:2.6.0c--0
 
 baseCommand: [STAR, --runMode, genomeGenerate]
 
