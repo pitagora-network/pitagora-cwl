@@ -2,7 +2,7 @@ cwlVersion: v1.0
 class: CommandLineTool
 hints:
   DockerRequirement:
-    dockerPull: genomicpariscentre/samtools:1.4.1
+    dockerPull: quay.io/biocontainers/samtools:1.9--h46bd0b3_0
 
 baseCommand: ["samtools", "sort"]
 
