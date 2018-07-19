@@ -5,7 +5,7 @@ doc: "Sailfish: Rapid Alignment-free Quantification of Isoform Abundance http://
 
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/sailfish:0.10.0
+    dockerPull: quay.io/biocontainers/sailfish:0.10.1--h6516f61_3
 
 baseCommand: [sailfish, quant]
 
