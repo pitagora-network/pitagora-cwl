@@ -13,7 +13,7 @@ SAILFISH_INDEX_URL="https://s3.amazonaws.com/nig-reference/sailfish_index/sailfi
 SAILFISH_INDEX_GZIP_FILE_NAME="$(basename "${SAILFISH_INDEX_URL}")"
 SAILFISH_INDEX_FILE_NAME="$(echo "${SAILFISH_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
 
-sailfish_index_file_path="${REF_DIR}/reference/sailfish_index/GRCh38"
+sailfish_index_file_path="${REF_DIR}/sailfish_index/GRCh38"
 
 sailfish_index_dir_path="$(dirname "${sailfish_index_file_path}")"
 sailfish_index_file_name="$(basename "${sailfish_index_file_path}")"
