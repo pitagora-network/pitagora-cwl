@@ -5,7 +5,7 @@ doc: "StringTie is a fast and highly efficient assembler of RNA-Seq alignments i
 
 hints:
   DockerRequirement:
-    dockerPull: yyabuki/stringtie:1.2.3
+    dockerPull: quay.io/biocontainers/stringtie:1.3.0--hd28b015_2
 
 baseCommand: [stringtie]
 
