@@ -5,7 +5,7 @@ doc: "HISAT2: graph-based alignment of next generation sequencing reads to a pop
 
 hints:
   DockerRequirement:
-    dockerPull: humancellatlas/hisat2:2-2.1.0
+    dockerPull: quay.io/biocontainers/hisat2:2.1.0--py36h2d50403_1
 
 baseCommand: [hisat2]
 

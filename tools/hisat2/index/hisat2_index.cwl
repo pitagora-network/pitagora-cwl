@@ -5,7 +5,7 @@ doc: "The hisat2-build indexer: hisat2-build builds a HISAT2 index from a set of
 
 hints:
   DockerRequirement:
-    dockerPull: humancellatlas/hisat2:2-2.1.0
+    dockerPull: quay.io/biocontainers/hisat2:2.1.0--py36h2d50403_1
 
 baseCommand: [hisat2-build]
 
