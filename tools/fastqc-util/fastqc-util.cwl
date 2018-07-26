@@ -5,7 +5,7 @@ doc: "Parse outputs from FastQC to create data to compare or analysis NGS data q
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/inutano/bio-fastqc:v0.10.7
+    dockerPull: quay.io/inutano/bio-fastqc:v0.10.8
 
 baseCommand: [fastqc-util, parse]
 
