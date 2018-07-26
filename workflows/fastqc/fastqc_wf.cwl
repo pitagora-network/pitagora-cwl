@@ -36,9 +36,15 @@ steps:
       nthreads: nthreads
     out:
       [fastqc_result]
-  fastqc-util:
-    run: fastqc-util.cwl
+  fastqc-util-tsv:
+    run: fastqc-util-tsv.cwl
     in:
       fastqcResults: fastqc/fastqc_result
     out:
-      [fastqc_summary]
+      [fastqc_summary_tsv]
+  fastqc-util-ttl:
+    run: fastqc-util-ttl.cwl
+    in:
+      fastqcResults: fastqc/fastqc_result
+    out:
+      [fastqc_summary_ttl]
