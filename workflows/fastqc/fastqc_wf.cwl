@@ -10,6 +10,9 @@ outputs:
   fastqc_result:
     type: File[]
     outputSource: fastqc/fastqc_result
+  fastqc_summary:
+    type: File[]
+    outputSource: fastqc-util/fastqc_summary
 
 steps:
   download_sra:
@@ -33,3 +36,9 @@ steps:
       nthreads: nthreads
     out:
       [fastqc_result]
+  fastqc-util:
+    run: fastqc-util.cwl
+    in:
+      fastqcResults: fastqc/fastqc_result
+    out:
+      [fastqc_summary]

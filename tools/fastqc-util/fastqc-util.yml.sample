@@ -1,0 +1,4 @@
+format: tsv
+fastqcResult:
+  - class: File
+    path: _PATH_TO_FASTQC_RESULT_
