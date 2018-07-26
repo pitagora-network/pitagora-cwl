@@ -16,7 +16,8 @@ arguments:
 inputs:
   outputFormat:
     label: "output format"
-    doc: "output format: --tsv, --json, --ttl, or --jsonld"
+    doc: "output format: tsv, json, ttl, or jsonld"
+    type: string
     default: tsv
     inputBinding:
       prefix: --format
