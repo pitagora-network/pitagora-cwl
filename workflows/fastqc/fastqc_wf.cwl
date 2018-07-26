@@ -10,9 +10,12 @@ outputs:
   fastqc_result:
     type: File[]
     outputSource: fastqc/fastqc_result
-  fastqc_summary:
+  fastqc_summary_ttl:
     type: File[]
-    outputSource: fastqc-util/fastqc_summary
+    outputSource: fastqc-util-ttl/fastqc_summary
+  fastqc_summary_tsv:
+    type: File[]
+    outputSource: fastqc-util-tsv/fastqc_summary
 
 steps:
   download_sra:
@@ -41,10 +44,10 @@ steps:
     in:
       fastqcResults: fastqc/fastqc_result
     out:
-      [fastqc_summary_tsv]
+      [fastqc_summary]
   fastqc-util-ttl:
     run: fastqc-util-ttl.cwl
     in:
       fastqcResults: fastqc/fastqc_result
     out:
-      [fastqc_summary_ttl]
+      [fastqc_summary]
