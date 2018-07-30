@@ -50,7 +50,7 @@ steps:
     in:
       nthreads: nthreads
       genomeDir: genomeDir
-      readFilesIn: pfastq-dump/fastqFiles
+      fq: pfastq-dump/fastqFiles
     out:
       [output_bam]
 

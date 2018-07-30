@@ -167,7 +167,7 @@ is less than or equal to this value."
     type: Directory
     inputBinding:
       prefix: --genomeDir
-  readFilesIn:
+  fq:
     label: "paths to files that contain input read"
     doc: "paths to files that contain input read1 (and, if needed, read2)"
     type: File[]

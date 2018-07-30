@@ -167,13 +167,20 @@ is less than or equal to this value."
     type: Directory
     inputBinding:
       prefix: --genomeDir
-  readFilesIn:
-    label: "paths to files that contain input reads"
-    doc: "paths to files that contain input read1 and read2"
-    type: File[]
+  fq1:
+    label: "path to file that contain input read1"
+    doc: "path to file that contain input read1"
+    type: File
     inputBinding:
       prefix: --readFilesIn
-      itemSeparator: " "
+      position: 50
+  fq2:
+    label: "path to file that contain input read2"
+    doc: "path to file that contain input read2"
+    type: File
+    inputBinding:
+      position: 51
+
 
 outputs:
   output_bam:
