@@ -44,7 +44,7 @@ steps:
       [fastqFiles]
 
   star_mapping:
-    run: star_mapping.cwl
+    run: star_mapping_se.cwl
     in:
       nthreads: nthreads
       genomeDir: genomeDir
