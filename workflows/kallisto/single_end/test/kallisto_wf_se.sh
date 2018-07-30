@@ -53,7 +53,7 @@ config_yaml(){
   sed -r \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
-    -e "s:_RUN_IDS_:${id}:" \
+    -e "s:_RUN_ID_:${id}:" \
     -e "s:_INDEX_FILE_PATH_:${KALLISTO_INDEX_FILE_PATH}:" \
     "${yaml_path}"
 }

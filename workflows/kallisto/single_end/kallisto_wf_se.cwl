@@ -3,26 +3,17 @@ class: Workflow
 
 inputs:
   ## Common inputs
-  # Required
   nthreads: int
 
   ## Inputs for download-sra
-  # Required
   run_ids: string[]
-  # Optional
   repo: string?
 
-  ## Inputs for pfastq-dump
-  #   None
-
   ## Inputs for kallisto quant
-  # Required
   index_file: File
   out_dir_name: string?
-  # Optional
-  single: boolean
-  fragment_length: double
-  standard_deviation: double
+  fragment_length: double?
+  standard_deviation: double?
   bootstrap_samples: int?
 
 outputs:
@@ -46,11 +37,10 @@ steps:
     out:
       [fastqFiles]
   kallisto_quant:
-    run: kallisto_quant.cwl
+    run: kallisto_quant_se.cwl
     in:
       index_file: index_file
       out_dir_name: out_dir_name
-      single: single
       fragment_length: fragment_length
       standard_deviation: standard_deviation
       bootstrap_samples: bootstrap_samples
