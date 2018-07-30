@@ -1,0 +1,10 @@
+index_file:
+  class: File
+  path: _INDEX_FILE_PATH_
+fq1:
+  class: File
+  path: _FASTQ_PATH_
+fq2:
+  class: File
+  path: _FASTQ_PATH_
+nthreads: _NTHREADS_

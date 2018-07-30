@@ -1,0 +1,10 @@
+index_file:
+  class: File
+  path: _INDEX_FILE_PATH_
+  # genome_version: _GENOME_VER_
+fq:
+  - class: File
+    path: _FASTQ_PATH_
+nthreads: _NTHREADS_
+# fragment_length: 200
+# standard_deviation: 20

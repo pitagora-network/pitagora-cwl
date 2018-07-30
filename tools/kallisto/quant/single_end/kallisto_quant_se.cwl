@@ -6,7 +6,7 @@ doc: "kallisto is a program for quantifying abundances of transcripts from RNA-S
 hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/kallisto:0.44.0--h7d86c95_2
-baseCommand: ["kallisto", "quant"]
+baseCommand: ["kallisto", "quant", "--single"]
 
 arguments:
   - prefix: -o
@@ -58,18 +58,6 @@ inputs:
     type: boolean?
     inputBinding:
       prefix: --fusion
-  single:
-    label: "Quantify single-end reads"
-    doc: "Quantify single-end reads"
-    type: boolean?
-    inputBinding:
-      prefix: --single
-  single_overhang:
-    label: "Include overhanged reads"
-    doc: "Include reads where unobserved rest of fragment is predicted to lie outside a transcript"
-    type: boolean?
-    inputBinding:
-      prefix: --single-overhang
   fr_stranded:
     label: "Strand specific reads, first read forward"
     doc: "Strand specific reads, first read forward"
@@ -82,10 +70,17 @@ inputs:
     type: boolean?
     inputBinding:
       prefix: --rf-stranded
+  single_overhang:
+    label: "Include overhanged reads"
+    doc: "Include reads where unobserved rest of fragment is predicted to lie outside a transcript"
+    type: boolean?
+    inputBinding:
+      prefix: --single-overhang
   fragment_length:
     label: "Estimated average fragment length"
     doc: "Estimated average fragment length"
     type: double?
+    default: 200
     inputBinding:
       prefix: --fragment-length=
       separate: false
@@ -93,6 +88,7 @@ inputs:
     label: "Estimated standard deviation of fragment length"
     doc: "Estimated standard deviation of fragment length (default: -l, -s values are estimated from paired end data, but are required when using --single)"
     type: double?
+    default: 20
     inputBinding:
       prefix: --sd=
       separate: false
@@ -130,7 +126,7 @@ inputs:
       prefix: --chromosome
   fq:
     label: "Input FASTQ file(s)"
-    doc: "Input FASTQ file(s), make sure to set single/fragment_length/standard_deviation/single_overhang for single end read, fr_stranded or rf_stranded for stranded specific reads"
+    doc: "Input FASTQ file(s)"
     type: File[]
     inputBinding:
       position: 50
