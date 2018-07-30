@@ -173,6 +173,7 @@ is less than or equal to this value."
     type: File[]
     inputBinding:
       prefix: --readFilesIn
+      itemSeparator: ","
 
 outputs:
   output_bam:
