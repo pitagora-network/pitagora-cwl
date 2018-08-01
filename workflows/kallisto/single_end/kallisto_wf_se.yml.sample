@@ -5,4 +5,3 @@ index_file:
   path: _INDEX_FILE_PATH_
 fragment_length: 200
 standard_deviation: 20
-bootstrap_samples: 100
