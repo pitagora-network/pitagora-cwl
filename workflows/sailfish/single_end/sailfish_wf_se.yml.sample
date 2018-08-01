@@ -4,5 +4,4 @@ run_ids: [_RUN_ID_]
 index_dir:
   class: Directory
   path: _PATH_TO_SAILFISH_INDEX_DIR_
-  # genome_version: _GENOME_VER_
-num_bootstrap: 100
+# num_bootstraps: 100

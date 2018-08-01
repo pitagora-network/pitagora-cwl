@@ -19,7 +19,7 @@ inputs:
   # Required
   index_dir: Directory
   gibbs_samples: int?
-  num_bootstrap: int?
+  num_bootstraps: int?
 
 outputs:
   quant_results:
@@ -48,6 +48,6 @@ steps:
       fq: pfastq_dump/fastqFiles
       nthreads: nthreads
       gibbs_samples: gibbs_samples
-      num_bootstrap: num_bootstrap
+      num_bootstraps: num_bootstraps
     out:
       [quant_results]

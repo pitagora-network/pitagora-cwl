@@ -90,7 +90,7 @@ inputs:
     default: 0
     inputBinding:
       prefix: --numGibbsSamples
-  num_bootstrap:
+  num_bootstraps:
     label: "Number of bootstrap samples to generate"
     doc: "Number of bootstrap samples to generate. Note: This is mutually exclusive with Gibbs sampling."
     type: int

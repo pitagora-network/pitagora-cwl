@@ -7,4 +7,4 @@ fq:
     path: _PATH_TO_FASTQ_
 nthreads: _NTHREADS_
 # gibbs_samples: _GIBBS_SAMPLES_
-# num_bootstrap: _NUM_BOOTSTRAP_
+# num_bootstraps: _NUM_BOOTSTRAPS_
