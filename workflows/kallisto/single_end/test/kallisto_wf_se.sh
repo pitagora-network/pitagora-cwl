@@ -75,5 +75,5 @@ run_cwl(){
 }
 
 cat "${ID_LIST_PATH}" | while read run_id; do
-  run_workflow "${run_id}"
+  run_workflow "${run_id}" ||:
 done
