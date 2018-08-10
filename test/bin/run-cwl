@@ -42,7 +42,7 @@ wf_cwl_name="${WF_NAME}.cwl"
 wf_cwl_path="$(find "${WF_DIR}" -name "${wf_cwl_name}")"
 
 if test $(echo "${wf_cwl_path}" | wc -l) -ne 1 -o ! -e "${wf_cwl_path}"; then
-  echo "ERROR: workflow ${WF_NAME} not found. Select one from below:"
+  echo "ERROR: workflow ${WF_NAME} not found. Select one from below:" >&2
   get_available_wf
   exit 1
 fi
