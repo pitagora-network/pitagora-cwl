@@ -1,18 +1,6 @@
 # Sailfish workflow
 
-## Test
-
-Single-end input version:
-
-```
-$ curl https://raw.githubusercontent.com/pitagora-galaxy/cwl/master/test/bin/run-cwl | bash -s "sailfish_wf_se"
-```
-
-Paired-end input version:
-
-```
-$ curl https://raw.githubusercontent.com/pitagora-galaxy/cwl/master/test/bin/run-cwl | bash -s "sailfish_wf_pe"
-```
+*note: Sailfish workflow has a bug that quantification process does not stop in some environment.*
 
 ### Steps
 
