@@ -9,7 +9,7 @@ get_abs_path(){
 REPO_DIR="$(get_abs_path "${1}")"
 REF_DIR="${REPO_DIR}/test/reference"
 
-RSEM_INDEX_URL="https://s3.amazonaws.com/nig-reference/rsem_index/GRCh38.tar.gz"
+RSEM_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/rsem_index/GRCh38.tar.gz"
 RSEM_INDEX_GZIP_FILE_NAME="$(basename "${RSEM_INDEX_URL}")"
 RSEM_INDEX_FILE_NAME="$(echo "${RSEM_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
 

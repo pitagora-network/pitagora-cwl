@@ -9,7 +9,7 @@ get_abs_path(){
 REPO_DIR="$(get_abs_path "${1}")"
 REF_DIR="${REPO_DIR}/test/reference/bowtie2_index"
 
-BOWTIE2_INDEX_URL="https://s3.amazonaws.com/nig-reference/bowtie2_index/bowtie2_GRCh38.tar.gz"
+BOWTIE2_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/bowtie2_index/bowtie2_GRCh38.tar.gz"
 BOWTIE2_INDEX_NAME_ORG="$(basename "${BOWTIE2_INDEX_URL}")"
 BOWTIE2_INDEX_DIR_NAME="$(echo "${BOWTIE2_INDEX_NAME_ORG}" | sed 's:.tar.gz$::')"
 
