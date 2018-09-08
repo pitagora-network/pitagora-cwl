@@ -9,20 +9,20 @@ inputs:
 outputs:
   fastqFiles:
     type: File[]
-    outputSource: pfastq_dump/fastqFiles
+    outputSource: fasterq_dump/fastqFiles
 
 steps:
   download_sra:
-    run: download-sra.cwl
+    run: download-sra-single.cwl
     in:
       repo: repo
-      run_ids: run_id
+      run_id: run_id
     out:
-      [sraFiles]
+      [sraFile]
   fasterq_dump:
     run: fasterq-dump.cwl
     in:
-      sraFiles: download_sra/sraFiles
+      srafile: download_sra/sraFile
       nthreads: nthreads
     out:
       [fastqFiles]
