@@ -50,7 +50,7 @@ config_yaml_single_end(){
   local yaml_path="${1}"
   local fpath="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
     -e "s:_FASTQ_PATH_:${fpath}:" \
@@ -66,7 +66,7 @@ config_yaml_paired_end(){
 
   cp "${YAML_TMP_PATH}" "${yaml_path}.buk"
   cat "${yaml_path}.buk" | \
-    sed -r \
+    sed -E \
       -e "s:_INDEX_FILE_PATH_:${INDEX_FILE_PATH}:" \
       -e "s:_NTHREADS_:${NCPUS}:" \
       -e "s#_FASTQ_PATH_#${path_fwd}@  - class: File@    path: ${path_rev}#" \

@@ -37,7 +37,7 @@ config_yaml(){
   local fpath="${2}"
 
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_PATH_TO_INDEX_DIR_:${INDEX_DIR_PATH}:" \

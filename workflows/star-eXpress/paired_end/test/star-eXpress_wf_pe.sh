@@ -35,7 +35,7 @@ config_yaml(){
   local id="${2}"
   cp "${YAML_TMP_PATH}" "${yaml_path}"
 
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_RUN_IDS_:${id}:" \
