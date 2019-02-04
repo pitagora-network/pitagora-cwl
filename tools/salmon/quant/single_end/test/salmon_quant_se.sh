@@ -37,7 +37,7 @@ config_yaml_single_end(){
   local fpath="${2}"
 
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_PATH_TO_SALMON_INDEX_DIR_:${INDEX_DIR_PATH}:" \
     -e "s:_PATH_TO_FASTQ_:${fpath}:" \

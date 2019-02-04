@@ -53,7 +53,7 @@ config_yaml(){
   local idx_basedir=$(dirname ${HISAT2_INDEX_FILE_PATH})
   local idx_basename=$(basename ${HISAT2_INDEX_FILE_PATH} | sed 's:\..*$::g')
 
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_NTHREADS_:${NCPUS}:" \
     -e "s:_RUN_IDS_:${id}:" \

@@ -43,7 +43,7 @@ config_yaml_paired_end(){
   local path_rev="$(echo "${path_fwd}" | sed 's:_1.fastq:_2.fastq:')"
 
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_PATH_TO_SAILFISH_INDEX_DIR_:${INDEX_DIR_PATH}:" \
     -e "s:_PATH_TO_FORWARD_FASTQ_:${path_fwd}:" \

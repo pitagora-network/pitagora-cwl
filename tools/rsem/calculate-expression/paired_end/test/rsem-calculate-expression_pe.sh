@@ -46,7 +46,7 @@ config_yaml_paired_end(){
   local idx_basename=$(basename ${INDEX_FILE_PATH} | sed 's:\..*$::g')
 
   cp "${YAML_TMP_PATH}" "${yaml_path}"
-  sed -r \
+  sed -E \
     -i.buk \
     -e "s:_PATH_TO_INDEX_DIR_:${idx_basedir}:" \
     -e "s:_RSEM_INDEX_PREFIX_:${idx_basename}:" \
