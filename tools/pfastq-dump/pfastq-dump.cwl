@@ -3,9 +3,6 @@ class: CommandLineTool
 label: "pfastq-dump: A bash implementation of parallel-fastq-dump, parallel fastq-dump wrapper"
 doc: "pfastq-dump is a bash implementation of parallel-fastq-dump, parallel fastq-dump wrapper. --stdout option is additionally supported, but almost same features. It also uses -N and -X options of fastq-dump to specify blocks of data to be decompressed separately. https://github.com/inutano/pfastq-dump"
 
-$namespaces:
-  edam: 'http://edamontology.org/'
-
 hints:
   DockerRequirement:
     dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
