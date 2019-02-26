@@ -45,3 +45,14 @@ stdout:
     var outfile = inputs.fq.basename.replace('.sam', '') + '.tmp.sam';
     return outfile;
   }
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+s:license: https://spdx.org/licenses/Apache-2.0
+s:codeRepository: https://github.com/pitagora-network/pitagora-cwl
+
+$schemas:
+  - https://schema.org/docs/schema_org_rdfa.html
+  - http://edamontology.org/EDAM_1.18.owl
