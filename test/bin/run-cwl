@@ -1,7 +1,7 @@
 #!/bin/sh
-# run-cwl [--cwl-repo <path to pitagora-galaxy/cwl>] <workflow name>
+# run-cwl [--cwl-repo <path to pitagora-network/pitagora-cwl>] <workflow name>
 set -e
-REPO_GITHUB_URL="https://github.com/pitagora-galaxy/cwl"
+REPO_GITHUB_URL="https://github.com/pitagora-network/pitagora-cwl"
 REPO_DIR="${HOME}/.pitagora-cwl"
 
 get_abs_path(){
@@ -81,5 +81,5 @@ done
 #
 # Setup and run test
 #
-bash "${wf_test_setup_name}" "${REPO_DIR}"
-bash "${wf_test_sh_name}"
+sh "${wf_test_setup_name}" "${REPO_DIR}"
+sh "${wf_test_sh_name}"

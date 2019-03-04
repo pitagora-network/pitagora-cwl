@@ -9,7 +9,7 @@ get_abs_path(){
 REPO_DIR="$(get_abs_path "${1}")"
 REF_DIR="${REPO_DIR}/test/reference/hisat2_index"
 
-HISAT2_INDEX_URL="ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg38.tar.gz"
+HISAT2_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/hisat2_index/hisat2_GRCh38.tar.gz"
 HISAT2_INDEX_NAME_ORG="$(basename "${HISAT2_INDEX_URL}")"
 HISAT2_INDEX_DIR_NAME="$(echo "${HISAT2_INDEX_NAME_ORG}" | sed 's:.tar.gz$::')"
 

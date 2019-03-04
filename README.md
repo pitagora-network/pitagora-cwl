@@ -38,6 +38,8 @@ This repository is to share the [Common Workflow Language](https://www.commonwl.
 
 ## Workflows
 
+See documentation in each workflow directory for the instruction.
+
 - RNA-Seq
   - TopHat2-*
     - [tophat2-cufflinks](workflows/tophat2-cufflinks)
