@@ -1,6 +1,15 @@
 # tophat2-cufflinks workflow
 
-## Preparation: Collect required CWL definition files
+## Workflow steps
+
+1. [download-sra](/tools/download-sra)
+2. [pfastq-dump](/tools/pfastq-dump)
+3. [tophat2-mapping](/tools/tophat2/mapping)
+4. [cufflinks](/tools/cufflinks)
+
+## Run workflow
+
+### Preparation: Collect required CWL definition files
 
 You need to place the dependent tool definition files in the same directory of the workflow definition file. Use the bundled shell script to copy the tool files for workflow steps.
 
@@ -11,9 +20,9 @@ $ sh ./test/bin/collect-steps.sh
 
 This will copy the CWL tool definition files in `tools` directory to the directories of workflow definitions. This will copy the files for all the pitagora-cwl workflows, so you do not have to run for each workflow.
 
-## Run workflow
+### Run by cwltool
 
-You can use any [CWL implementation](https://www.commonwl.org/#Implementations) to run the CWL workflow. Below is the example command line to run the workflow by [cwltool](https://github.com/common-workflow-language/cwltool/), the reference imeplementation of CWL runner.
+You can use any [CWL implementation](https://www.commonwl.org/#Implementations) to run the CWL workflow. Below is the example command line to run the workflow by [cwltool](https://github.com/common-workflow-language/cwltool/), the reference implementation of CWL runner.
 
 For single-end reads:
 
@@ -62,10 +71,3 @@ Paired-end input version:
 ```
 $ curl https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/test/bin/run-cwl | bash -s "tophat2-cufflinks_wf_pe"
 ```
-
-### Steps
-
-1. [download-sra](/tools/download-sra)
-2. [pfastq-dump](/tools/pfastq-dump)
-3. [tophat2-mapping](/tools/tophat2/mapping)
-4. [cufflinks](/tools/cufflinks)
