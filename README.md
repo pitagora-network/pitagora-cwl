@@ -1,5 +1,7 @@
 # Pitagora Workflows in CWL
 
+[![DOI](https://zenodo.org/badge/172622089.svg)](https://zenodo.org/badge/latestdoi/172622089)
+
 This repository is to share the [Common Workflow Language](https://www.commonwl.org) definition files of tools and workflows, maintained by Pitagora Network, as known as Galaxy Community Japan.
 
 ## Tools
