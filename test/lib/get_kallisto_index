@@ -9,11 +9,11 @@ get_abs_path(){
 REPO_DIR="$(get_abs_path "${1}")"
 REF_DIR="${REPO_DIR}/test/reference"
 
-KALLISTO_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/kallisto_index/GRCh38Gencode.gz"
+KALLISTO_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/kallisto_index/kallisto_GRCh38_Gencode.gz"
 KALLISTO_INDEX_GZIP_FILE_NAME="$(basename "${KALLISTO_INDEX_URL}")"
 KALLISTO_INDEX_FILE_NAME="$(echo "${KALLISTO_INDEX_GZIP_FILE_NAME}" | sed 's:.gz$::')"
 
-kallisto_index_file_path="${REF_DIR}/kallisto_index/GRCh38"
+kallisto_index_file_path="${REF_DIR}/kallisto_index/kallisto_GRCh38_Gencode"
 
 kallisto_index_dir_path="$(dirname "${kallisto_index_file_path}")"
 kallisto_index_file_name="$(basename "${kallisto_index_file_path}")"
@@ -26,4 +26,4 @@ if test ! -e "${kallisto_index_file_path}"; then
   cd ${BASE_DIR}
 fi
 
-ln -s "${kallisto_index_file_path}" "./kallisto_GRCh38"
+ln -s "${kallisto_index_file_path}" "./kallisto_GRCh38_Gencode"
