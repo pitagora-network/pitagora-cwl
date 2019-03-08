@@ -20,7 +20,7 @@ DATA_DIR_PATH="${BASE_DIR}"
 CWL_PATH="${BASE_DIR}/${PFX}.cwl"
 YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
 ID_LIST_PATH="${BASE_DIR}/id.list"
-KALLISTO_INDEX_FILE_PATH="${BASE_DIR}/kallisto_GRCh38"
+KALLISTO_INDEX_FILE_PATH="${BASE_DIR}/kallisto_GRCh38_Gencode"
 
 while test $# -gt 0; do
   key=${1}
