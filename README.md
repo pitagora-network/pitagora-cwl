@@ -55,3 +55,16 @@ See documentation in each workflow directory for the instruction.
   - [kallisto](workflows/kallisto)
   - [sailfish](workflows/sailfish)
   - [salmon](workflows/salmon)
+
+## Test
+
+Each workflow listed above has a shell script to run the workflow for testing. See README in each workflow directory for how to exec the test run.
+
+The test scripts bundled with the workflows will automatically download the corresponding reference data listed below.
+
+- [Gencode gene annotation GRCh38](reference/annotation/gencode/GRCh38)
+- [Bowtie2 index file GRCh38](reference/bowtie2_index/GRCh38/)
+- [HiSAT2 index file GRCh38](reference/hisat2_index/GRCh38)
+- [Kallisto index file GRCh38](reference/kallisto_index/GRCh38)
+- [Salmon index file GRCh38](reference/salmon_index/GRCh38)
+- [STAR index file GRCh38](reference/star_index/GRCh38)
