@@ -25,7 +25,7 @@ outputs:
 
 steps:
   download-sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
@@ -33,7 +33,7 @@ steps:
       [sraFiles]
 
   pfastq-dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download-sra/sraFiles
       nthreads: nthreads
@@ -41,7 +41,7 @@ steps:
       [fastqFiles]
 
   tophat2_mapping:
-    run: tophat2_mapping_se.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/tophat2/mapping/single_end/tophat2_mapping_se.cwl
     in:
       genome_index_dir: genome_index_dir
       genome_index_base: genome_index_base
@@ -51,7 +51,7 @@ steps:
       [accepted_hits_bam]
 
   cufflinks:
-    run: cufflinks.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/cufflinks/cufflinks.cwl
     in:
       nthreads: nthreads
       annotation: annotation

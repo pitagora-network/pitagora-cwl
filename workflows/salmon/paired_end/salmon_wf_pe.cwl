@@ -28,21 +28,21 @@ outputs:
 
 steps:
   download_sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
     out:
       [sraFiles]
   pfastq_dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
     out:
       [forward, reverse]
   salmon_quant:
-    run: salmon_quant_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/salmon/quant/paired_end/salmon_quant_pe.cwl
     in:
       index_dir: index_dir
       fq1: pfastq_dump/forward

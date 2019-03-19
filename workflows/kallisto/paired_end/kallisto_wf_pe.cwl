@@ -21,21 +21,21 @@ outputs:
 
 steps:
   download_sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
     out:
       [sraFiles]
   pfastq_dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
     out:
       [forward, reverse]
   kallisto_quant:
-    run: kallisto_quant_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/kallisto/quant/paired_end/kallisto_quant_pe.cwl
     in:
       index_file: index_file
       out_dir_name: out_dir_name
