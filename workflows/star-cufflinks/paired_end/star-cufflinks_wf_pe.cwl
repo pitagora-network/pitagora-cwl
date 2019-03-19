@@ -29,7 +29,7 @@ outputs:
 
 steps:
   download-sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
@@ -37,7 +37,7 @@ steps:
       [sraFiles]
 
   pfastq-dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download-sra/sraFiles
       nthreads: nthreads
@@ -46,7 +46,7 @@ steps:
       [forward, reverse]
 
   star_mapping:
-    run: star_mapping_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/star/mapping/paired_end/star_mapping_pe.cwl
     in:
       nthreads: nthreads
       genomeDir: genomeDir
@@ -56,14 +56,14 @@ steps:
       [output_bam]
 
   samtools_sort:
-    run: samtools_sort.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/samtools/sort/samtools_sort.cwl
     in:
       input_bam: star_mapping/output_bam
       nthreads: nthreads
     out: [sorted_bamfile]
 
   cufflinks:
-    run: cufflinks.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/cufflinks/cufflinks.cwl
     in:
       nthreads: nthreads
       annotation: annotation

@@ -25,7 +25,7 @@ outputs:
 
 steps:
   download-sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
@@ -33,7 +33,7 @@ steps:
       [sraFiles]
 
   pfastq-dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download-sra/sraFiles
       nthreads: nthreads
@@ -41,7 +41,7 @@ steps:
       [forward, reverse]
 
   hisat2_mapping:
-    run: hisat2_mapping_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/hisat2/mapping/paired_end/hisat2_mapping_pe.cwl
     in:
       hisat2_idx_basedir: hisat2_idx_basedir
       hisat2_idx_basename: hisat2_idx_basename
@@ -52,20 +52,20 @@ steps:
       [hisat2_sam]
 
   samtools_sam2bam:
-    run: samtools_sam2bam.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/samtools/sam2bam/samtools_sam2bam.cwl
     in:
       input_sam: hisat2_mapping/hisat2_sam
     out: [bamfile]
 
   samtools_sort:
-    run: samtools_sort.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/samtools/sort/samtools_sort.cwl
     in:
       input_bam: samtools_sam2bam/bamfile
       nthreads: nthreads
     out: [sorted_bamfile]
 
   cufflinks:
-    run: cufflinks.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/cufflinks/cufflinks.cwl
     in:
       nthreads: nthreads
       annotation: annotation
