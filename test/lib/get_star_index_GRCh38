@@ -14,15 +14,12 @@ STAR_INDEX_GZIP_FILE_NAME="$(basename "${STAR_INDEX_URL}")"
 STAR_INDEX_FILE_NAME="$(echo "${STAR_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
 
 star_index_file_path="${REF_DIR}/star_GRCh38"
-
 star_index_dir_path="$(dirname "${star_index_file_path}")"
-star_index_file_name="$(basename "${star_index_file_path}")"
 
 if test ! -e "${star_index_file_path}"; then
   mkdir -p "${star_index_dir_path}" && cd "${star_index_dir_path}"
   wget "${STAR_INDEX_URL}"
   tar zxf "${STAR_INDEX_GZIP_FILE_NAME}"
-  mv "${STAR_INDEX_FILE_NAME}" "${star_index_file_name}"
   cd ${BASE_DIR}
 fi
 
