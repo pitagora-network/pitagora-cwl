@@ -7,13 +7,13 @@ get_abs_path(){
 }
 
 REPO_DIR="$(get_abs_path "${1}")"
-REF_DIR="${REPO_DIR}/test/reference"
+REF_DIR="${REPO_DIR}/test/reference/star_index/GRCh38"
 
 STAR_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/star_index/star_GRCh38.tar.gz"
 STAR_INDEX_GZIP_FILE_NAME="$(basename "${STAR_INDEX_URL}")"
 STAR_INDEX_FILE_NAME="$(echo "${STAR_INDEX_GZIP_FILE_NAME}" | sed 's:.tar.gz$::')"
 
-star_index_file_path="${REF_DIR}/star_index/GRCh38"
+star_index_file_path="${REF_DIR}/star_GRCh38"
 
 star_index_dir_path="$(dirname "${star_index_file_path}")"
 star_index_file_name="$(basename "${star_index_file_path}")"
