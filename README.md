@@ -51,9 +51,7 @@ See documentation in each workflow directory for the instruction.
   - STAR-*
     - [star-cufflinks](workflows/star-cufflinks)
     - [star-stringtie](workflows/star-stringtie)
-    - [star-rsem](workflows/star-rsem)
   - [kallisto](workflows/kallisto)
-  - [sailfish](workflows/sailfish)
   - [salmon](workflows/salmon)
 
 ## Test
