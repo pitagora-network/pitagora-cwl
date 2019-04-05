@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # hisat2-stringtie_wf.sh <path to id list> <path to one of hisat2 index files (e.g. hoge.1.ht2)> <path to annotation gtf file> <path to hisat2-stringtie_wf_(se|pe).cwl> <path to hisat2-stringtie_wf_(se|pe).yaml.sample>
 #
 set -e
@@ -37,7 +37,8 @@ done
 
 run_workflow(){
   local id="${1}"
-  local result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
+  local id_prefix=$(echo "${id}" | cut -c 1-6)
+  local result_dir="${BASE_DIR}/result/${id_prefix}/${id}"
   local yaml_path="${result_dir}/${id}.yaml"
   mkdir -p "${result_dir}" && cd "${result_dir}"
   config_yaml "${yaml_path}" "${id}"
