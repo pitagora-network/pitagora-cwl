@@ -22,7 +22,6 @@ if test ! -e "${kallisto_index_file_path}"; then
   mkdir -p "${kallisto_index_dir_path}" && cd "${kallisto_index_dir_path}"
   wget "${KALLISTO_INDEX_URL}"
   gunzip "${KALLISTO_INDEX_GZIP_FILE_NAME}"
-  mv "${KALLISTO_INDEX_FILE_NAME}" "${kallisto_index_file_name}"
   cd ${BASE_DIR}
 fi
 

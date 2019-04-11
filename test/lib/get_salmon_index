@@ -22,7 +22,6 @@ if test ! -e "${salmon_index_file_path}"; then
   mkdir -p "${salmon_index_dir_path}" && cd "${salmon_index_dir_path}"
   wget "${SALMON_INDEX_URL}"
   tar zxf "${SALMON_INDEX_GZIP_FILE_NAME}"
-  mv "${SALMON_INDEX_FILE_NAME}" "${salmon_index_file_name}"
   cd ${BASE_DIR}
 fi
 
