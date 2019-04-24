@@ -11,7 +11,7 @@ baseCommand: [kallisto, index]
 
 arguments:
   - prefix: -i
-    valueFrom: $(runtime.ourdir)/$(inputs.index_name)
+    valueFrom: $(runtime.outdir)/$(inputs.index_name)
 
 inputs:
   index_name:
