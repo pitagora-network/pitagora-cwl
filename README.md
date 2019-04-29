@@ -60,9 +60,9 @@ Each workflow listed above has a shell script to run the workflow for testing. S
 
 The test scripts bundled with the workflows will automatically download the corresponding reference data listed below.
 
-- [Gencode gene annotation GRCh38](reference/annotation/gencode/GRCh38)
-- [Bowtie2 index file GRCh38](reference/bowtie2_index/GRCh38/)
-- [HiSAT2 index file GRCh38](reference/hisat2_index/GRCh38)
-- [Kallisto index file GRCh38](reference/kallisto_index/GRCh38)
-- [Salmon index file GRCh38](reference/salmon_index/GRCh38)
-- [STAR index file GRCh38](reference/star_index/GRCh38)
+- [Gencode gene annotation GRCh38](test/reference/annotation/gencode/GRCh38)
+- [Bowtie2 index file GRCh38](test/reference/bowtie2_index/GRCh38/)
+- [HiSAT2 index file GRCh38](test/reference/hisat2_index/GRCh38)
+- [Kallisto index file GRCh38](test/reference/kallisto_index/GRCh38)
+- [Salmon index file GRCh38](test/reference/salmon_index/GRCh38)
+- [STAR index file GRCh38](test/reference/star_index/GRCh38)
