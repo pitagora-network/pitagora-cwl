@@ -1,5 +1,7 @@
 cwlVersion: v1.0
 class: Workflow
+label: "Download sequence data from Sequence Read Archive and perform FastQC"
+doc: "Download sequence data from Sequence Read Archive and perform FastQC. Run download-sra to get .sra file, convert to FASTQ file by pfastq-dump, then perform FastQC."
 
 inputs:
   nthreads: int
@@ -7,6 +9,9 @@ inputs:
   repo: string?
 
 outputs:
+  fastq_files:
+    type: File[]
+    outputSource: pfastq_dump/fastqFiles
   fastqc_result:
     type: File[]
     outputSource: fastqc/fastqc_result
@@ -19,34 +24,34 @@ outputs:
 
 steps:
   download_sra:
-    run: download-sra.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
     out:
       [sraFiles]
   pfastq_dump:
-    run: pfastq-dump.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
     out:
       [fastqFiles]
   fastqc:
-    run: fastqc.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/fastqc/fastqc.cwl
     in:
       seqfile: pfastq_dump/fastqFiles
       nthreads: nthreads
     out:
       [fastqc_result]
   fastqc-util-tsv:
-    run: fastqc-util-tsv.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/fastqc-util/fastqc-util-tsv.cwl
     in:
       fastqcResults: fastqc/fastqc_result
     out:
       [fastqc_summary]
   fastqc-util-ttl:
-    run: fastqc-util-ttl.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/fastqc-util/fastqc-util-ttl.cwl
     in:
       fastqcResults: fastqc/fastqc_result
     out:
