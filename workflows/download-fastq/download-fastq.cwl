@@ -4,15 +4,17 @@ label: "Download sequence data from Sequence Read Archive and dump to FASTQ file
 doc: "input variable repo should be one of ncbi or ebi"
 
 inputs:
-  nthreads:
-    type: int
-    label: "number of threads to be used by parallel fastq-dump"
   run_ids:
     type: string[]
     label: "list of SRA Run ID e.g. SRR1274306"
+  nthreads:
+    type: int?
+    default: 4
+    label: "Optional: number of threads to be used by parallel fastq-dump"
   repo:
     type: string?
-    label: "ncbi or ebi"
+    default: "ncbi"
+    label: "Optional: repository to be used. ncbi or ebi"
 
 outputs:
   fastq_files:
