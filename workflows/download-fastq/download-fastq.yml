@@ -1,5 +1,5 @@
 run_ids:  # array of type "string"
   - SRR1274306
   - SRR1274307
-repo: "ncbi"  # default value of type "string". (optional)
+repo: "ebi"  # default value of type "string". (optional)
 nthreads: 4  # default value of type "int". (optional)

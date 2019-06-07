@@ -6,14 +6,14 @@ doc: "input variable repo should be one of ncbi or ebi"
 inputs:
   run_ids:
     type: string[]
-    label: "list of SRA Run ID e.g. SRR1274306"
+    label: "list of SRA Run ID e.g. SRR1274307"
   nthreads:
     type: int?
     default: 4
     label: "Optional: number of threads to be used by parallel fastq-dump"
   repo:
     type: string?
-    default: "ncbi"
+    default: "ebi"
     label: "Optional: repository to be used. ncbi or ebi"
 
 outputs:
@@ -30,7 +30,7 @@ steps:
     out:
       [sraFiles]
   pfastq_dump:
-    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/pfastq-dump/pfastq-dump.cwl
+    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/pfastq-dump/pfastq-dump-multi.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
