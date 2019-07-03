@@ -10,7 +10,7 @@ inputs:
   nthreads:
     type: int?
     default: 4
-    label: "Optional: number of threads to be used by parallel fastq-dump"
+    label: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
   repo:
     type: string?
     default: "ebi"
