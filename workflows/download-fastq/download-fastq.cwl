@@ -7,14 +7,17 @@ inputs:
   run_ids:
     type: string[]
     label: "list of SRA Run ID e.g. SRR1274307"
+    doc: "list of SRA Run ID e.g. SRR1274307"
   nthreads:
     type: int?
     default: 4
     label: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
+    doc: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
   repo:
     type: string?
     default: "ebi"
     label: "Optional: repository to be used. ncbi or ebi"
+    doc: "Optional: repository to be used. ncbi or ebi"
 
 outputs:
   fastq_files:
