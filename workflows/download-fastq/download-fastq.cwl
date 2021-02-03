@@ -5,7 +5,9 @@ doc: "input variable repo should be one of ncbi or ebi"
 
 inputs:
   run_ids:
-    type: string[]
+    type:
+      - string
+      - string[]
     label: "list of SRA Run ID e.g. SRR1274307"
     doc: "list of SRA Run ID e.g. SRR1274307"
   nthreads:
@@ -26,14 +28,14 @@ outputs:
 
 steps:
   download_sra:
-    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/download-sra/download-sra.cwl
+    run: ../../tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
     out:
       [sraFiles]
   pfastq_dump:
-    run: https://github.com/pitagora-network/pitagora-cwl/raw/master/tools/pfastq-dump/pfastq-dump-multi.cwl
+    run: ../../tools/pfastq-dump/pfastq-dump-multi.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads

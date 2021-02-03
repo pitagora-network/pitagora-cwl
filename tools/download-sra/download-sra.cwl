@@ -17,7 +17,9 @@ inputs:
       position: 1
       prefix: "-r"
   run_ids:
-    type: string[]
+    type:
+      - string
+      - string[]
     inputBinding:
       position: 2
 
