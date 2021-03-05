@@ -1,0 +1,3 @@
+run_ids: SRR1274306
+repo: "ebi"  # default value of type "string". (optional)
+nthreads: 4  # default value of type "int". (optional)

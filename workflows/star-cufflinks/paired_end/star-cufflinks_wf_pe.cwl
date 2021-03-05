@@ -29,7 +29,7 @@ outputs:
 
 steps:
   download-sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
@@ -37,7 +37,7 @@ steps:
       [sraFiles]
 
   pfastq-dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download-sra/sraFiles
       nthreads: nthreads
@@ -46,7 +46,7 @@ steps:
       [forward, reverse]
 
   star_mapping:
-    run: star_mapping_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/star/mapping/paired_end/star_mapping_pe.cwl
     in:
       nthreads: nthreads
       genomeDir: genomeDir
@@ -56,16 +56,32 @@ steps:
       [output_bam]
 
   samtools_sort:
-    run: samtools_sort.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/samtools/sort/samtools_sort.cwl
     in:
       input_bam: star_mapping/output_bam
       nthreads: nthreads
     out: [sorted_bamfile]
 
   cufflinks:
-    run: cufflinks.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/cufflinks/cufflinks.cwl
     in:
       nthreads: nthreads
       annotation: annotation
       input_bam: samtools_sort/sorted_bamfile
     out: [cufflinks_result]
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+s:license: https://spdx.org/licenses/Apache-2.0
+s:codeRepository: https://github.com/pitagora-network/pitagora-cwl
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0003-3777-5945
+    s:email: mailto:inutano@gmail.com
+    s:name: Tazro Ohta
+
+$schemas:
+  - https://schema.org/docs/schema_org_rdfa.html
+  - http://edamontology.org/EDAM_1.18.owl

@@ -15,4 +15,4 @@ if test ! -e "${id_list_name}"; then
 fi
 
 # Get kallisto index files
-. "${LIB_DIR}/get_kallisto_index" "${REPO_DIR}"
+. "${LIB_DIR}/get_kallisto_index_GRCh38" "${REPO_DIR}"

@@ -1,5 +1,16 @@
 # STAR-rsem workflow
 
+## Preparation: Collect required CWL definition files
+
+You need to place the dependent tool definition files in the same directory of the workflow definition file. Use the bundled shell script to copy the tool files for workflow steps.
+
+```
+cd /path/to/pitagora-cwl
+sh ./test/bin/collect-steps.sh
+```
+
+This will copy the CWL tool definition files in `tools` directory to the directories of workflow definitions. This will copy the files for all the pitagora-cwl workflows, so you do not have to run for each workflow.
+
 ## Test
 
 *Note: current STAR-RSEM workflow test scripts occurs STAR's permanentFailure: too many levels of symbolic links, will find a way to fix it*

@@ -1,7 +1,7 @@
 #!/bin/sh
-# run-cwl [--cwl-repo <path to pitagora-galaxy/cwl>] <workflow name>
+# run-cwl [--cwl-repo <path to pitagora-network/pitagora-cwl>] <workflow name>
 set -e
-REPO_GITHUB_URL="https://github.com/pitagora-galaxy/cwl"
+REPO_GITHUB_URL="https://github.com/pitagora-network/pitagora-cwl"
 REPO_DIR="${HOME}/.pitagora-cwl"
 
 get_abs_path(){
@@ -35,7 +35,7 @@ WF_DIR="${REPO_DIR}/workflows"
 # Select workflow
 #
 get_available_wf(){
-  find "${WF_DIR}" -name 'README.md' | xargs cat | awk '/curl/ { print $NF }' | tr -d '"'
+  find "${WF_DIR}" -name 'README.md' | xargs cat | awk '/bash -s/ { print $NF }' | tr -d '"'
 }
 
 wf_cwl_name="${WF_NAME}.cwl"
@@ -74,12 +74,8 @@ ln -s "${wf_yml_path}" .
 ln -s "${wf_test_setup_path}" .
 ln -s "${wf_test_sh_path}" .
 
-cat ${wf_cwl_name} | awk '$1 == "run:" { print $2 }' | while read tool; do
-  ln -s $(find "${TOOL_DIR}" -name "${tool}") .
-done
-
 #
 # Setup and run test
 #
-bash "${wf_test_setup_name}" "${REPO_DIR}"
-bash "${wf_test_sh_name}"
+sh "${wf_test_setup_name}" "${REPO_DIR}"
+sh "${wf_test_sh_name}"

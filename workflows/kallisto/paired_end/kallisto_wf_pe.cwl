@@ -21,21 +21,21 @@ outputs:
 
 steps:
   download_sra:
-    run: download-sra.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/download-sra/download-sra.cwl
     in:
       repo: repo
       run_ids: run_ids
     out:
       [sraFiles]
   pfastq_dump:
-    run: pfastq-dump.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/pfastq-dump/pfastq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
     out:
       [forward, reverse]
   kallisto_quant:
-    run: kallisto_quant_pe.cwl
+    run: https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/tools/kallisto/quant/paired_end/kallisto_quant_pe.cwl
     in:
       index_file: index_file
       out_dir_name: out_dir_name
@@ -44,3 +44,19 @@ steps:
       fq2: pfastq_dump/reverse
     out:
       [quant_output]
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+s:license: https://spdx.org/licenses/Apache-2.0
+s:codeRepository: https://github.com/pitagora-network/pitagora-cwl
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0003-3777-5945
+    s:email: mailto:inutano@gmail.com
+    s:name: Tazro Ohta
+
+$schemas:
+  - https://schema.org/docs/schema_org_rdfa.html
+  - http://edamontology.org/EDAM_1.18.owl

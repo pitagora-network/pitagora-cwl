@@ -7,13 +7,13 @@ get_abs_path(){
 }
 
 REPO_DIR="$(get_abs_path "${1}")"
-REF_DIR="${REPO_DIR}/test/reference/hisat2_index"
+REF_DIR="${REPO_DIR}/test/reference/hisat2_index/GRCh38"
 
-HISAT2_INDEX_URL="ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/hg38.tar.gz"
+HISAT2_INDEX_URL="https://s3.amazonaws.com/nig-reference/GRCh38/hisat2_index/hisat2_GRCh38.tar.gz"
 HISAT2_INDEX_NAME_ORG="$(basename "${HISAT2_INDEX_URL}")"
-HISAT2_INDEX_DIR_NAME="$(echo "${HISAT2_INDEX_NAME_ORG}" | sed 's:.tar.gz$::')"
+HISAT2_INDEX_DIR_NAME="$(echo "${HISAT2_INDEX_NAME_ORG}" | sed 's:hisat2_GRCh38.tar.gz$:hg38:')" # unarchived reference dir name: hg38
 
-hisat2_index_dir="${REF_DIR}/GRCh38"
+hisat2_index_dir="${REF_DIR}/hisat2_GRCh38"
 hisat2_index_file="${hisat2_index_dir}/genome.1.ht2"
 
 if test ! -e "${hisat2_index_file}"; then

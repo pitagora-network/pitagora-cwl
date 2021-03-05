@@ -7,13 +7,13 @@ get_abs_path(){
 }
 
 REPO_DIR="$(get_abs_path "${1}")"
-REF_DIR="${REPO_DIR}/test/reference"
+REF_DIR="${REPO_DIR}/test/reference/annotation/gencode"
 
-GENCODE_GTF_URL="ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz"
+GENCODE_GTF_URL="https://s3.amazonaws.com/nig-reference/GRCh38/gencode_v28_annotation/gencode.v28.annotation.gtf.gz"
 GENCODE_GTF_GZIP_FILE_NAME="$(basename "${GENCODE_GTF_URL}")"
 GENCODE_GTF_FILE_NAME="$(echo "${GENCODE_GTF_GZIP_FILE_NAME}" | sed 's:.gz$::')"
 
-annotation_file_path="${REF_DIR}/annotation/gencode/genes.gtf"
+annotation_file_path="${REF_DIR}/genes.gtf"
 
 annotation_dir_path="$(dirname "${annotation_file_path}")"
 annotation_file_name="$(basename "${annotation_file_path}")"

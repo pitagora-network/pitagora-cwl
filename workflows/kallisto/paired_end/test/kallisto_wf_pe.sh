@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # kallisto_wf_pe.sh [--id <path to id list>] [--kallisto-index <path to kallisto index file>] [--cwl <path to kallisto_wf_pe.cwl>] [--yml <path to kallisto_wf_pe.yaml.sample>]
 #
 set -e
@@ -20,7 +20,7 @@ DATA_DIR_PATH="${BASE_DIR}"
 CWL_PATH="${BASE_DIR}/${PFX}.cwl"
 YAML_TMP_PATH="${BASE_DIR}/${PFX}.yml.sample"
 ID_LIST_PATH="${BASE_DIR}/id.list"
-KALLISTO_INDEX_FILE_PATH="${BASE_DIR}/kallisto_GRCh38"
+KALLISTO_INDEX_FILE_PATH="${BASE_DIR}/kallisto_GRCh38_Gencode"
 
 while test $# -gt 0; do
   key=${1}
@@ -35,7 +35,8 @@ done
 
 run_workflow(){
   local id="${1}"
-  local result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
+  local id_prefix=$(echo "${id}" | cut -c 1-6)
+  local result_dir="${BASE_DIR}/result/${id_prefix}/${id}"
   local yaml_path="${result_dir}/${id}.yaml"
   mkdir -p "${result_dir}" && cd "${result_dir}"
 

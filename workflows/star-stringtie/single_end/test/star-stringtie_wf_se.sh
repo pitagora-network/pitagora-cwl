@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # star-stringtie_wf_se.sh [--id <path to id list>] [--star-index <path to index directory>] [--stringtie-annotation <path to annotation gtf file>] [--cwl <path to star-stringtie_wf_se.cwl>] [--yml <path to star-stringtie_wf_se.yaml.sample>]
 #
 set -e
@@ -37,7 +37,8 @@ done
 
 run_workflow(){
   local id="${1}"
-  local result_dir="${BASE_DIR}/result/${id:0:6}/${id}"
+  local id_prefix=$(echo "${id}" | cut -c 1-6)
+  local result_dir="${BASE_DIR}/result/${id_prefix}/${id}"
   local yaml_path="${result_dir}/${id}.yaml"
   mkdir -p "${result_dir}" && cd "${result_dir}"
   config_yaml "${yaml_path}" "${id}"

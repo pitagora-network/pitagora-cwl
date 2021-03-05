@@ -11,7 +11,7 @@ baseCommand: [kallisto, index]
 
 arguments:
   - prefix: -i
-    valueFrom: $(runtime.ourdir)/$(inputs.index_name)
+    valueFrom: $(runtime.outdir)/$(inputs.index_name)
 
 inputs:
   index_name:
@@ -44,3 +44,19 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.index_name)
+
+$namespaces:
+  s: https://schema.org/
+  edam: http://edamontology.org/
+
+s:license: https://spdx.org/licenses/Apache-2.0
+s:codeRepository: https://github.com/pitagora-network/pitagora-cwl
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0003-3777-5945
+    s:email: mailto:inutano@gmail.com
+    s:name: Tazro Ohta
+
+$schemas:
+  - https://schema.org/docs/schema_org_rdfa.html
+  - http://edamontology.org/EDAM_1.18.owl
