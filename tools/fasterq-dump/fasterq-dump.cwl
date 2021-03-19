@@ -6,6 +6,9 @@ doc: "sra-toolkit: https://github.com/ncbi/sra-tools/wiki/Download-On-Demand"
 hints:
   DockerRequirement:
     dockerPull: ncbi/sra-tools:2.11.0
+  EnvVarRequirement:
+    envDef:
+      HOME: /root
 
 baseCommand: [fasterq-dump]
 
