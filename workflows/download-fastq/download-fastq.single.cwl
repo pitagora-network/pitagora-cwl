@@ -11,8 +11,8 @@ inputs:
   nthreads:
     type: int?
     default: 4
-    label: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
-    doc: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
+    label: "Optional: number of threads to be used by fasterq-dump (default: 4)"
+    doc: "Optional: number of threads to be used by fasterq-dump (default: 4)"
   repo:
     type: string?
     default: "ebi"
@@ -22,7 +22,7 @@ inputs:
 outputs:
   fastq_files:
     type: File[]
-    outputSource: pfastq_dump/fastqFiles
+    outputSource: fasterq_dump/fastqFiles
 
 steps:
   download_sra:
@@ -32,8 +32,8 @@ steps:
       run_ids: run_id
     out:
       [sraFiles]
-  pfastq_dump:
-    run: ../../tools/pfastq-dump/pfastq-dump-multi.cwl
+  fasterq_dump:
+    run: ../../tools/fasterq-dump/fasterq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
