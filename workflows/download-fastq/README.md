@@ -4,12 +4,14 @@
 
 - Docker
 - [`cwltool`](https://github.com/common-workflow-language/cwltool) or [your favorite CWL runner](https://www.commonwl.org/cwl-staging/#Implementations)
+  - with the option `--no-match-user` to run containers as root
 
 ## Workflows
 
 - `download-fastq.cwl`
-  - Accept a list of
+  - Accept a list of SRA Run IDs
 - `download-fastq.single.cwl`
+  - Accept a single SRA Run ID
 
 ## Inputs
 
@@ -31,7 +33,7 @@
 Use `download-fastq.single.cwl`. You can specify `run_id` via command line argument:
 
 ```
-$ cwltool "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" --run_id "SRR1274307"
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" --run_id "SRR1274307"
 ```
 
 Or specify via job configuration file:
@@ -39,7 +41,7 @@ Or specify via job configuration file:
 ```
 $ cat job.yaml
 run_id: SRR1274306
-$ cwltool "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" job.yaml
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" job.yaml
 ```
 
 ### Download multiple Run data
@@ -51,7 +53,7 @@ $ cat job.yaml
 run_ids:
   - SRR1274306
   - SRR1274307
-$ cwltool --debug "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.cwl" "job.yml"
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.cwl" "job.yml"
 ```
 
 Note: `cwltool` does not handle `string[]` type input via command line argument, so you always need to specify via job conf.
