@@ -5,7 +5,7 @@ doc: "sra-toolkit: https://github.com/ncbi/sra-tools/wiki/Download-On-Demand"
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
+    dockerPull: ncbi/sra-tools:2.11.0
 
 baseCommand: [fastq-dump]
 

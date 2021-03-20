@@ -4,12 +4,30 @@
 
 - Docker
 - [`cwltool`](https://github.com/common-workflow-language/cwltool) or [your favorite CWL runner](https://www.commonwl.org/cwl-staging/#Implementations)
+  - with the option `--no-match-user` to run containers as root
+
+### For singularity users
+
+The NCBI's file format converter `fasterq-dump` in `sra-tools` has an issue when one runs it in non-interactive environment like this automated CWL workflow. The tool requires the configuration of its setting with `vdb-config` beforehand, saving the configuration file at `$HOME/.ncbi/user-settings.mkfg`. The official Docker container has a configuration file in the container's file system to avoid this issue, but the configuration file is at `/root/.ncbi/user-settings.mkfg`, which means that the users need to run the container as root user. This is not a recommended way to use Docker container in terms of keeping the container's security though.
+
+This problem, however, becomes worse when the workflow runs with `cwltool --singularity`. In the CWL specification, the runtime environment has to be distinct from the host environment to ensure workflow portability, which means runtime environment has different `$HOME` path and it cannot be changed (and it shouldn't be from the view of reproducibility).
+
+There's not a practical way to run this workflow with singularity for now, but here's a procedure to run `fasterq-dump` with singularity:
+
+```
+$ singularity pull docker://ncbi/sra-tools:2.11.0
+$ singularity exec sra-tools_2.11.0.sif vdb-config --interactive
+# You can just save and exit, the config file will be saved at $HOME/.ncbi/user-settings.mkfg
+$ singularity exec sra-tools_2.11.0.sif fasterq-dump SRR1274306.sra --threads 8 --skip-technical --split-files --split-spot
+```
+You can download SRA format files with [`download-sra.cwl`](../../tools/download-sra/download-sra.cwl).
 
 ## Workflows
 
 - `download-fastq.cwl`
-  - Accept a list of
+  - Accept a list of SRA Run IDs
 - `download-fastq.single.cwl`
+  - Accept a single SRA Run ID
 
 ## Inputs
 
@@ -31,7 +49,7 @@
 Use `download-fastq.single.cwl`. You can specify `run_id` via command line argument:
 
 ```
-$ cwltool "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" --run_id "SRR1274307"
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" --run_id "SRR1274307"
 ```
 
 Or specify via job configuration file:
@@ -39,7 +57,7 @@ Or specify via job configuration file:
 ```
 $ cat job.yaml
 run_id: SRR1274306
-$ cwltool "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" job.yaml
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.single.cwl" job.yaml
 ```
 
 ### Download multiple Run data
@@ -51,7 +69,7 @@ $ cat job.yaml
 run_ids:
   - SRR1274306
   - SRR1274307
-$ cwltool --debug "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.cwl" "job.yml"
+$ cwltool --no-match-user "https://raw.githubusercontent.com/pitagora-network/pitagora-cwl/master/workflows/download-fastq/download-fastq.cwl" "job.yml"
 ```
 
 Note: `cwltool` does not handle `string[]` type input via command line argument, so you always need to specify via job conf.
