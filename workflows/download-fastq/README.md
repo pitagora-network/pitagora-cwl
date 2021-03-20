@@ -6,6 +6,22 @@
 - [`cwltool`](https://github.com/common-workflow-language/cwltool) or [your favorite CWL runner](https://www.commonwl.org/cwl-staging/#Implementations)
   - with the option `--no-match-user` to run containers as root
 
+### For singularity users
+
+The NCBI's file format converter `fasterq-dump` in `sra-tools` has an issue when one runs it in non-interactive environment like this automated CWL workflow. The tool requires the configuration of its setting with `vdb-config` beforehand, saving the configuration file at `$HOME/.ncbi/user-settings.mkfg`. The official Docker container has a configuration file in the container's file system to avoid this issue, but the configuration file is at `/root/.ncbi/user-settings.mkfg`, which means that the users need to run the container as root user. This is not a recommended way to use Docker container in terms of keeping the container's security though.
+
+This problem, however, becomes worse when the workflow runs with `cwltool --singularity`. In the CWL specification, the runtime environment has to be distinct from the host environment to ensure workflow portability, which means runtime environment has different `$HOME` path and it cannot be changed (and it shouldn't be from the view of reproducibility).
+
+There's not a practical way to run this workflow with singularity for now, but here's a procedure to run `fasterq-dump` with singularity:
+
+```
+$ singularity pull docker://ncbi/sra-tools:2.11.0
+$ singularity exec sra-tools_2.11.0.sif vdb-config --interactive
+# You can just save and exit, the config file will be saved at $HOME/.ncbi/user-settings.mkfg
+$ singularity exec sra-tools_2.11.0.sif fasterq-dump SRR1274306.sra --threads 8 --skip-technical --split-files --split-spot
+```
+You can download SRA format files with [`download-sra.cwl`](../../tools/download-sra/download-sra.cwl).
+
 ## Workflows
 
 - `download-fastq.cwl`
