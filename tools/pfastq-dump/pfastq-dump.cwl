@@ -5,7 +5,7 @@ doc: "pfastq-dump is a bash implementation of parallel-fastq-dump, parallel fast
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
+    dockerPull: ghcr.io/inutano/sra-tools:fcafeb0
 
 baseCommand: [pfastq-dump]
 
