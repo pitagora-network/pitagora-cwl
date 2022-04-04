@@ -17,9 +17,9 @@ inputs:
     doc: "Optional: number of threads to be used by fasterq-dump (default: 4)"
   repo:
     type: string?
-    default: "ebi"
-    label: "Optional: repository to be used. ncbi or ebi"
-    doc: "Optional: repository to be used. ncbi or ebi"
+    default: "ddbj"
+    label: "Optional: target repo, ddbj or ebi"
+    doc: "Optional: target repo, ddbj or ebi"
 
 outputs:
   fastq_files:

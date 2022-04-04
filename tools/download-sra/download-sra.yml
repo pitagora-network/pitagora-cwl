@@ -1,4 +1,5 @@
 # ncbi, ebi, or ddbj can be used for source repository
 repo: ddbj
 # Run IDs, e.g. SRR1274306
-run_ids: [_RUN_IDS_]
+run_ids:
+  - SRR1274307
