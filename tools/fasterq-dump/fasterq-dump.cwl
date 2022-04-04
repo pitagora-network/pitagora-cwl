@@ -5,7 +5,7 @@ doc: "sra-toolkit: https://github.com/ncbi/sra-tools/wiki/Download-On-Demand"
 
 hints:
   DockerRequirement:
-    dockerPull: ncbi/sra-tools:2.11.0
+    dockerPull: ncbi/sra-tools:3.0.0
   EnvVarRequirement:
     envDef:
       HOME: /root
@@ -71,7 +71,7 @@ inputs:
 
   split_spot:
     type: boolean?
-    default: true
+    default: false
     inputBinding:
       prefix: --split-spot
     label: "split spots into reads"

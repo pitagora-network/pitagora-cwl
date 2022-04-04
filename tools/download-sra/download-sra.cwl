@@ -5,14 +5,14 @@ doc: "A simple download tool to get .sra file from a repository of INSDC members
 
 hints:
   DockerRequirement:
-    dockerPull: ghcr.io/inutano/download-sra:cb2bba4
+    dockerPull: ghcr.io/inutano/download-sra:177141a
 
 baseCommand: ["download-sra"]
 
 inputs:
   repo:
     type: string
-    default: "ncbi"
+    default: "ddbj"
     inputBinding:
       position: 1
       prefix: "-r"
