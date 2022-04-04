@@ -13,8 +13,8 @@ inputs:
   nthreads:
     type: int?
     default: 4
-    label: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
-    doc: "Optional: number of threads to be used by parallel fastq-dump (default: 4)"
+    label: "Optional: number of threads to be used by fasterq-dump (default: 4)"
+    doc: "Optional: number of threads to be used by fasterq-dump (default: 4)"
   repo:
     type: string?
     default: "ebi"
@@ -24,7 +24,7 @@ inputs:
 outputs:
   fastq_files:
     type: File[]
-    outputSource: pfastq_dump/fastqFiles
+    outputSource: fasterq_dump/fastqFiles
 
 steps:
   download_sra:
@@ -34,8 +34,8 @@ steps:
       run_ids: run_ids
     out:
       [sraFiles]
-  pfastq_dump:
-    run: ../../tools/pfastq-dump/pfastq-dump-multi.cwl
+  fasterq_dump:
+    run: ../../tools/fasterq-dump/fasterq-dump.cwl
     in:
       sraFiles: download_sra/sraFiles
       nthreads: nthreads
@@ -50,5 +50,5 @@ s:license: https://spdx.org/licenses/Apache-2.0
 s:codeRepository: https://github.com/pitagora-network/pitagora-cwl
 
 $schemas:
-  - https://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
   - http://edamontology.org/EDAM_1.18.owl

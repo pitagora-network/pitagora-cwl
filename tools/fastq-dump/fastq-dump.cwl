@@ -5,7 +5,7 @@ doc: "sra-toolkit: https://github.com/ncbi/sra-tools/wiki/Download-On-Demand"
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/inutano/sra-toolkit:v2.9.0
+    dockerPull: ncbi/sra-tools:2.11.0
 
 baseCommand: [fastq-dump]
 
@@ -67,5 +67,5 @@ s:author:
     s:name: Tazro Ohta
 
 $schemas:
-  - https://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
   - http://edamontology.org/EDAM_1.18.owl

@@ -5,7 +5,7 @@ doc: "A simple download tool to get .sra file from a repository of INSDC members
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/inutano/download-sra:0.2.1
+    dockerPull: ghcr.io/inutano/download-sra:cb2bba4
 
 baseCommand: ["download-sra"]
 
@@ -42,5 +42,5 @@ s:author:
     s:name: Tazro Ohta
 
 $schemas:
-  - https://schema.org/docs/schema_org_rdfa.html
+  - https://schema.org/version/latest/schemaorg-current-http.rdf
   - http://edamontology.org/EDAM_1.18.owl
