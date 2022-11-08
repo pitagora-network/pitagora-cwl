@@ -5,7 +5,7 @@ doc: "A simple download tool to get .sra file from a repository of INSDC members
 
 hints:
   DockerRequirement:
-    dockerPull: ghcr.io/inutano/download-sra:177141a
+    dockerPull: ghcr.io/inutano/download-sra:a827d85
 
 baseCommand: ["download-sra"]
 
